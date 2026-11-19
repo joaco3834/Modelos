@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heladería Nube — Helado artesanal en Catamarca</title>
+<meta name="description" content="Heladería Nube: helado artesanal y postres helados en Catamarca. Armá tu pote, elegí tus gustos y pedí por WhatsApp.">
+<meta name="theme-color" content="#fdf0f6">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fondo:#fdf0f6; --tinta:#3f2d52; --suave:#7a6890;
+    --rosa:#ffc8dd; --celeste:#bde0fe; --menta:#bdf0d2; --lila:#dcc6f2; --amarillo:#fff0a6; --durazno:#ffd4b8; --blanco:#fffafd;
+    --redondo:"Fredoka",ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--fondo);color:var(--tinta);line-height:1.5;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+  h1,h2,h3,.redondo{font-family:var(--redondo);font-weight:700;letter-spacing:-.01em}
+
+  /* Plastilina: sombra afuera suave + luz y sombra adentro */
+  .clay{background:var(--c,var(--blanco));border-radius:30px;
+    box-shadow:10px 14px 28px rgba(120,80,150,.18),inset -7px -9px 16px rgba(60,20,90,.08),inset 7px 9px 16px rgba(255,255,255,.8)}
+  .clay-btn{border:0;background:var(--c,var(--blanco));border-radius:999px;padding:14px 24px;font-family:var(--redondo);font-weight:600;font-size:1.05rem;
+    box-shadow:6px 9px 18px rgba(120,80,150,.22),inset -5px -6px 10px rgba(60,20,90,.1),inset 5px 6px 10px rgba(255,255,255,.85);transition:transform .15s,box-shadow .15s}
+  .clay-btn:active{transform:translateY(2px) scale(.98);box-shadow:3px 4px 10px rgba(120,80,150,.2),inset -3px -3px 8px rgba(60,20,90,.12),inset 3px 3px 8px rgba(255,255,255,.7)}
+
+  .demo{background:var(--tinta);color:#fff;text-align:center;font-size:.8rem;font-weight:600;padding:6px 12px}
+
+  /* Encabezado */
+  .cab{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;max-width:1100px;margin:0 auto}
+  .logo{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;font-family:var(--redondo);font-weight:700;font-size:1.15rem;text-decoration:none;--c:var(--blanco)}
+  .cab .clay-btn{--c:var(--rosa);padding:10px 18px;font-size:.95rem;text-decoration:none}
+
+  /* Portada */
+  .portada{position:relative;padding:18px 0 40px;overflow:hidden}
+  .portada .wrap{display:grid;gap:26px;align-items:center}
+  @media(min-width:860px){.portada .wrap{grid-template-columns:1.05fr 1fr}}
+  .portada h1{font-size:clamp(2.5rem,11vw,4.6rem);line-height:1}
+  .portada h1 span{display:inline-block;background:var(--celeste);border-radius:22px;padding:0 14px;margin-top:6px;
+    box-shadow:6px 8px 16px rgba(120,80,150,.16),inset -4px -5px 10px rgba(60,20,90,.07),inset 4px 5px 10px rgba(255,255,255,.8)}
+  .portada p{font-size:1.1rem;color:var(--suave);margin:16px 0 22px;max-width:34ch}
+  .portada .acciones{display:flex;gap:12px;flex-wrap:wrap}
+  .portada .acciones a{text-decoration:none}
+  .marco{position:relative;--c:var(--rosa);border-radius:44px;padding:14px;aspect-ratio:1/1;max-width:460px;width:100%;justify-self:center}
+  .marco .img{width:100%;height:100%;border-radius:32px;overflow:hidden;background:linear-gradient(135deg,#ffb3cf,#c9b6ff);display:grid;place-items:center;font-size:7rem}
+  .marco .img{position:relative}
+  .marco .img span{position:absolute}
+  .marco img{position:relative;width:100%;height:100%;object-fit:cover}
+  .burbuja{position:absolute;border-radius:50%;z-index:-1;animation:flotar 6s ease-in-out infinite}
+  .burbuja.b1{width:120px;height:120px;--c:var(--menta);right:-30px;top:20px}
+  .burbuja.b2{width:80px;height:80px;--c:var(--amarillo);left:-20px;bottom:120px;animation-delay:-2s}
+  .burbuja.b3{width:54px;height:54px;--c:var(--lila);right:30%;bottom:-14px;animation-delay:-4s}
+  .sello{position:absolute;right:-6px;bottom:22px;--c:var(--amarillo);padding:12px 16px;border-radius:24px;font-family:var(--redondo);font-weight:700;transform:rotate(-6deg);text-align:center;line-height:1.1}
+  .sello small{display:block;font-weight:500;font-size:.75rem}
+  @keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+  /* Franja */
+  .franja{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:6px 18px 22px;max-width:1100px;margin:0 auto}
+  .franja::-webkit-scrollbar{display:none}
+  .franja span{flex:0 0 auto;padding:10px 16px;border-radius:999px;font-weight:600;font-size:.9rem;--c:var(--blanco)}
+
+  /* Secciones */
+  section{padding:46px 0}
+  .tit{text-align:center;margin-bottom:24px}
+  .tit h2{font-size:clamp(2rem,8vw,3rem);line-height:1.05}
+  .tit p{color:var(--suave);margin-top:6px}
+  .paso{display:inline-flex;align-items:center;gap:10px;font-family:var(--redondo);font-weight:700;font-size:1.25rem;margin:26px 0 14px}
+  .paso b{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--tinta);color:#fff;font-size:1rem}
+
+  /* Tamaños */
+  .tamanos{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(min-width:760px){.tamanos{grid-template-columns:repeat(4,1fr)}}
+  .tam{border:0;text-align:center;padding:18px 10px 16px;display:grid;justify-items:center;gap:4px;transition:transform .2s}
+  .tam .ico{font-size:2.6rem;line-height:1;width:72px;height:72px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.55)}
+  .tam strong{font-family:var(--redondo);font-size:1.25rem}
+  .tam small{color:var(--suave);font-weight:600}
+  .tam .pr{font-family:var(--redondo);font-weight:700;font-size:1.15rem}
+  .tam[aria-pressed="true"]{outline:3px solid var(--tinta);outline-offset:3px;transform:translateY(-3px)}
+
+  /* Gustos */
+  .contador{position:sticky;top:8px;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;margin-bottom:16px;--c:var(--amarillo);border-radius:22px;font-weight:600}
+  .contador .bolitas{display:flex;gap:6px}
+  .contador .bolitas i{width:18px;height:18px;border-radius:50%;background:rgba(63,45,82,.15)}
+  .contador .bolitas i.llena{background:var(--tinta)}
+  .grupo-g h3{font-size:1.05rem;margin:14px 0 10px;color:var(--suave)}
+  .gustos{display:flex;flex-wrap:wrap;gap:10px}
+  .gusto{border:0;display:inline-flex;align-items:center;gap:8px;padding:10px 16px 10px 10px;border-radius:999px;font-weight:600;font-size:.95rem;--c:var(--blanco);
+    box-shadow:5px 7px 14px rgba(120,80,150,.16),inset -4px -5px 9px rgba(60,20,90,.07),inset 4px 5px 9px rgba(255,255,255,.85);background:var(--c);transition:transform .15s}
+  .gusto i{width:24px;height:24px;border-radius:50%;background:var(--g);box-shadow:inset -3px -3px 6px rgba(0,0,0,.15),inset 3px 3px 6px rgba(255,255,255,.5)}
+  .gusto[aria-pressed="true"]{--c:var(--tinta);color:#fff}
+  .gusto:disabled{opacity:.45;cursor:not-allowed}
+  .armar-pie{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;padding:16px;--c:var(--blanco)}
+  .cant{display:inline-flex;align-items:center;gap:6px}
+  .cant button{width:44px;height:44px;border-radius:50%;border:0;font-size:1.3rem;font-weight:700;--c:var(--lila);background:var(--c);
+    box-shadow:4px 6px 12px rgba(120,80,150,.2),inset -3px -4px 8px rgba(60,20,90,.1),inset 3px 4px 8px rgba(255,255,255,.8)}
+  .cant span{min-width:28px;text-align:center;font-family:var(--redondo);font-weight:700;font-size:1.2rem}
+  .agregar-pote{--c:var(--rosa);flex:1 1 220px}
+  .aviso.ok{color:#1f7a4d}
+  .aviso{color:#b42350;font-weight:600;font-size:.9rem;min-height:1.3em;margin-top:8px;text-align:center}
+
+  /* Postres */
+  .postres{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(min-width:760px){.postres{grid-template-columns:repeat(4,1fr)}}
+  .postre{padding:16px;display:flex;flex-direction:column;gap:6px;text-align:center}
+  .postre .ico{font-size:3rem;width:84px;height:84px;margin:0 auto 4px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.55)}
+  .postre h3{font-size:1.1rem;line-height:1.2}
+  .postre p{font-size:.85rem;color:var(--suave);flex:1}
+  .postre .pr{font-family:var(--redondo);font-weight:700;font-size:1.2rem}
+  .postre .clay-btn{padding:10px 14px;font-size:.95rem;--c:var(--blanco)}
+
+  /* Opiniones y pie */
+  .vacio{max-width:560px;margin:0 auto;padding:30px 20px;text-align:center;--c:var(--celeste)}
+  .vacio strong{display:block;font-family:var(--redondo);font-size:1.35rem;margin-bottom:4px}
+  footer{padding:30px 0 130px}
+  footer .clay{padding:24px 20px;--c:var(--lila)}
+  footer h2{font-size:1.6rem;margin-bottom:10px}
+  footer ul{list-style:none;display:grid;gap:8px;font-weight:500}
+  .legal{font-size:.8rem;color:var(--suave);margin-top:16px;text-align:center}
+
+  /* WhatsApp y barra del pedido */
+  .wa{position:fixed;right:16px;bottom:16px;z-index:50;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;
+    box-shadow:6px 9px 18px rgba(30,120,70,.3),inset -4px -5px 9px rgba(0,0,0,.12),inset 4px 5px 9px rgba(255,255,255,.35)}
+  .wa svg{width:30px;height:30px;fill:#fff}
+  .ver-pedido{position:fixed;left:16px;right:88px;bottom:16px;z-index:50;max-width:420px;display:none;justify-content:space-between;align-items:center;--c:var(--tinta);color:#fff}
+  .ver-pedido.visible{display:flex}
+  .velo{position:fixed;inset:0;background:rgba(63,45,82,.4);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+  .panel{position:fixed;left:8px;right:8px;bottom:8px;z-index:70;max-height:90vh;max-height:90svh;overflow-y:auto;overscroll-behavior:contain;padding:20px 18px 24px;
+    transform:translateY(110%);transition:transform .3s cubic-bezier(.2,.9,.3,1.1);--c:var(--fondo)}
+  @media(min-width:760px){.panel{left:auto;width:440px;right:16px;bottom:16px}}
+  body.abierto{overflow:hidden}
+  body.abierto .velo{opacity:1;pointer-events:auto}
+  body.abierto .panel{transform:none}
+  .panel-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .panel-top h2{font-size:1.7rem}
+  .cerrar{width:42px;height:42px;padding:0;--c:var(--rosa)}
+  .items{list-style:none;display:grid;gap:10px}
+  .item{display:flex;align-items:center;gap:10px;padding:12px;border-radius:22px;--c:var(--blanco)}
+  .item .nom{flex:1;font-weight:600;line-height:1.3}
+  .item .nom small{display:block;color:var(--suave);font-weight:500}
+  .item .cant button{width:34px;height:34px;font-size:1.05rem}
+  .vacio-carrito{text-align:center;color:var(--suave);padding:20px 0}
+  .totales{margin:16px 0;display:grid;gap:4px;font-weight:600}
+  .totales div{display:flex;justify-content:space-between}
+  .totales .t{font-family:var(--redondo);font-size:1.4rem;border-top:2px dashed rgba(63,45,82,.2);padding-top:8px}
+  form{display:grid;gap:12px}
+  label{display:grid;gap:5px;font-weight:600;font-size:.92rem}
+  input,select{font:inherit;font-size:16px;padding:13px 16px;border:0;border-radius:18px;background:var(--blanco);color:var(--tinta);width:100%;
+    box-shadow:inset 4px 5px 10px rgba(60,20,90,.1),inset -4px -5px 10px rgba(255,255,255,.9)}
+  input:focus,select:focus{outline:3px solid var(--lila)}
+  .entrega{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .entrega label{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:999px;cursor:pointer;--c:var(--blanco);
+    background:var(--c);box-shadow:4px 6px 12px rgba(120,80,150,.16),inset -3px -4px 8px rgba(60,20,90,.07),inset 3px 4px 8px rgba(255,255,255,.85)}
+  .entrega input{width:auto;box-shadow:none;accent-color:var(--tinta)}
+  .entrega label:has(input:checked){--c:var(--menta)}
+  .oculto{display:none!important}
+  .btn-wa{--c:#25d366;color:#fff;width:100%}
+
+  :focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo">Página de ejemplo — hecha por Joaco</div>
+
+<header class="cab">
+  <a class="logo clay" href="#inicio">☁️ Heladería Nube</a>
+  <a class="clay-btn" href="#armar">Pedí</a>
+</header>
+
+<section class="portada" id="inicio" style="padding-top:8px">
+  <div class="wrap">
+    <div>
+      <h1 class="anim">Helado artesanal<br><span>en las nubes</span></h1>
+      <p class="anim">Cremoso, hecho todos los días y con mucho gusto. Armá tu pote y te lo llevamos a tu casa.</p>
+      <div class="acciones anim">
+        <a class="clay-btn" href="#armar" style="--c:var(--rosa)">Armá tu pote 🍨</a>
+        <a class="clay-btn" href="#postres" style="--c:var(--blanco)">Ver postres</a>
+      </div>
+    </div>
+    <div class="marco clay anim">
+      <span class="burbuja clay b1" aria-hidden="true"></span>
+      <span class="burbuja clay b2" aria-hidden="true"></span>
+      <span class="burbuja clay b3" aria-hidden="true"></span>
+      <div class="img"><span aria-hidden="true">🍦</span><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=700&q=60&auto=format&fit=crop" alt="Cucuruchos de helado de colores" fetchpriority="high" onerror="this.remove()"></div>
+      <div class="sello clay">14 gustos<small>artesanales</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="franja">
+  <span class="clay">💳 Efectivo · Transferencia · Mercado Pago</span>
+  <span class="clay">🛵 Delivery en la Capital</span>
+  <span class="clay">🕑 Todos los días de 14 a 24 h</span>
+</div>
+
+<main>
+  <section id="armar">
+    <div class="wrap">
+      <div class="tit anim"><h2>Armá tu pote</h2><p>Elegí el tamaño, sumá tus gustos y listo.</p></div>
+
+      <div class="paso"><b>1</b> Elegí el tamaño</div>
+      <div class="tamanos" id="tamanos" role="group" aria-label="Tamaños"></div>
+
+      <div class="paso"><b>2</b> Elegí tus gustos</div>
+      <div class="contador clay" aria-live="polite"><span id="contTexto">Elegí un tamaño primero</span><span class="bolitas" id="bolitas"></span></div>
+      <div id="gustos"></div>
+
+      <div class="paso"><b>3</b> Sumalo al pedido</div>
+      <div class="armar-pie clay">
+        <div class="cant"><button type="button" id="menos" aria-label="Uno menos">−</button><span id="cant">1</span><button type="button" id="mas" aria-label="Uno más">+</button></div>
+        <button class="clay-btn agregar-pote" type="button" id="agregarPote">Agregar al pedido</button>
+      </div>
+      <p class="aviso" id="avisoPote" role="alert"></p>
+    </div>
+  </section>
+
+  <section id="postres">
+    <div class="wrap">
+      <div class="tit anim"><h2>Postres helados</h2><p>Para compartir (o no).</p></div>
+      <div class="postres" id="listaPostres"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="tit anim"><h2>Lo que dicen de Nube</h2></div>
+      <div class="vacio clay anim">
+        <strong>Próximamente opiniones de clientes</strong>
+        ¿Ya probaste nuestro helado? Contanos qué te pareció por WhatsApp.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="clay">
+      <h2>☁️ Heladería Nube</h2>
+      <ul>
+        <li>🛵 Delivery en San Fernando del Valle de Catamarca · Retiro en el local</li>
+        <li>📱 WhatsApp: <a href="https://wa.me/5493834024275" target="_blank" rel="noopener">383 402-4275</a></li>
+        <li>📸 Instagram: <a href="#" onclick="return false">@heladerianube</a> (de ejemplo)</li>
+        <li>🕑 Todos los días de 14 a 24 h</li>
+      </ul>
+    </div>
+    <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Foto: Unsplash.</p>
+  </div>
+</footer>
+
+<button class="ver-pedido clay-btn" id="verPedido" type="button"><span>🍨 Ver mi pedido (<span id="cuenta">0</span>)</span><span id="totalBarra">$0</span></button>
+
+<a class="wa" href="https://wa.me/5493834024275?text=Hola%20Helader%C3%ADa%20Nube!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2a13 13 0 0 0 6.6 1.8c7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.2-3.8 1.2 1.2-3.7-.3-.4a10.5 10.5 0 0 1-1.7-5.7C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.9c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9 2.8 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+</a>
+
+<div class="velo" id="velo"></div>
+<aside class="panel clay" id="panel" role="dialog" aria-modal="true" aria-labelledby="tituloPedido" aria-hidden="true">
+  <div class="panel-top"><h2 id="tituloPedido">Tu pedido 🍨</h2><button class="cerrar clay-btn" id="cerrar" type="button" aria-label="Cerrar">✕</button></div>
+  <ul class="items" id="items"></ul>
+  <div class="totales">
+    <div><span>Helados y postres</span><span id="tProd">$0</span></div>
+    <div><span>Envío</span><span id="tEnvio">—</span></div>
+    <div class="t"><span>Total</span><span id="tTotal">$0</span></div>
+  </div>
+  <form id="form" novalidate>
+    <label>Tu nombre <input id="nombre" autocomplete="name" placeholder="Ej: Sofía"></label>
+    <div class="entrega" role="radiogroup" aria-label="Entrega">
+      <label><input type="radio" name="entrega" value="delivery" checked> 🛵 Delivery</label>
+      <label><input type="radio" name="entrega" value="retiro"> 🏠 Retiro</label>
+    </div>
+    <label id="campoDir">Dirección y barrio <input id="direccion" autocomplete="street-address" placeholder="Calle, número y barrio"></label>
+    <p id="notaRetiro" class="oculto" style="font-size:.9rem;color:var(--suave)">Lo retirás en el local. Te avisamos por WhatsApp cuando esté listo.</p>
+    <label>Forma de pago
+      <select id="pago"><option value="">Elegí una opción</option><option>Efectivo</option><option>Transferencia</option><option>Mercado Pago</option></select>
+    </label>
+    <p class="aviso" id="error" role="alert"></p>
+    <button class="clay-btn btn-wa" type="submit">Enviar pedido por WhatsApp</button>
+  </form>
+</aside>
+
+<script>
+(function(){
+  var WA = "5493834024275", DELIVERY = 2000;
+  var reducir = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function $(id){ return document.getElementById(id); }
+  function precio(n){ return "$" + n.toLocaleString("es-AR"); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  var tamanos = [
+    {id:"cucurucho", nombre:"Cucurucho", gustos:2, precio:4500, ico:"🍦", color:"var(--durazno)"},
+    {id:"cuarto", nombre:"1/4 kg", gustos:3, precio:7900, ico:"🍨", color:"var(--celeste)"},
+    {id:"medio", nombre:"1/2 kg", gustos:3, precio:13900, ico:"🍨", color:"var(--menta)"},
+    {id:"kilo", nombre:"1 kg", gustos:4, precio:24900, ico:"🧁", color:"var(--lila)"}
+  ];
+  var grupos = [
+    {nombre:"Cremas", gustos:[["Vainilla","#fff3c4"],["Crema americana","#fffaf0"],["Sambayón","#ffe08a"],["Tramontana","#f3e2c7"]]},
+    {nombre:"Chocolates", gustos:[["Chocolate","#8a5a3c"],["Chocolate amargo","#5a3725"],["Chocolate con almendras","#a0714f"]]},
+    {nombre:"Dulce de leche", gustos:[["Dulce de leche","#d9a066"],["Dulce de leche granizado","#c98a52"],["Dulce de leche con brownie","#b07443"]]},
+    {nombre:"Frutales", gustos:[["Frutilla","#ff8fab"],["Limón","#f7f08a"],["Maracuyá","#ffc94d"],["Frutos rojos","#d64f7a"]]}
+  ];
+  var postres = [
+    {id:"torta", nombre:"Torta helada", desc:"Vainilla, dulce de leche y chocolate. 8 porciones.", precio:18500, ico:"🎂", color:"var(--rosa)"},
+    {id:"bombones", nombre:"Bombones helados x6", desc:"Bañados en chocolate.", precio:7200, ico:"🍫", color:"var(--durazno)"},
+    {id:"copa", nombre:"Copa Nube", desc:"3 bochas, crema, salsa y confites.", precio:6900, ico:"🍧", color:"var(--celeste)"},
+    {id:"paletas", nombre:"Paletas de fruta x3", desc:"Frutilla, limón y maracuyá.", precio:5400, ico:"🍭", color:"var(--menta)"}
+  ];
+
+  /* ---------- Armá tu pote ---------- */
+  var tam = null, elegidos = [], cant = 1;
+  $("tamanos").innerHTML = tamanos.map(function(t){
+    return '<button class="tam clay" type="button" data-id="'+t.id+'" aria-pressed="false" style="--c:'+t.color+'"><span class="ico">'+t.ico+'</span>'+
+      '<strong>'+t.nombre+'</strong><small>Hasta '+t.gustos+' gustos</small><span class="pr">'+precio(t.precio)+'</span></button>';
+  }).join("");
+  $("gustos").innerHTML = grupos.map(function(g){
+    return '<div class="grupo-g"><h3>'+g.nombre+'</h3><div class="gustos">'+g.gustos.map(function(x){
+      return '<button class="gusto" type="button" data-g="'+esc(x[0])+'" aria-pressed="false"><i style="--g:'+x[1]+'"></i>'+esc(x[0])+'</button>';
+    }).join("")+'</div></div>';
+  }).join("");
+  function pintarPote(){
+    var max = tam ? tam.gustos : 0;
+    $("contTexto").textContent = tam ? "Elegiste " + elegidos.length + " de " + max + " gustos" : "Elegí un tamaño primero";
+    $("bolitas").innerHTML = new Array(max + 1).join("x").split("").map(function(_, i){ return '<i class="'+(i < elegidos.length ? "llena" : "")+'"></i>'; }).join("");
+    document.querySelectorAll(".gusto").forEach(function(b){
+      var sel = elegidos.indexOf(b.dataset.g) >= 0;
+      b.setAttribute("aria-pressed", sel ? "true" : "false");
+      b.disabled = !sel && (!tam || elegidos.length >= max);
+    });
+    $("agregarPote").textContent = tam ? "Agregar " + tam.nombre + " · " + precio(tam.precio * cant) : "Agregar al pedido";
+  }
+  $("tamanos").addEventListener("click", function(e){
+    var b = e.target.closest(".tam"); if (!b) return;
+    tamanos.forEach(function(t){ if (t.id === b.dataset.id) tam = t; });
+    $("tamanos").querySelectorAll(".tam").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    if (elegidos.length > tam.gustos) elegidos = elegidos.slice(0, tam.gustos);
+    $("avisoPote").textContent = "";
+    pintarPote(); pop(b);
+  });
+  $("gustos").addEventListener("click", function(e){
+    var b = e.target.closest(".gusto"); if (!b || b.disabled) return;
+    var i = elegidos.indexOf(b.dataset.g);
+    if (i >= 0) elegidos.splice(i, 1); else elegidos.push(b.dataset.g);
+    $("avisoPote").textContent = "";
+    pintarPote(); pop(b);
+  });
+  $("menos").addEventListener("click", function(){ cant = Math.max(1, cant - 1); $("cant").textContent = cant; pintarPote(); });
+  $("mas").addEventListener("click", function(){ cant = Math.min(10, cant + 1); $("cant").textContent = cant; pintarPote(); });
+  $("agregarPote").addEventListener("click", function(){
+    $("avisoPote").classList.remove("ok");
+    if (!tam){ $("avisoPote").textContent = "Elegí un tamaño."; return; }
+    if (!elegidos.length){ $("avisoPote").textContent = "Elegí al menos un gusto."; return; }
+    pedido.push({tipo:"pote", tam:tam.id, gustos:elegidos.slice(), c:cant});
+    guardar(); render(); pop($("verPedido"));
+    elegidos = []; cant = 1; $("cant").textContent = 1;
+    $("avisoPote").textContent = "¡Listo! Sumamos tu " + tam.nombre + " al pedido."; $("avisoPote").classList.add("ok");
+    pintarPote();
+  });
+  pintarPote();
+
+  /* ---------- Postres ---------- */
+  $("listaPostres").innerHTML = postres.map(function(p){
+    return '<article class="postre clay anim-card" style="--c:'+p.color+'"><span class="ico">'+p.ico+'</span><h3>'+esc(p.nombre)+'</h3><p>'+esc(p.desc)+'</p>'+
+      '<span class="pr">'+precio(p.precio)+'</span><button class="clay-btn" type="button" data-id="'+p.id+'">Agregar</button></article>';
+  }).join("");
+  $("listaPostres").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    var ya = pedido.filter(function(x){ return x.tipo === "postre" && x.id === b.dataset.id; })[0];
+    if (ya) ya.c++; else pedido.push({tipo:"postre", id:b.dataset.id, c:1});
+    guardar(); render(); pop(b);
+    b.textContent = "¡Sumado! ✓"; setTimeout(function(){ b.textContent = "Agregar"; }, 900);
+  });
+
+  /* ---------- Pedido ---------- */
+  var pedido = [];
+  try { pedido = JSON.parse(localStorage.getItem("nube-pedido")) || []; } catch(e){ pedido = []; }
+  function guardar(){ try { localStorage.setItem("nube-pedido", JSON.stringify(pedido)); } catch(e){} }
+  function buscarT(id){ return tamanos.filter(function(t){ return t.id === id; })[0]; }
+  function buscarP(id){ return postres.filter(function(p){ return p.id === id; })[0]; }
+  function info(x){
+    if (x.tipo === "pote"){ var t = buscarT(x.tam); return {nombre:t.nombre + (t.id === "cucurucho" ? "" : " de helado"), detalle:x.gustos.join(", "), precio:t.precio}; }
+    var p = buscarP(x.id); return {nombre:p.nombre, detalle:"", precio:p.precio};
+  }
+  function entrega(){ var r = document.querySelector('input[name="entrega"]:checked'); return r ? r.value : "delivery"; }
+  function cuentas(){
+    var sub = pedido.reduce(function(s, x){ return s + info(x).precio * x.c; }, 0);
+    var env = entrega() === "delivery" && sub > 0 ? DELIVERY : 0;
+    return {sub:sub, env:env, total:sub + env};
+  }
+  function render(){
+    var n = pedido.reduce(function(s, x){ return s + x.c; }, 0), c = cuentas();
+    $("cuenta").textContent = n; $("totalBarra").textContent = precio(c.sub);
+    $("verPedido").classList.toggle("visible", n > 0);
+    $("tProd").textContent = precio(c.sub);
+    $("tEnvio").textContent = entrega() === "retiro" ? "Sin cargo" : precio(DELIVERY);
+    $("tTotal").textContent = precio(c.total);
+    $("items").innerHTML = pedido.length ? pedido.map(function(x, i){
+      var f = info(x);
+      return '<li class="item clay"><div class="nom">'+esc(f.nombre)+'<small>'+(f.detalle ? esc(f.detalle) + " · " : "")+precio(f.precio * x.c)+'</small></div>'+
+        '<div class="cant"><button type="button" data-menos="'+i+'" aria-label="Quitar uno">−</button><span>'+x.c+'</span><button type="button" data-mas="'+i+'" aria-label="Agregar uno">+</button></div></li>';
+    }).join("") : '<li class="vacio-carrito">Todavía no sumaste nada 🍦</li>';
+  }
+  $("items").addEventListener("click", function(e){
+    var t = e.target.closest("button"); if (!t) return;
+    var i = +(t.dataset.mas || t.dataset.menos);
+    pedido[i].c += t.dataset.mas ? 1 : -1;
+    if (pedido[i].c <= 0) pedido.splice(i, 1);
+    guardar(); render();
+  });
+  document.querySelectorAll('input[name="entrega"]').forEach(function(r){ r.addEventListener("change", function(){
+    var retiro = entrega() === "retiro";
+    $("campoDir").classList.toggle("oculto", retiro); $("notaRetiro").classList.toggle("oculto", !retiro);
+    render();
+  }); });
+  function abrir(){ document.body.classList.add("abierto"); $("panel").setAttribute("aria-hidden", "false"); $("cerrar").focus(); if (window.__lenis) window.__lenis.stop(); }
+  function cerrar(){ document.body.classList.remove("abierto"); $("panel").setAttribute("aria-hidden", "true"); $("verPedido").focus(); if (window.__lenis) window.__lenis.start(); }
+  $("verPedido").addEventListener("click", abrir);
+  $("cerrar").addEventListener("click", cerrar);
+  $("velo").addEventListener("click", cerrar);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && document.body.classList.contains("abierto")) cerrar(); });
+  $("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var nombre = $("nombre").value.trim(), dir = $("direccion").value.trim(), pago = $("pago").value, ent = entrega(), c = cuentas();
+    if (!pedido.length){ $("error").textContent = "Sumá al menos un helado o postre."; return; }
+    if (!nombre || !pago || (ent === "delivery" && !dir)){ $("error").textContent = "Completá tu nombre, " + (ent === "delivery" ? "la dirección " : "") + "y la forma de pago."; return; }
+    $("error").textContent = "";
+    var msg = "¡Hola Heladería Nube! 🍦 Quiero hacer este pedido:\n\n" +
+      pedido.map(function(x){ var f = info(x); return "• " + x.c + " x " + f.nombre + (f.detalle ? " (" + f.detalle + ")" : "") + " — " + precio(f.precio * x.c); }).join("\n") +
+      "\n\nSubtotal: " + precio(c.sub) +
+      "\nEntrega: " + (ent === "delivery" ? "Delivery (" + precio(DELIVERY) + ")" : "Retiro en el local") +
+      "\n*Total: " + precio(c.total) + "*\n\nNombre: " + nombre + (ent === "delivery" ? "\nDirección: " + dir : "") + "\nForma de pago: " + pago;
+    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+  });
+  render();
+
+  // Pequeño "rebote" de plastilina al tocar
+  function pop(el){ if (!reducir && el && el.animate) el.animate([{transform:"scale(1)"},{transform:"scale(.94)"},{transform:"scale(1.04)"},{transform:"scale(1)"}], {duration:380, easing:"ease-out"}); }
+
+  /* ---------- Animaciones suaves (no se cargan si piden reducir movimiento) ---------- */
+  if (reducir) return;
+  function cargar(src, cb){ var s = document.createElement("script"); s.src = src; s.async = true; s.onload = cb; document.head.appendChild(s); }
+  window.addEventListener("load", function(){
+    cargar("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js", function(){
+      cargar("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js", function(){
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from(".portada .anim", {y:30, opacity:0, scale:.96, duration:.9, stagger:.12, ease:"back.out(1.6)"});
+        gsap.utils.toArray("main .anim").forEach(function(el){
+          gsap.from(el, {y:26, opacity:0, duration:.8, ease:"back.out(1.5)", scrollTrigger:{trigger:el, start:"top 90%", once:true}});
+        });
+        ScrollTrigger.batch(".tam, .anim-card", {start:"top 92%", once:true,
+          onEnter:function(b){ gsap.from(b, {y:30, scale:.92, opacity:0, duration:.7, stagger:.08, ease:"back.out(1.7)"}); }});
+        cargar("https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js", function(){
+          if (!window.Lenis) return;
+          var lenis = new Lenis({duration:1.1, smoothWheel:true});
+          window.__lenis = lenis;
+          lenis.on("scroll", ScrollTrigger.update);
+          gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+          gsap.ticker.lagSmoothing(0);
+          document.querySelectorAll('a[href^="#"]').forEach(function(a){
+            a.addEventListener("click", function(e){
+              var h = a.getAttribute("href"); if (h.length < 2) return;
+              var dest = document.querySelector(h);
+              if (dest){ e.preventDefault(); lenis.scrollTo(dest, {offset:-10}); }
+            });
+          });
+        });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
