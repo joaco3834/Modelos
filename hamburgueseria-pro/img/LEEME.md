@@ -9,14 +9,11 @@ Fotos de Unsplash recortadas con rembg (modelo `birefnet-general-lite`) y pasada
 | `criolla.webp`       | Criolla        | `ghaly-wedinly-Md54Ida-hiI-unsplash.jpg`        |
 | `bacon.webp`         | Bacon Bomb     | `david-foodphototasty-E94j3rMcxlw-unsplash.jpg` |
 
-Los ingredientes flotantes (tomate, lechuga y queso) siguen siendo ilustraciones SVG. Para usar fotos,
-agregá `tomate.webp`, `lechuga.webp` y `queso.webp` y poné `FOTOS_ING = true` en `../index.html`.
-
 Las `.jpg` originales no las carga la página; se pueden borrar para que el repositorio pese menos.
 
 ## Ingredientes flotantes
 
-Recortados por color (y limpiados a mano) de las mismas fotos:
+Recortados por color (verde, amarillo, rojo) de las mismas fotos:
 
 | Archivo               | De dónde sale                              |
 |-----------------------|--------------------------------------------|
@@ -26,4 +23,5 @@ Recortados por color (y limpiados a mano) de las mismas fotos:
 | `ing-queso.webp`      | feta que cae, foto de Stanley Kustamin     |
 | `ing-sesamo1/2.webp`  | semillas de la tapa del pan                |
 
-Falta una rodaja de tomate: en estas fotos el tomate solo se ve de costado.
+Falta una rodaja de tomate: en estas fotos el tomate solo se ve de costado. Si se agrega
+`ing-tomate.webp`, se suma en la lista `ing` de cada burger en `../index.html`.
