@@ -1,16 +1,15 @@
 # Imágenes recortadas (sin fondo)
 
-Poné acá las fotos recortadas, en WebP o PNG transparente, de unos 800 px de ancho y de menos de 120 KB cada una:
+Fotos de Unsplash recortadas con rembg (modelo `birefnet-general-lite`) y pasadas a WebP de 800 px:
 
-| Archivo              | Qué es                       |
-|----------------------|------------------------------|
-| `clasica.webp`       | Hamburguesa Clásica Fuego    |
-| `doble-cheddar.webp` | Hamburguesa Doble Cheddar    |
-| `veggie.webp`        | Hamburguesa Veggie Verde     |
-| `bacon.webp`         | Hamburguesa Bacon Bomb       |
-| `tomate.webp`        | Rodaja de tomate             |
-| `lechuga.webp`       | Hoja de lechuga              |
-| `queso.webp`         | Feta de queso                |
+| Archivo              | Hamburguesa    | Foto original                                   |
+|----------------------|----------------|-------------------------------------------------|
+| `clasica.webp`       | Clásica Fuego  | `stanley-kustamin-egC8A3EWFms-unsplash.jpg`     |
+| `doble-cheddar.webp` | Doble Cheddar  | `amirali-mirhashemian-sc5sTPMrVfk-unsplash.jpg` |
+| `criolla.webp`       | Criolla        | `ghaly-wedinly-Md54Ida-hiI-unsplash.jpg`        |
+| `bacon.webp`         | Bacon Bomb     | `david-foodphototasty-E94j3rMcxlw-unsplash.jpg` |
 
-Después, en `../index.html`, cambiá `var FOTOS = false;` por `var FOTOS = true;`
-(y si usás PNG, cambiá `EXT` a `".png"`). Mientras tanto la página usa ilustraciones SVG.
+Los ingredientes flotantes (tomate, lechuga y queso) siguen siendo ilustraciones SVG. Para usar fotos,
+agregá `tomate.webp`, `lechuga.webp` y `queso.webp` y poné `FOTOS_ING = true` en `../index.html`.
+
+Las `.jpg` originales no las carga la página; se pueden borrar para que el repositorio pese menos.

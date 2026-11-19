@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/clasica.webp" type="image/webp">
 <style>
   :root{
     --negro:#0d0d0d; --negro2:#161616; --negro3:#232323;
@@ -40,6 +41,7 @@
   .hero-burger{position:absolute;left:50%;top:54%;width:min(70vw,460px);transform:translate(-50%,-50%);z-index:2}
   .flota{animation:flotar 4.5s ease-in-out infinite}
   .flota img,.flota svg{width:100%;height:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
+  .slide .flota img{height:100%;object-fit:contain}
   .sombra{position:absolute;left:50%;bottom:-14%;width:70%;height:14%;transform:translateX(-50%);
     background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);animation:sombra 4.5s ease-in-out infinite;z-index:-1}
   @keyframes flotar{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(1deg)}}
@@ -207,7 +209,7 @@
 <section class="carrusel" id="burgers" aria-roledescription="carrusel" aria-label="Nuestras hamburguesas">
   <div class="ing" data-ing="lechuga" data-vel="1.2" data-rot="35"  style="width:18vw;max-width:110px;left:-2%;top:14%"></div>
   <div class="ing" data-ing="queso"   data-vel="1.6" data-rot="-45" style="width:13vw;max-width:80px;right:4%;top:12%"></div>
-  <div class="ing" data-ing="tomate"  data-vel="0.8" data-rot="50"  style="width:14vw;max-width:85px;right:-2%;top:70%"></div>
+  <div class="ing" data-ing="tomate"  data-vel="0.8" data-rot="50"  style="width:13vw;max-width:80px;left:-3%;top:88%"></div>
   <div class="cab wrap">
     <small>Deslizá o tocá las flechas</small>
     <h2 class="titulo">Nuestras burgers</h2>
@@ -259,7 +261,7 @@
       <li>📸 Instagram: <a href="#" onclick="return false">@burgerfuego</a> <small>(de ejemplo)</small></li>
       <li>🕗 Martes a domingo de 20 a 00 h</li>
     </ul>
-    <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash.</p>
+    <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash (Amirali Mirhashemian, David Foodphototasty, Ghaly Wedinly, Stanley Kustamin).</p>
   </div>
 </footer>
 
@@ -297,13 +299,14 @@
 <script>
 (function(){
   /* =====================================================================
-     FOTOS RECORTADAS: cuando estén en /img (PNG o WebP sin fondo), poner
-     FOTOS = true. Nombres esperados:
-       img/clasica.webp  img/doble-cheddar.webp  img/veggie.webp  img/bacon.webp
+     FOTOS RECORTADAS (WebP sin fondo, hechas con rembg) en /img:
+       img/clasica.webp  img/doble-cheddar.webp  img/criolla.webp  img/bacon.webp
+     FOTOS_ING = true cuando haya también fotos de ingredientes:
        img/tomate.webp   img/lechuga.webp        img/queso.webp
      Mientras tanto se usan ilustraciones SVG livianas.
      ===================================================================== */
-  var FOTOS = false;
+  var FOTOS = true;
+  var FOTOS_ING = false;
   var EXT = ".webp";
 
   var WA = "5493834024275";
@@ -375,7 +378,7 @@
   var burgers = [
     {id:1, slug:"clasica", nombre:"Clásica Fuego", corto:"Clásica", desc:"Medallón smash, cheddar, lechuga, tomate y salsa de la casa.", precio:8500, bg:"#e3262b", ink:"#ffffff", capas:["panArriba","lechuga","tomate","queso","carne","panAbajo"]},
     {id:2, slug:"doble-cheddar", nombre:"Doble Cheddar", corto:"Cheddar", desc:"Doble carne, doble cheddar y cebolla caramelizada. La más pedida.", precio:11900, bg:"#ffc21a", ink:"#141414", capas:["panArriba","queso","carne","queso","carne","panAbajo"]},
-    {id:3, slug:"veggie", nombre:"Veggie Verde", corto:"Veggie", desc:"Medallón de garbanzos, lechuga, tomate y mayo de albahaca.", precio:9800, bg:"#1f8a4c", ink:"#ffffff", capas:["panArriba","lechuga","tomate","veggie","lechuga","panAbajo"]},
+    {id:3, slug:"criolla", nombre:"Criolla", corto:"Criolla", desc:"Carne smash, cheddar, cebolla, tomate, lechuga y salsa criolla.", precio:10500, bg:"#1f8a4c", ink:"#ffffff", capas:["panArriba","lechuga","tomate","queso","carne","lechuga","panAbajo"]},
     {id:4, slug:"bacon", nombre:"Bacon Bomb", corto:"Bacon", desc:"Doble panceta crocante, cheddar, carne smash y barbacoa.", precio:12500, bg:"#f47b20", ink:"#141414", capas:["panArriba","panceta","queso","carne","lechuga","panAbajo"]}
   ];
   var IMG="https://images.unsplash.com/photo-", Q="?w=300&q=55&auto=format&fit=crop";
@@ -398,7 +401,7 @@
   $("heroBurger").innerHTML = imagen("clasica", burgerSVG(burgers[0].capas, "Hamburguesa Clásica Fuego"), "Hamburguesa Clásica Fuego", true);
   document.querySelectorAll(".ing").forEach(function(el){
     var n = el.dataset.ing;
-    el.innerHTML = FOTOS ? '<img src="img/'+n+EXT+'" alt="" loading="lazy" decoding="async">' : ingSVG[n];
+    el.innerHTML = FOTOS_ING ? '<img src="img/'+n+EXT+'" alt="" loading="lazy" decoding="async">' : ingSVG[n];
     el.style.transform = "rotate(" + (parseFloat(el.dataset.rot)/3) + "deg)";
   });
   // "FUEGO" ocupando todo el ancho
