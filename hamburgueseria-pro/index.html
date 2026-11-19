@@ -41,7 +41,6 @@
   .hero-burger{position:absolute;left:50%;top:54%;width:min(70vw,460px);transform:translate(-50%,-50%);z-index:2}
   .flota{animation:flotar 4.5s ease-in-out infinite}
   .flota img,.flota svg{width:100%;height:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
-  .slide .flota img{height:100%;object-fit:contain}
   .sombra{position:absolute;left:50%;bottom:-14%;width:70%;height:14%;transform:translateX(-50%);
     background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);animation:sombra 4.5s ease-in-out infinite;z-index:-1}
   @keyframes flotar{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(1deg)}}
@@ -63,37 +62,36 @@
   .franja li{display:flex;gap:8px;align-items:center}
   @media(min-width:700px){.franja ul{grid-template-columns:repeat(3,1fr)}.franja li{justify-content:center}}
 
-  /* ---------- Carrusel ---------- */
+  /* ---------- Rueda de hamburguesas ---------- */
   .carrusel{position:relative;overflow:hidden;background:var(--slide-bg);color:var(--slide-ink);
-    transition:background-color .7s ease,color .7s ease;padding:44px 0 40px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+    transition:background-color .7s ease,color .7s ease;padding:40px 0 36px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
   .carrusel .cab{position:relative;z-index:3;text-align:center}
   .carrusel .cab small{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;opacity:.8}
   .carrusel h2{font-size:clamp(2.2rem,10vw,3.6rem)}
-  .escena{position:relative;flex:1;min-height:300px;display:flex;align-items:center;justify-content:center;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-  .fondo-nombre{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--titulo);text-transform:uppercase;
-    font-size:30vw;line-height:.8;white-space:nowrap;opacity:.14;pointer-events:none;z-index:0}
-  @media(min-width:900px){.fondo-nombre{font-size:20vw}}
-  .slot{position:relative;width:min(76vw,440px);aspect-ratio:400/330;z-index:2}
-  .slide{position:absolute;inset:0;display:none}
-  .slide.activa{display:block}
-  .slide .flota{position:absolute;inset:0}
-  .flecha{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:48px;height:48px;border-radius:50%;border:2px solid currentColor;
-    background:rgba(255,255,255,.12);color:inherit;font-size:1.3rem;display:grid;place-items:center}
+  .escena{position:relative;height:clamp(320px,56vh,600px);height:clamp(320px,56svh,600px);margin-top:8px;overflow:hidden;
+    touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;z-index:2}
+  .escena.arrastrando{cursor:grabbing}
+  .rueda{position:absolute;inset:0}
+  .arco{position:absolute;pointer-events:none;color:var(--slide-ink);opacity:.17;will-change:transform;transform-origin:50% 50%}
+  .arco text{font-family:var(--titulo);text-transform:uppercase;fill:currentColor}
+  .piso{position:absolute;left:50%;width:min(46vw,300px);height:34px;transform:translateX(-50%);pointer-events:none;
+    background:radial-gradient(closest-side,rgba(0,0,0,.32),transparent)}
+  .r-item{position:absolute;left:0;top:0;will-change:transform,opacity;transform-origin:50% 50%;cursor:pointer}
+  .r-item img,.r-item svg{width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
+  .r-tag{position:absolute;left:0;top:0;white-space:nowrap;pointer-events:none;will-change:transform,opacity;
+    background:var(--negro);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+  .flecha{position:absolute;top:50%;transform:translateY(-50%);z-index:200;width:46px;height:46px;border-radius:50%;border:2px solid currentColor;
+    background:rgba(255,255,255,.14);color:inherit;font-size:1.2rem;display:grid;place-items:center}
   .flecha:active{transform:translateY(-50%) scale(.92)}
-  .flecha.izq{left:12px}.flecha.der{right:12px}
-  @media(min-width:900px){.flecha.izq{left:8%}.flecha.der{right:8%}}
-  .detalle{position:relative;z-index:3;text-align:center;padding:0 16px;max-width:520px;margin:0 auto}
+  .flecha.izq{left:10px}.flecha.der{right:10px}
+  @media(min-width:900px){.flecha.izq{left:5%}.flecha.der{right:5%}}
+  .detalle{position:relative;z-index:3;text-align:center;padding:0 16px;max-width:520px;margin:6px auto 0}
   .detalle h3{font-size:clamp(2rem,9vw,3rem)}
   .detalle p{opacity:.9;margin:6px 0 14px;min-height:3em}
   .detalle .fila{display:flex;align-items:center;justify-content:center;gap:16px}
   .detalle .precio{font-family:var(--titulo);font-size:2.2rem;line-height:1}
   .btn-agregar{background:var(--negro);color:#fff;border:0;border-radius:999px;padding:14px 24px;font-weight:800}
   .btn-agregar.ok{background:#fff;color:var(--negro)}
-  .puntos{display:flex;justify-content:center;gap:4px;margin-top:18px}
-  .puntos button{width:32px;height:32px;border:0;background:none;display:grid;place-items:center}
-  .puntos button::after{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--slide-ink);transition:background .3s,transform .3s}
-  .puntos button[aria-current="true"]::after{background:var(--slide-ink);transform:scale(1.2)}
-  .ayuda{text-align:center;font-size:.8rem;opacity:.75;margin-top:4px}
 
   /* ---------- Menú ---------- */
   section.menu{padding:56px 0}
@@ -205,19 +203,20 @@
   </ul>
 </div>
 
-<!-- CARRUSEL DE HAMBURGUESAS -->
+<!-- RUEDA DE HAMBURGUESAS -->
 <section class="carrusel" id="burgers" aria-roledescription="carrusel" aria-label="Nuestras hamburguesas">
-  <div class="ing" data-ing="lechuga" data-vel="1.2" data-rot="35"  style="width:18vw;max-width:110px;left:-2%;top:14%"></div>
-  <div class="ing" data-ing="queso"   data-vel="1.6" data-rot="-45" style="width:13vw;max-width:80px;right:4%;top:12%"></div>
-  <div class="ing" data-ing="tomate"  data-vel="0.8" data-rot="50"  style="width:13vw;max-width:80px;left:-3%;top:88%"></div>
+  <div class="ing" data-ing="lechuga" data-vel="1.2" data-rot="35"  style="width:16vw;max-width:100px;left:-3%;top:9%"></div>
+  <div class="ing" data-ing="queso"   data-vel="1.6" data-rot="-45" style="width:12vw;max-width:76px;right:2%;top:7%"></div>
+  <div class="ing" data-ing="tomate"  data-vel="0.8" data-rot="50"  style="width:12vw;max-width:76px;left:-3%;top:90%"></div>
   <div class="cab wrap">
-    <small>Deslizá o tocá las flechas</small>
+    <small>Deslizá, girá o tocá una burger</small>
     <h2 class="titulo">Nuestras burgers</h2>
   </div>
   <div class="escena" id="escena">
-    <div class="fondo-nombre" id="fondoNombre" aria-hidden="true"></div>
+    <svg class="arco" id="arco" aria-hidden="true"></svg>
+    <div class="piso" id="piso" aria-hidden="true"></div>
+    <div class="rueda" id="rueda"></div>
     <button class="flecha izq" id="prev" type="button" aria-label="Hamburguesa anterior">←</button>
-    <div class="slot" id="slot"></div>
     <button class="flecha der" id="next" type="button" aria-label="Hamburguesa siguiente">→</button>
   </div>
   <div class="detalle" aria-live="polite">
@@ -228,7 +227,6 @@
       <button class="btn-agregar" id="sAgregar" type="button">Agregar</button>
     </div>
   </div>
-  <div class="puntos" id="puntos"></div>
 </section>
 
 <main>
@@ -413,71 +411,209 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustarGigante);
   var rt; window.addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(ajustarGigante, 150); });
 
-  /* ---------- Carrusel ---------- */
-  var slot = $("slot"), actual = 0, ocupado = false;
-  slot.innerHTML = burgers.map(function(b, i){
-    return '<div class="slide'+(i===0?' activa':'')+'" aria-roledescription="diapositiva" aria-label="'+(i+1)+' de '+burgers.length+'"><div class="flota">'+
-      imagen(b.slug, burgerSVG(b.capas, b.nombre), b.nombre, false)+'</div></div>';
-  }).join("");
-  var slides = slot.querySelectorAll(".slide");
-  $("puntos").innerHTML = burgers.map(function(b, i){ return '<button type="button" aria-label="Ver '+esc(b.nombre)+'" data-i="'+i+'"></button>'; }).join("");
-  var puntos = $("puntos").querySelectorAll("button");
+  /* ---------- Rueda de hamburguesas ("producto en órbita") ---------- */
+  var N = burgers.length;
+  var REP = Math.max(1, Math.ceil(12 / N));   // si son pocas, se repiten hasta completar la rueda
+  var M = N * REP, PASO = 360 / M;
+  var escena = $("escena"), estado = {r:0};
+  var items = [], tags = [], htmlR = "";
+  for (var k = 0; k < M; k++){
+    var bk = burgers[k % N];
+    htmlR += '<div class="r-item" data-i="'+k+'"'+(k >= N ? ' aria-hidden="true"' : '')+'>'+
+      imagen(bk.slug, burgerSVG(bk.capas, bk.nombre), k < N ? bk.nombre : "", false)+'</div>'+
+      '<span class="r-tag" aria-hidden="true">'+esc(bk.corto)+'</span>';
+  }
+  $("rueda").innerHTML = htmlR;
+  items = $("rueda").querySelectorAll(".r-item");
+  tags = $("rueda").querySelectorAll(".r-tag");
+  for (k = 0; k < items.length; k++) items[k].querySelectorAll("img").forEach(function(im){ im.draggable = false; });
 
-  function pintarDetalle(i){
-    var b = burgers[i], sec = $("burgers");
-    sec.style.setProperty("--slide-bg", b.bg);
-    sec.style.setProperty("--slide-ink", b.ink);
+  var G = {};   // geometría
+  function geom(){
+    var vw = escena.clientWidth, vh = escena.clientHeight;
+    G.vh = vh;
+    G.B = Math.min(vw * 0.5, 320);           // tamaño de la del centro
+    G.H = G.B * 0.82;
+    G.R = vw < 700 ? Math.max(230, vw * 0.7) : Math.max(480, vw * 0.42);           // radio del círculo (centro abajo de la pantalla)
+    G.cx = vw / 2;
+    G.cy = vh * 0.46 + G.R;
+    for (var i = 0; i < M; i++){ items[i].style.width = G.B + "px"; items[i].style.height = G.H + "px"; }
+    var piso = $("piso"); piso.style.top = (vh * 0.46 + G.H * 0.36) + "px";
+    // Texto gigante siguiendo la curva
+    var fs = G.B * 0.42, Rt = G.R - G.B * 0.06, pad = fs * 1.2, lado = 2 * (Rt + pad), c = Rt + pad;
+    var circ = 2 * Math.PI * Rt, frase = "Smash burgers • Fuego • ";
+    var reps = Math.max(1, Math.round(circ / (frase.length * fs * 0.42)));
+    var arco = $("arco");
+    arco.setAttribute("width", lado); arco.setAttribute("height", lado);
+    arco.setAttribute("viewBox", "0 0 " + lado + " " + lado);
+    arco.style.left = (G.cx - c) + "px"; arco.style.top = (G.cy - c) + "px";
+    arco.innerHTML = '<path id="arcoPath" fill="none" d="M'+c+' '+(c-Rt)+'a'+Rt+' '+Rt+' 0 1 1 0 '+(2*Rt)+'a'+Rt+' '+Rt+' 0 1 1 0 '+(-2*Rt)+'"/>'+
+      '<text font-size="'+fs+'" textLength="'+(circ - 2).toFixed(1)+'" lengthAdjust="spacing"><textPath href="#arcoPath">'+
+      new Array(reps + 1).join(frase)+'</textPath></text>';
+  }
+
+  function norm(a){ return ((a % 360) + 540) % 360 - 180; }
+  function mod(n, m){ return ((n % m) + m) % m; }
+  var ultimo = 0, giro = 0, colorActual = -1, mostrado = -1;
+  var arrastrando = false, tweenActivo = false, scrollActivo = false, corriendo = false;
+
+  function pintar(){
+    var r = estado.r, d = r - ultimo; ultimo = r;
+    // giro propio de cada hamburguesa según la velocidad
+    giro += (Math.max(-22, Math.min(22, d * 5)) - giro) * 0.2;
+    if (Math.abs(giro) < 0.02) giro = 0;
+    for (var i = 0; i < M; i++){
+      var a = norm(i * PASO + r), u = Math.abs(a) / PASO, it = items[i], tg = tags[i];
+      if (u > 2.6){
+        if (!it._oculto){ it.style.visibility = tg.style.visibility = "hidden"; it._oculto = true; }
+        continue;
+      }
+      if (it._oculto){ it.style.visibility = tg.style.visibility = ""; it._oculto = false; }
+      var rad = a * Math.PI / 180;
+      var x = G.cx + G.R * Math.sin(rad), y = G.cy - G.R * Math.cos(rad);
+      var s = u <= 1 ? 1 - 0.45 * u : Math.max(0.3, 0.55 - 0.15 * (u - 1));
+      var o = u <= 1 ? 1 - 0.2 * u : Math.max(0, 0.8 - 0.4 * (u - 1));
+      // se desvanecen al acercarse al borde de abajo (sin cortes bruscos)
+      o *= Math.max(0, Math.min(1, (G.vh - (y + G.H * s * 0.5) + 30) / 90));
+      var t = a * 0.9 + giro;
+      it.style.transform = "translate3d(" + (x - G.B / 2).toFixed(1) + "px," + (y - G.H / 2).toFixed(1) + "px,0) rotate(" + t.toFixed(2) + "deg) scale(" + s.toFixed(3) + ")";
+      it.style.opacity = o.toFixed(3);
+      it.style.zIndex = 100 - Math.round(u * 10);
+      // etiqueta al costado (no se achica tanto para que se pueda leer)
+      var tr = t * Math.PI / 180, ox = G.B * s * 0.4, oy = -G.H * s * 0.42;
+      var lx = x + ox * Math.cos(tr) - oy * Math.sin(tr), ly = y + ox * Math.sin(tr) + oy * Math.cos(tr);
+      tg.style.transform = "translate3d(" + lx.toFixed(1) + "px," + ly.toFixed(1) + "px,0) translate(-50%,-50%) rotate(" + t.toFixed(2) + "deg) scale(" + (0.75 + 0.25 * s).toFixed(3) + ")";
+      tg.style.opacity = (o * (u < 0.5 ? 1 : 0.9)).toFixed(3);
+      tg.style.zIndex = 101 - Math.round(u * 10);
+    }
+    $("arco").style.transform = "rotate(" + (r * 0.6).toFixed(2) + "deg)";
+    var c = mod(Math.round(-r / PASO), M) % N;
+    if (c !== colorActual){ colorActual = c; ponerColor(c); }
+  }
+  function bucle(){
+    pintar();
+    if (arrastrando || tweenActivo || scrollActivo || giro !== 0) requestAnimationFrame(bucle);
+    else corriendo = false;
+  }
+  function mover(){ if (!corriendo){ corriendo = true; requestAnimationFrame(bucle); } }
+
+  function ponerColor(i){
+    var sec = $("burgers");
+    sec.style.setProperty("--slide-bg", burgers[i].bg);
+    sec.style.setProperty("--slide-ink", burgers[i].ink);
+  }
+  function mostrarDetalle(i, animar){
+    if (i === mostrado) return;
+    mostrado = i;
+    var b = burgers[i];
     $("sNombre").textContent = b.nombre;
     $("sDesc").textContent = b.desc;
     $("sPrecio").textContent = precio(b.precio);
-    $("fondoNombre").textContent = b.corto;
-    puntos.forEach(function(p, k){ p.setAttribute("aria-current", k===i ? "true" : "false"); });
+    $("sAgregar").setAttribute("aria-label", "Agregar " + b.nombre);
+    if (!animar || reducir) return;
+    var partes = document.querySelectorAll(".detalle > *");
+    if (window.gsap) gsap.fromTo(partes, {y:16, opacity:0}, {y:0, opacity:1, duration:.5, stagger:.07, ease:"power2.out", overwrite:true});
+    else if (partes[0].animate) partes.forEach(function(p, n){ p.animate([{opacity:0, transform:"translateY(16px)"},{opacity:1, transform:"none"}], {duration:450, delay:n * 70, easing:"ease-out", fill:"backwards"}); });
+  }
+  function asentar(){ mostrarDetalle(mod(Math.round(-estado.r / PASO), M) % N, true); }
+
+  var tweenPropio = null;
+  function frenar(){
+    if (window.gsap) gsap.killTweensOf(estado);
+    if (tweenPropio){ cancelAnimationFrame(tweenPropio); tweenPropio = null; }
+    tweenActivo = false;
+  }
+  function irA(destino, dur){
+    frenar();
+    if (reducir || !dur){ estado.r = destino; pintar(); giro = 0; pintar(); asentar(); return; }
+    tweenActivo = true; mover();
+    var fin = function(){ tweenActivo = false; asentar(); };
+    if (window.gsap){ gsap.to(estado, {r:destino, duration:dur, ease:"power3.out", onComplete:fin}); return; }
+    var r0 = estado.r, t0 = performance.now();
+    (function paso(ahora){
+      var p = Math.min(1, (ahora - t0) / (dur * 1000)), e = 1 - Math.pow(1 - p, 3);
+      estado.r = r0 + (destino - r0) * e;
+      if (p < 1) tweenPropio = requestAnimationFrame(paso); else { tweenPropio = null; fin(); }
+    })(t0);
+  }
+  function encajar(r){ return Math.round(r / PASO) * PASO; }
+  function irPasos(n){ irA(encajar(estado.r) - n * PASO, 0.7); }
+
+  // Arrastrar con el dedo / mouse, con inercia
+  var p0 = null;
+  escena.addEventListener("pointerdown", function(e){
+    if (e.button > 0 || e.target.closest(".flecha")) return;
+    p0 = {x:e.clientX, y:e.clientY, r:estado.r, id:e.pointerId, muestras:[{t:e.timeStamp, x:e.clientX}], item:e.target.closest(".r-item")};
+  });
+  escena.addEventListener("pointermove", function(e){
+    if (!p0 || e.pointerId !== p0.id) return;
+    var dx = e.clientX - p0.x, dy = e.clientY - p0.y;
+    if (!arrastrando){
+      if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy)) return;
+      arrastrando = true; frenar(); p0.r = estado.r; p0.x = e.clientX;
+      escena.classList.add("arrastrando");
+      try { escena.setPointerCapture(e.pointerId); } catch(err){}
+      dx = 0;
+    }
+    estado.r = p0.r + dx / G.R * 57.2958;
+    p0.muestras.push({t:e.timeStamp, x:e.clientX});
+    if (p0.muestras.length > 6) p0.muestras.shift();
+    mover();
+  });
+  function soltar(e){
+    if (!p0) return;
+    var datos = p0; p0 = null;
+    if (!arrastrando){
+      // toque: si tocó una hamburguesa de costado, la trae al centro
+      if (e.type === "pointerup" && datos.item){
+        var a = norm(+datos.item.dataset.i * PASO + estado.r);
+        if (Math.abs(a) > PASO / 2) irA(estado.r - a, 0.8);
+      }
+      return;
+    }
+    arrastrando = false; escena.classList.remove("arrastrando");
+    var m = datos.muestras, v = 0;
+    if (m.length > 1){
+      var ult = m[m.length - 1], pri = m[0];
+      if (e.timeStamp - ult.t < 90 && ult.t > pri.t) v = (ult.x - pri.x) / (ult.t - pri.t);   // px por ms
+      if (Math.abs(v) < 0.35) v = 0;                       // arrastre lento: sin inercia
+    }
+    var vGrados = v / G.R * 57.2958;                      // grados por ms
+    var destino = encajar(estado.r + vGrados * 380);      // inercia: si va rápido, gira más
+    var dur = Math.min(2.2, Math.max(0.6, 0.45 + Math.abs(destino - estado.r) / PASO * 0.22));
+    irA(destino, dur);
+  }
+  escena.addEventListener("pointerup", soltar);
+  escena.addEventListener("pointercancel", soltar);
+  escena.addEventListener("dragstart", function(e){ e.preventDefault(); });
+
+  $("prev").addEventListener("click", function(){ irPasos(-1); });
+  $("next").addEventListener("click", function(){ irPasos(1); });
+  $("burgers").addEventListener("keydown", function(e){
+    if (e.key === "ArrowLeft") irPasos(-1);
+    if (e.key === "ArrowRight") irPasos(1);
+  });
+  $("sAgregar").addEventListener("click", function(){ sumar(burgers[mostrado].id, 1); listo(this, "Agregar"); });
+
+  // Girar con el scroll (se activa cuando carga GSAP + ScrollTrigger)
+  function ruedaConScroll(){
+    var antes = null, quieto, dirScroll = 0;
+    ScrollTrigger.create({trigger:"#burgers", start:"top bottom", end:"bottom top", onUpdate:function(self){
+      if (antes === null){ antes = self.progress; return; }
+      var dp = self.progress - antes; antes = self.progress;
+      if (arrastrando || !dp) return;
+      frenar();
+      estado.r -= dp * PASO * 7;
+      dirScroll = dp > 0 ? -1 : 1;
+      scrollActivo = true; mover();
+      clearTimeout(quieto);
+      quieto = setTimeout(function(){ scrollActivo = false; irA(encajar(estado.r + dirScroll * PASO * 0.3), 0.6); }, 140);
+    }});
   }
 
-  function ir(nuevo, dir){
-    nuevo = (nuevo + burgers.length) % burgers.length;
-    if (nuevo === actual || ocupado) return;
-    if (dir === undefined) dir = nuevo > actual ? 1 : -1;
-    var viejo = slides[actual], entra = slides[nuevo];
-    actual = nuevo;
-    pintarDetalle(nuevo);
-    if (reducir || !viejo.animate){
-      viejo.classList.remove("activa"); entra.classList.add("activa"); return;
-    }
-    ocupado = true;
-    entra.classList.add("activa");
-    viejo.animate([
-      {transform:"translateX(0) rotate(0) scale(1)", opacity:1},
-      {transform:"translateX("+(-dir*80)+"vw) rotate("+(-dir*110)+"deg) scale(.6)", opacity:0}
-    ], {duration:480, easing:"cubic-bezier(.55,0,.75,.3)", fill:"forwards"}).onfinish = function(){
-      viejo.classList.remove("activa"); viejo.getAnimations().forEach(function(a){ a.cancel(); });
-    };
-    var a = entra.animate([
-      {transform:"translateX("+(dir*80)+"vw) rotate("+(dir*110)+"deg) scale(.6)", opacity:0},
-      {transform:"translateX(0) rotate(0) scale(1)", opacity:1}
-    ], {duration:620, delay:120, easing:"cubic-bezier(.2,.9,.25,1)", fill:"backwards"});
-    a.onfinish = function(){ ocupado = false; };
-    var d = document.querySelector(".detalle");
-    d.animate([{opacity:0, transform:"translateY(12px)"},{opacity:1, transform:"none"}], {duration:400, delay:200, easing:"ease-out", fill:"backwards"});
-  }
-  $("prev").addEventListener("click", function(){ ir(actual - 1, -1); });
-  $("next").addEventListener("click", function(){ ir(actual + 1, 1); });
-  $("puntos").addEventListener("click", function(e){ var b = e.target.closest("button"); if (b) ir(+b.dataset.i); });
-  $("burgers").addEventListener("keydown", function(e){
-    if (e.key === "ArrowLeft") ir(actual - 1, -1);
-    if (e.key === "ArrowRight") ir(actual + 1, 1);
-  });
-  // Deslizar con el dedo
-  var x0 = null, y0 = 0;
-  $("escena").addEventListener("pointerdown", function(e){ x0 = e.clientX; y0 = e.clientY; });
-  $("escena").addEventListener("pointerup", function(e){
-    if (x0 === null) return;
-    var dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) ir(actual + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
-  });
-  $("escena").addEventListener("pointercancel", function(){ x0 = null; });
-  $("sAgregar").addEventListener("click", function(){ sumar(burgers[actual].id, 1); listo(this, "Agregar"); });
-  pintarDetalle(0);
+  geom(); pintar(); giro = 0; pintar(); mostrarDetalle(0, false);
+  var rr; window.addEventListener("resize", function(){ clearTimeout(rr); rr = setTimeout(function(){ geom(); pintar(); }, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ pintar(); });
 
   /* ---------- Menú ---------- */
   var htmlTabs = "", htmlCat = "";
@@ -550,6 +686,7 @@
       cargar("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js", function(){
         if (!window.gsap || !window.ScrollTrigger) return;
         gsap.registerPlugin(ScrollTrigger);
+        ruedaConScroll();
         gsap.from(".hero-burger", {y:40, scale:.85, opacity:0, duration:1, ease:"power3.out"});
         gsap.from("#gigante", {opacity:0, scale:1.08, duration:1.2, ease:"power2.out"});
         gsap.from(".hero-pie > *", {y:20, opacity:0, duration:.8, stagger:.12, delay:.3, ease:"power2.out"});
