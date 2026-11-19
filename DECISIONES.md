@@ -26,3 +26,31 @@ Cosas que elegí por mi cuenta mientras armaba los modelos. Si algo no te gusta,
 
 ## Índice
 - Le agregué la etiqueta "Estilo: Clásico" a la primera hamburguesería para que las 5 tarjetas tengan su estilo. Saqué la tarjeta de "Más modelos próximamente".
+
+## Fotos para revisar
+No pude ver ninguna de estas fotos (la red del entorno bloquea Unsplash). Son IDs de Unsplash que conozco para cada tema.
+Si alguna no corresponde o tiene marcas, avisame y la cambio. Todas tienen un fondo de color de respaldo si no cargan.
+Para verla, abrí `https://images.unsplash.com/photo-<ID>?w=800`.
+
+| Modelo | Dónde | ID | Qué debería mostrar |
+|---|---|---|---|
+| Lumi Store | Portada y tarjeta del índice | 1490481651871-ab68de25d43d | Prendas en tonos neutros en un perchero |
+| Lumi Store | Sección "Nosotros" | 1523381210434-271e8be1f52b | Perchero con ropa clara |
+| Lumi Store | Remera básica | 1521572163474-6864f9cf17ab | Remera blanca lisa |
+| Lumi Store | Remera oversize negra | 1583743814966-8936f5b7be1a | Remera negra lisa |
+| Lumi Store | Jean recto | 1541099649105-f69ad21f3246 | Jean |
+| Lumi Store | Pantalón sastrero | 1594633312681-425c7b97ccd1 | Pantalón de vestir claro |
+| Lumi Store | Buzo canguro | 1556821840-3a63f95609a7 | Buzo con capucha liso |
+| Lumi Store | Sweater tejido | 1434389677669-e08b4cac3105 | Persona con sweater/ropa de abrigo |
+| Lumi Store | Tote bag | 1590874103328-eac38a683ce7 | Bolsa de lienzo |
+| Lumi Store | Gorra | 1588850561407-ed78c282e89b | Gorra lisa |
+| Lumi Store | Bufanda | 1520903920243-00d872a2d1c9 | Bufanda tejida |
+| Lumi Store | Mochila | 1553062407-98eeb64c6a62 | Mochila |
+| Heladería Nube | Portada y tarjeta del índice | 1563805042-7684c019e1cb | Cucuruchos de helado de colores |
+| Cabañas El Rodeo | Portada y tarjeta del índice | 1449158743715-0a90ebb6d2d8 | Cabaña de madera entre árboles |
+| Cabañas El Rodeo | Caja "Cerros y aire puro" | 1464822759023-fed622ff2c3b | Montañas |
+| Cabañas El Rodeo | Living | 1522708323590-d24dbb6b0267 | Living luminoso |
+| Cabañas El Rodeo | Dormitorio | 1505693416388-ac5ce068fe85 | Dormitorio con cama |
+| Cabañas El Rodeo | Cabaña Arroyo | 1542718610-a1d656d1884c | Cabaña en el bosque |
+| Cabañas El Rodeo | Cabaña Cerro | 1510798831971-661eb04b3739 | Cabaña |
+| Cabañas El Rodeo | Cabaña Familiar | 1518780664697-55e3ad937233 | Casa/cabaña por fuera |
