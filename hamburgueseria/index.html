@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burger Fuego — Hamburguesas en Catamarca</title>
+<meta name="description" content="Burger Fuego: hamburguesas a la parrilla en San Fernando del Valle de Catamarca. Pedí por WhatsApp.">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900&q=60&auto=format&fit=crop">
+<style>
+  :root{
+    --negro:#0d0d0d; --negro2:#171717; --negro3:#242424;
+    --rojo:#e3262b; --rojo2:#b81c20; --amarillo:#ffc21a;
+    --texto:#f5f5f5; --gris:#a3a3a3; --radio:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--negro);color:var(--texto);line-height:1.5}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+
+  /* Cartelito de ejemplo */
+  .demo{background:var(--amarillo);color:var(--negro);text-align:center;font-size:.8rem;font-weight:700;padding:6px 12px}
+
+  /* Encabezado */
+  .hero{position:relative;min-height:78vh;min-height:78svh;display:flex;align-items:flex-end;background:var(--negro2);overflow:hidden}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.35) 40%,rgba(13,13,13,1) 100%)}
+  .hero .wrap{position:relative;z-index:1;padding-bottom:40px;width:100%}
+  .logo{display:inline-flex;align-items:center;gap:8px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;font-size:.9rem;color:var(--amarillo);margin-bottom:10px}
+  .hero h1{font-size:clamp(2.6rem,11vw,5rem);line-height:.95;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+  .hero h1 span{color:var(--rojo)}
+  .hero p{margin:14px 0 22px;font-size:1.1rem;color:#e5e5e5;max-width:30ch}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 24px;font-weight:800;text-decoration:none;font-size:1rem}
+  .btn-rojo{background:var(--rojo);color:#fff}
+  .btn-rojo:active{background:var(--rojo2)}
+  .btn-amarillo{background:var(--amarillo);color:var(--negro)}
+
+  /* Franja de info */
+  .franja{background:var(--rojo);color:#fff}
+  .franja ul{list-style:none;display:grid;grid-template-columns:1fr;gap:6px;padding:14px 16px;max-width:1100px;margin:0 auto;font-weight:700;font-size:.95rem}
+  .franja li{display:flex;gap:8px;align-items:center}
+  @media(min-width:700px){.franja ul{grid-template-columns:repeat(3,1fr);text-align:center}.franja li{justify-content:center}}
+
+  /* Secciones */
+  section{padding:48px 0}
+  h2{font-size:clamp(1.8rem,7vw,2.6rem);font-weight:900;text-transform:uppercase;line-height:1}
+  h2 span{color:var(--amarillo)}
+  .sub{color:var(--gris);margin-top:6px}
+
+  /* Pestañas de categorías */
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(13,13,13,.95);margin:20px -16px 0;padding:10px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs a{flex:0 0 auto;padding:8px 16px;border-radius:999px;background:var(--negro3);text-decoration:none;font-weight:700;font-size:.9rem;white-space:nowrap}
+  .tabs a.activa{background:var(--amarillo);color:var(--negro)}
+
+  .cat{padding-top:28px;scroll-margin-top:60px}
+  .cat h3{font-size:1.3rem;font-weight:900;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .cat h3::after{content:"";flex:1;height:2px;background:var(--rojo)}
+  .grid{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+  .card{background:var(--negro2);border-radius:var(--radio);overflow:hidden;display:flex;flex-direction:column;border:1px solid #222}
+  .card .foto{aspect-ratio:16/10;background:linear-gradient(135deg,var(--rojo2),var(--negro3));position:relative}
+  .card .foto img{width:100%;height:100%;object-fit:cover}
+  .card .foto::before{content:attr(data-emoji);position:absolute;inset:0;display:grid;place-items:center;font-size:3rem;z-index:0}
+  .card .foto img{position:relative;z-index:1}
+  .card .info{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .card h4{font-size:1.1rem;font-weight:800}
+  .card .desc{color:var(--gris);font-size:.9rem;flex:1}
+  .card .pie{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}
+  .precio{font-size:1.3rem;font-weight:900;color:var(--amarillo)}
+  .agregar{background:var(--rojo);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-weight:800;font-size:.9rem}
+  .agregar:active{background:var(--rojo2)}
+  .agregar.ok{background:#1f9d55}
+  .tag{display:inline-block;background:var(--amarillo);color:var(--negro);font-size:.7rem;font-weight:900;text-transform:uppercase;padding:2px 8px;border-radius:999px;align-self:flex-start}
+
+  /* Opiniones */
+  .opiniones{background:var(--negro2);text-align:center}
+  .vacio{margin-top:20px;border:2px dashed #333;border-radius:var(--radio);padding:32px 16px;color:var(--gris)}
+  .vacio strong{display:block;color:var(--texto);font-size:1.1rem;margin-bottom:4px}
+
+  /* Pie */
+  footer{padding:40px 0 120px;color:var(--gris);font-size:.95rem}
+  footer .marca{font-weight:900;font-size:1.4rem;color:var(--texto);text-transform:uppercase}
+  footer .marca span{color:var(--rojo)}
+  footer ul{list-style:none;margin:14px 0;display:grid;gap:8px}
+  footer a{color:var(--amarillo)}
+  .legal{font-size:.8rem;border-top:1px solid #222;padding-top:14px;margin-top:20px}
+
+  /* WhatsApp fijo */
+  .wa{position:fixed;right:16px;bottom:16px;z-index:50;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  .wa svg{width:32px;height:32px;fill:#fff}
+
+  /* Botón carrito */
+  .ver-carrito{position:fixed;left:16px;right:90px;bottom:16px;z-index:50;background:var(--amarillo);color:var(--negro);border:0;border-radius:999px;padding:14px 18px;font-weight:900;display:none;justify-content:space-between;align-items:center;box-shadow:0 6px 20px rgba(0,0,0,.4);max-width:420px}
+  .ver-carrito.visible{display:flex}
+  .ver-carrito .n{background:var(--negro);color:var(--amarillo);border-radius:999px;padding:0 9px;margin-right:6px;font-size:.85rem}
+
+  /* Panel carrito */
+  .fondo{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}
+  .panel{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--negro2);border-radius:20px 20px 0 0;max-height:92vh;max-height:92svh;overflow-y:auto;overscroll-behavior:contain;transform:translateY(105%);transition:transform .25s ease;padding:18px 16px 24px}
+  @media(min-width:700px){.panel{left:auto;right:16px;bottom:16px;width:420px;border-radius:20px}}
+  body.abierto .fondo{opacity:1;pointer-events:auto}
+  body.abierto .panel{transform:none}
+  body.abierto{overflow:hidden}
+  .panel-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .panel-top h2{font-size:1.5rem}
+  .cerrar{background:var(--negro3);color:var(--texto);border:0;width:38px;height:38px;border-radius:50%;font-size:1.2rem}
+  .items{list-style:none;display:grid;gap:10px}
+  .item{display:flex;align-items:center;gap:10px;background:var(--negro3);border-radius:12px;padding:10px}
+  .item .nom{flex:1;font-weight:700;font-size:.95rem}
+  .item .nom small{display:block;color:var(--gris);font-weight:400}
+  .cant{display:flex;align-items:center;gap:6px}
+  .cant button{width:32px;height:32px;border-radius:50%;border:0;background:var(--negro);color:var(--texto);font-weight:900;font-size:1.1rem}
+  .cant span{min-width:20px;text-align:center;font-weight:800}
+  .total{display:flex;justify-content:space-between;font-size:1.3rem;font-weight:900;margin:16px 0;padding-top:12px;border-top:1px solid #333}
+  .total span:last-child{color:var(--amarillo)}
+  form{display:grid;gap:12px}
+  label{font-weight:700;font-size:.9rem;display:grid;gap:4px}
+  input,select,textarea{font:inherit;font-size:16px;padding:12px;border-radius:10px;border:1px solid #333;background:var(--negro);color:var(--texto);width:100%}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--amarillo);border-color:transparent}
+  .error{color:#ff6b6b;font-size:.85rem;min-height:1em}
+  .vacio-carrito{color:var(--gris);text-align:center;padding:24px 0}
+  .btn-wa{background:#25d366;color:#fff;width:100%}
+
+  :focus-visible{outline:3px solid var(--amarillo);outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo">Página de ejemplo — hecha por Joaco</div>
+
+<header class="hero">
+  <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900&q=60&auto=format&fit=crop"
+       srcset="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=55&auto=format&fit=crop 600w,
+               https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900&q=60&auto=format&fit=crop 900w,
+               https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600&q=60&auto=format&fit=crop 1600w"
+       sizes="100vw" alt="Hamburguesa doble con queso derretido" fetchpriority="high" onerror="this.remove()">
+  <div class="wrap">
+    <div class="logo anim">🔥 Burger Fuego</div>
+    <h1 class="anim">Hamburguesas <span>a la parrilla</span></h1>
+    <p class="anim">Carne smash, pan de papa y mucho queso. Hechas al momento en Catamarca.</p>
+    <a href="#menu" class="btn btn-rojo anim">Ver el menú 👇</a>
+  </div>
+</header>
+
+<div class="franja">
+  <ul>
+    <li>💳 Efectivo · Transferencia · Mercado Pago</li>
+    <li>🛵 Delivery en todo el centro y alrededores</li>
+    <li>🕗 Martes a domingo · 20 a 00 h</li>
+  </ul>
+</div>
+
+<main>
+  <section id="menu">
+    <div class="wrap">
+      <h2 class="anim">Nuestro <span>menú</span></h2>
+      <p class="sub anim">Tocá "Agregar" y armá tu pedido. Lo mandás por WhatsApp en un toque.</p>
+      <nav class="tabs" id="tabs" aria-label="Categorías del menú"></nav>
+      <div id="catalogo"></div>
+    </div>
+  </section>
+
+  <section class="opiniones" id="opiniones">
+    <div class="wrap">
+      <h2 class="anim">Lo que dicen <span>nuestros clientes</span></h2>
+      <div class="vacio anim">
+        <strong>Próximamente opiniones de clientes</strong>
+        ¿Ya probaste Burger Fuego? Contanos qué te pareció por WhatsApp.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="marca">Burger <span>Fuego</span></div>
+    <ul>
+      <li>📍 Delivery en San Fernando del Valle de Catamarca</li>
+      <li>📱 WhatsApp: <a href="https://wa.me/5493834024275" target="_blank" rel="noopener">383 402-4275</a></li>
+      <li>📸 Instagram: <a href="#" onclick="return false">@burgerfuego</a> <small>(de ejemplo)</small></li>
+      <li>🕗 Martes a domingo de 20 a 00 h</li>
+    </ul>
+    <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash.</p>
+  </div>
+</footer>
+
+<!-- Botón ver pedido -->
+<button class="ver-carrito" id="verCarrito" type="button" aria-label="Ver pedido">
+  <span><span class="n" id="cuentaItems">0</span>Ver mi pedido</span>
+  <span id="totalBoton">$0</span>
+</button>
+
+<!-- WhatsApp fijo -->
+<a class="wa" href="https://wa.me/5493834024275?text=Hola%20Burger%20Fuego!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2a13 13 0 0 0 6.6 1.8c7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.2-3.8 1.2 1.2-3.7-.3-.4a10.5 10.5 0 0 1-1.7-5.7C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.9c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9 2.8 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+</a>
+
+<!-- Panel del carrito -->
+<div class="fondo" id="fondo"></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="tituloPedido" aria-hidden="true">
+  <div class="panel-top">
+    <h2 id="tituloPedido">Tu <span>pedido</span></h2>
+    <button class="cerrar" id="cerrar" type="button" aria-label="Cerrar">✕</button>
+  </div>
+  <ul class="items" id="items"></ul>
+  <div class="total"><span>Total</span><span id="total">$0</span></div>
+  <form id="form" novalidate>
+    <label>Tu nombre
+      <input id="nombre" autocomplete="name" required placeholder="Ej: Martina">
+    </label>
+    <label>Dirección de entrega
+      <input id="direccion" autocomplete="street-address" required placeholder="Calle, número y barrio">
+    </label>
+    <label>Forma de pago
+      <select id="pago" required>
+        <option value="">Elegí una opción</option>
+        <option>Efectivo</option>
+        <option>Transferencia</option>
+        <option>Mercado Pago</option>
+      </select>
+    </label>
+    <p class="error" id="error" role="alert"></p>
+    <button class="btn btn-wa" type="submit">Enviar pedido por WhatsApp</button>
+  </form>
+</aside>
+
+<script>
+(function(){
+  var WA = "5493834024275";
+  var IMG = "https://images.unsplash.com/photo-";
+  var Q = "?w=500&q=55&auto=format&fit=crop";
+
+  var categorias = [
+    {id:"hamburguesas", nombre:"Hamburguesas", emoji:"🍔"},
+    {id:"papas", nombre:"Papas", emoji:"🍟"},
+    {id:"bebidas", nombre:"Bebidas", emoji:"🥤"},
+    {id:"combos", nombre:"Combos", emoji:"🔥"}
+  ];
+
+  var productos = [
+    {id:1, cat:"hamburguesas", nombre:"Clásica Fuego", desc:"Medallón smash, cheddar, lechuga, tomate y salsa de la casa.", precio:8500, foto:"1568901346375-23c9450c58cd"},
+    {id:2, cat:"hamburguesas", nombre:"Doble Cheddar", desc:"Doble carne, doble cheddar, cebolla caramelizada y pepinos.", precio:11900, foto:"1553979459-d2229ba7433b", tag:"La más pedida"},
+    {id:3, cat:"hamburguesas", nombre:"Bacon Bomb", desc:"Doble carne, panceta crocante, cheddar y barbacoa.", precio:12500, foto:"1594212699903-ec8a3eca50f5"},
+    {id:4, cat:"hamburguesas", nombre:"Volcán Picante", desc:"Carne, pepper jack, jalapeños y mayo picante. Para valientes.", precio:12900, foto:"1550547660-d9450f859349"},
+    {id:5, cat:"hamburguesas", nombre:"Veggie", desc:"Medallón de garbanzos, queso, rúcula y tomate.", precio:9800, foto:"1520072959219-c595dc870360"},
+    {id:6, cat:"papas", nombre:"Papas clásicas", desc:"Porción grande, crocantes y con sal.", precio:4500, foto:"1573080496219-bb080dd4f877"},
+    {id:7, cat:"papas", nombre:"Papas cheddar y panceta", desc:"Bañadas en cheddar con panceta y verdeo.", precio:6900, foto:"1630384060421-cb20d0e0649d"},
+    {id:8, cat:"bebidas", nombre:"Gaseosa 500 ml", desc:"Coca-Cola, Sprite o Fanta. Avisanos cuál querés.", precio:2500, foto:"1554866585-cd94860890b7"},
+    {id:9, cat:"bebidas", nombre:"Agua saborizada 500 ml", desc:"Pomelo, manzana o naranja.", precio:2200, foto:"1625772299848-391b6a87d7b3"},
+    {id:10, cat:"combos", nombre:"Combo Fuego", desc:"Clásica Fuego + papas clásicas + gaseosa.", precio:13900, foto:"1561758033-d89a9ad46330", tag:"Ahorrás $1.600"},
+    {id:11, cat:"combos", nombre:"Combo para dos", desc:"2 Doble Cheddar + 2 papas clásicas + 2 gaseosas.", precio:34500, foto:"1586190848861-99aa4a171e90"}
+  ];
+
+  function precio(n){ return "$" + n.toLocaleString("es-AR"); }
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  /* ---- Catálogo ---- */
+  var htmlTabs = "", htmlCat = "";
+  categorias.forEach(function(c, i){
+    htmlTabs += '<a href="#' + c.id + '"' + (i===0?' class="activa"':'') + '>' + c.emoji + ' ' + c.nombre + '</a>';
+    htmlCat += '<div class="cat" id="' + c.id + '"><h3>' + c.nombre + '</h3><div class="grid">';
+    productos.filter(function(p){return p.cat===c.id;}).forEach(function(p){
+      htmlCat += '<article class="card anim-card">' +
+        '<div class="foto" data-emoji="' + c.emoji + '"><img src="' + IMG + p.foto + Q + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" width="500" height="313" onerror="this.remove()"></div>' +
+        '<div class="info">' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') +
+        '<h4>' + esc(p.nombre) + '</h4><p class="desc">' + esc(p.desc) + '</p>' +
+        '<div class="pie"><span class="precio">' + precio(p.precio) + '</span>' +
+        '<button class="agregar" type="button" data-id="' + p.id + '">Agregar</button></div></div></article>';
+    });
+    htmlCat += '</div></div>';
+  });
+  $("tabs").innerHTML = htmlTabs;
+  $("catalogo").innerHTML = htmlCat;
+
+  // Resaltar la categoría visible
+  if ("IntersectionObserver" in window){
+    var links = $("tabs").querySelectorAll("a");
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          links.forEach(function(a){ a.classList.toggle("activa", a.getAttribute("href") === "#" + e.target.id); });
+        }
+      });
+    }, {rootMargin:"-40% 0px -55% 0px"});
+    categorias.forEach(function(c){ io.observe($(c.id)); });
+  }
+
+  /* ---- Carrito ---- */
+  var carrito = {};
+  try { carrito = JSON.parse(localStorage.getItem("bf-carrito")) || {}; } catch(e){ carrito = {}; }
+  function guardar(){ try { localStorage.setItem("bf-carrito", JSON.stringify(carrito)); } catch(e){} }
+  function buscar(id){ for (var i=0;i<productos.length;i++){ if (productos[i].id == id) return productos[i]; } }
+  function lineas(){
+    return Object.keys(carrito).map(function(id){ var p = buscar(id); return p && carrito[id] > 0 ? {p:p, c:carrito[id]} : null; }).filter(Boolean);
+  }
+  function total(){ return lineas().reduce(function(s,l){ return s + l.p.precio * l.c; }, 0); }
+
+  function render(){
+    var ls = lineas(), cant = ls.reduce(function(s,l){return s + l.c;}, 0);
+    $("cuentaItems").textContent = cant;
+    $("totalBoton").textContent = precio(total());
+    $("total").textContent = precio(total());
+    $("verCarrito").classList.toggle("visible", cant > 0);
+    if (!ls.length){
+      $("items").innerHTML = '<li class="vacio-carrito">Todavía no agregaste nada 🍔</li>';
+      return;
+    }
+    $("items").innerHTML = ls.map(function(l){
+      return '<li class="item"><div class="nom">' + esc(l.p.nombre) + '<small>' + precio(l.p.precio * l.c) + '</small></div>' +
+        '<div class="cant"><button type="button" data-menos="' + l.p.id + '" aria-label="Quitar uno">−</button>' +
+        '<span>' + l.c + '</span><button type="button" data-mas="' + l.p.id + '" aria-label="Agregar uno">+</button></div></li>';
+    }).join("");
+  }
+
+  function sumar(id, n){
+    carrito[id] = (carrito[id] || 0) + n;
+    if (carrito[id] <= 0) delete carrito[id];
+    guardar(); render();
+  }
+
+  $("catalogo").addEventListener("click", function(e){
+    var b = e.target.closest(".agregar");
+    if (!b) return;
+    sumar(b.dataset.id, 1);
+    b.textContent = "¡Listo! ✓"; b.classList.add("ok");
+    setTimeout(function(){ b.textContent = "Agregar"; b.classList.remove("ok"); }, 900);
+  });
+  $("items").addEventListener("click", function(e){
+    var t = e.target;
+    if (t.dataset.mas) sumar(t.dataset.mas, 1);
+    if (t.dataset.menos) sumar(t.dataset.menos, -1);
+  });
+
+  function abrir(){ document.body.classList.add("abierto"); $("panel").setAttribute("aria-hidden","false"); $("cerrar").focus(); if (window.__lenis) window.__lenis.stop(); }
+  function cerrar(){ document.body.classList.remove("abierto"); $("panel").setAttribute("aria-hidden","true"); $("verCarrito").focus(); if (window.__lenis) window.__lenis.start(); }
+  $("verCarrito").addEventListener("click", abrir);
+  $("cerrar").addEventListener("click", cerrar);
+  $("fondo").addEventListener("click", cerrar);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && document.body.classList.contains("abierto")) cerrar(); });
+
+  $("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var nombre = $("nombre").value.trim(), dir = $("direccion").value.trim(), pago = $("pago").value;
+    var ls = lineas();
+    if (!ls.length){ $("error").textContent = "Agregá al menos un producto."; return; }
+    if (!nombre || !dir || !pago){ $("error").textContent = "Completá tu nombre, dirección y forma de pago."; return; }
+    $("error").textContent = "";
+    var msg = "¡Hola Burger Fuego! 🔥 Quiero hacer este pedido:\n\n" +
+      ls.map(function(l){ return "• " + l.c + " x " + l.p.nombre + " — " + precio(l.p.precio * l.c); }).join("\n") +
+      "\n\n*Total: " + precio(total()) + "*\n\n" +
+      "Nombre: " + nombre + "\nDirección: " + dir + "\nForma de pago: " + pago;
+    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+  });
+
+  render();
+
+  /* ---- Animaciones (solo si no pidieron reducir movimiento) ---- */
+  var reducir = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducir) return;
+
+  function cargar(src, cb){ var s = document.createElement("script"); s.src = src; s.async = true; s.onload = cb; document.head.appendChild(s); }
+  window.addEventListener("load", function(){
+    cargar("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js", function(){
+      cargar("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js", function(){
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from(".hero .anim", {y:24, opacity:0, duration:.8, stagger:.1, ease:"power2.out"});
+        gsap.utils.toArray("section .anim").forEach(function(el){
+          gsap.from(el, {y:20, opacity:0, duration:.7, ease:"power2.out", scrollTrigger:{trigger:el, start:"top 90%", once:true}});
+        });
+        ScrollTrigger.batch(".anim-card", {
+          start:"top 92%", once:true,
+          onEnter:function(b){ gsap.from(b, {y:24, opacity:0, duration:.6, stagger:.08, ease:"power2.out"}); }
+        });
+        cargar("https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js", function(){
+          if (!window.Lenis) return;
+          var lenis = new Lenis({duration:1.1, smoothWheel:true});
+          window.__lenis = lenis;
+          lenis.on("scroll", ScrollTrigger.update);
+          gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+          gsap.ticker.lagSmoothing(0);
+          document.querySelectorAll('a[href^="#"]').forEach(function(a){
+            a.addEventListener("click", function(e){
+              var dest = document.querySelector(a.getAttribute("href"));
+              if (dest){ e.preventDefault(); lenis.scrollTo(dest, {offset:-56}); }
+            });
+          });
+        });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
