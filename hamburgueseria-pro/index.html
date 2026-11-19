@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Burger Fuego — Hamburguesas premium en Catamarca</title>
-<meta name="description" content="Burger Fuego: hamburguesas smash en San Fernando del Valle de Catamarca. Elegí la tuya y pedí por WhatsApp.">
-<meta name="theme-color" content="#0d0d0d">
+<title>Burger Fuego — Smash burgers en Catamarca</title>
+<meta name="description" content="Burger Fuego: smash burgers en San Fernando del Valle de Catamarca. Elegí la tuya y pedí por WhatsApp.">
+<meta name="theme-color" content="#f3ead9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -13,9 +13,10 @@
 <style>
   :root{
     --negro:#0d0d0d; --negro2:#161616; --negro3:#232323;
-    --rojo:#e3262b; --rojo2:#b81c20; --amarillo:#ffc21a; --verde:#1f8a4c; --naranja:#f47b20;
+    --rojo:#e3262b; --rojo2:#b81c20; --amarillo:#ffc21a;
     --texto:#f5f5f5; --gris:#a3a3a3; --radio:16px;
-    --slide-bg:var(--rojo); --slide-ink:#fff;
+    --crema:#f3ead9; --tinta:#1b1612;
+    --bg:#e3262b; --ink:#ffffff;
     --titulo:"Anton",Impact,"Arial Narrow Bold",system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -24,78 +25,70 @@
   img,svg{display:block;max-width:100%}
   a{color:inherit}
   button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
   .titulo{font-family:var(--titulo);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.95}
+  .demo{position:relative;z-index:6;background:var(--amarillo);color:var(--negro);text-align:center;font-size:.8rem;font-weight:700;padding:6px 12px}
 
-  .demo{position:relative;z-index:5;background:var(--amarillo);color:var(--negro);text-align:center;font-size:.8rem;font-weight:700;padding:6px 12px}
-
-  /* ---------- Encabezado ---------- */
-  .hero{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;
-    background:radial-gradient(60% 45% at 50% 52%,#3a0d0e 0%,var(--negro) 70%)}
-  .barra{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:14px 16px}
-  .marca{font-family:var(--titulo);font-size:1.3rem;text-transform:uppercase;letter-spacing:.03em}
+  /* ---------- Inicio (crema, texto gigante y la burger asomando) ---------- */
+  .intro{position:relative}
+  .intro-pin{position:relative;height:100vh;height:100svh;min-height:540px;overflow:hidden;background:var(--crema);color:var(--tinta)}
+  .intro-color{position:absolute;inset:0;background:var(--bg);opacity:0;transition:background-color .6s ease}
+  .barra{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:14px 16px}
+  .marca{font-family:var(--titulo);font-size:1.35rem;text-transform:uppercase;letter-spacing:.03em}
   .marca span{color:var(--rojo)}
-  .barra a.pedir{background:var(--texto);color:var(--negro);text-decoration:none;font-weight:800;font-size:.85rem;padding:8px 14px;border-radius:999px}
-  .gigante{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);white-space:nowrap;font-family:var(--titulo);
-    font-size:38vw;line-height:.8;color:var(--rojo);text-transform:uppercase;user-select:none;pointer-events:none;z-index:1}
-  .hero-burger{position:absolute;left:50%;top:54%;width:min(70vw,460px);transform:translate(-50%,-50%);z-index:2}
-  .flota{animation:flotar 4.5s ease-in-out infinite}
-  .flota img,.flota svg{width:100%;height:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
-  .sombra{position:absolute;left:50%;bottom:-14%;width:70%;height:14%;transform:translateX(-50%);
-    background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);animation:sombra 4.5s ease-in-out infinite;z-index:-1}
-  @keyframes flotar{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(1deg)}}
-  @keyframes sombra{0%,100%{transform:translateX(-50%) scale(1);opacity:.9}50%{transform:translateX(-50%) scale(.82);opacity:.6}}
-  .hero-pie{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 16px 28px;text-align:center}
-  .hero-pie p{font-size:1.05rem;color:#e5e5e5;margin-bottom:14px}
-  .hero-pie p strong{color:var(--amarillo)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 26px;font-weight:800;text-decoration:none;font-size:1rem}
-  .btn-rojo{background:var(--rojo);color:#fff}
-  .btn-rojo:active{background:var(--rojo2)}
-
-  /* Ingredientes flotantes */
-  .ing{position:absolute;z-index:2;pointer-events:none;will-change:transform}
-  .ing svg,.ing img{width:100%;height:auto;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+  .pedir{background:var(--tinta);color:var(--crema);text-decoration:none;font-weight:800;font-size:.85rem;padding:9px 16px;border-radius:999px}
+  .lema{position:absolute;left:50%;top:15%;transform:translateX(-50%);z-index:1;text-align:center;font-family:var(--titulo);text-transform:uppercase;
+    line-height:.93;font-size:25vw;white-space:nowrap;letter-spacing:-.005em}
+  .lema span{display:block}
+  .lema .rojo{color:var(--rojo)}
+  .intro-sub{position:absolute;left:0;right:0;z-index:1;text-align:center;font-weight:700;font-size:.95rem;padding:0 16px}
+  .intro-burger{position:absolute;left:0;right:0;margin:0 auto;top:100%;width:min(94vw,640px);z-index:2;transform:translateY(-52%);will-change:transform}
+  .intro-burger img{width:100%;height:auto;filter:drop-shadow(0 28px 26px rgba(0,0,0,.3))}
+  .deslizar{position:absolute;right:16px;top:50%;z-index:3;writing-mode:vertical-rl;font-weight:800;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
 
   /* ---------- Franja ---------- */
-  .franja{background:var(--amarillo);color:var(--negro)}
-  .franja ul{list-style:none;display:grid;gap:6px;padding:14px 16px;max-width:1100px;margin:0 auto;font-weight:800;font-size:.95rem}
+  .franja{background:var(--tinta);color:var(--crema)}
+  .franja ul{list-style:none;display:grid;gap:6px;padding:14px 16px;max-width:1180px;margin:0 auto;font-weight:800;font-size:.95rem}
   .franja li{display:flex;gap:8px;align-items:center}
   @media(min-width:700px){.franja ul{grid-template-columns:repeat(3,1fr)}.franja li{justify-content:center}}
 
-  /* ---------- Rueda de hamburguesas ---------- */
-  .carrusel{position:relative;overflow:hidden;background:var(--slide-bg);color:var(--slide-ink);
-    transition:background-color .7s ease,color .7s ease;padding:26px 0 104px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
-  .carrusel .cab{position:relative;z-index:3;text-align:center}
-  .carrusel .cab small{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;opacity:.8}
-  .carrusel h2{font-size:clamp(2.2rem,10vw,3.6rem)}
-  .escena{position:relative;height:clamp(280px,43vh,540px);height:clamp(280px,43svh,540px);margin-top:4px;overflow:hidden;
-    touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;z-index:2}
-  .escena.arrastrando{cursor:grabbing}
-  .rueda{position:absolute;inset:0}
-  .arco{position:absolute;pointer-events:none;color:var(--slide-ink);opacity:.17;will-change:transform;transform-origin:50% 50%}
-  .arco text{font-family:var(--titulo);text-transform:uppercase;fill:currentColor}
-  .piso{position:absolute;left:50%;width:min(46vw,300px);height:34px;transform:translateX(-50%);pointer-events:none;
-    background:radial-gradient(closest-side,rgba(0,0,0,.32),transparent)}
-  .r-item{position:absolute;left:0;top:0;will-change:transform,opacity;transform-origin:50% 50%;cursor:pointer}
-  .r-item img,.r-item svg{width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
-  .r-tag{position:absolute;left:0;top:0;white-space:nowrap;pointer-events:none;will-change:transform,opacity;
-    background:var(--negro);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
-  .controles{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px}
-  .flecha{width:44px;height:44px;border-radius:50%;border:2px solid currentColor;flex:0 0 auto;
-    background:rgba(255,255,255,.14);color:inherit;font-size:1.15rem;display:grid;place-items:center}
-  .flecha:active{transform:scale(.92)}
-  .puntos{display:flex;gap:2px}
-  .puntos button{width:30px;height:44px;border:0;background:none;display:grid;place-items:center}
-  .puntos button::after{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--slide-ink);transition:background .3s,transform .3s}
-  .puntos button[aria-current="true"]::after{background:var(--slide-ink);transform:scale(1.2)}
-  .detalle{position:relative;z-index:3;text-align:center;padding:0 16px;max-width:520px;margin:6px auto 0}
-  .detalle h3{font-size:clamp(2rem,9vw,3rem)}
-  .detalle p{opacity:.9;margin:4px 0 12px;min-height:3em}
-  .detalle .fila{display:flex;align-items:center;justify-content:center;gap:16px}
-  .detalle .precio{font-family:var(--titulo);font-size:2.2rem;line-height:1}
-  .btn-agregar{background:var(--negro);color:#fff;border:0;border-radius:999px;padding:14px 24px;font-weight:800}
+  /* ---------- Burger protagonista ---------- */
+  .producto{position:relative;background:var(--bg);color:var(--ink);transition:background-color .6s ease,color .6s ease;padding:18px 0 112px;overflow:hidden}
+  .prod{display:grid;grid-template-areas:"nombre" "escena" "info" "selector";row-gap:6px}
+  @media(min-width:900px){
+    .prod{grid-template-columns:1fr 1.15fr;grid-template-areas:"nombre escena" "info escena" "selector escena";column-gap:36px;align-items:center;align-content:center;min-height:calc(100vh - 140px)}
+  }
+  .prod-eti{grid-area:nombre;align-self:end}
+  .prod-eti small{display:block;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.75rem;opacity:.8;margin-bottom:6px}
+  .prod-nombre{font-family:var(--titulo);font-weight:400;text-transform:uppercase;line-height:.88;font-size:clamp(3rem,15vw,9.5rem)}
+  @media(min-width:900px){.prod-nombre{font-size:clamp(4rem,8vw,9.5rem)}}
+  .prod-nombre span{display:block}
+  .escena-prod{grid-area:escena;position:relative;width:100%;aspect-ratio:1/0.68;margin:0}
+  @media(min-width:900px){.escena-prod{aspect-ratio:1/0.8}}
+  .burger-prod{position:absolute;left:14%;right:14%;top:8%;z-index:2}
+  @media(min-width:900px){.burger-prod{left:12%;right:12%;top:12%}}
+  .flota{animation:flotar 4.5s ease-in-out infinite}
+  .burger-prod img{width:100%;height:auto;filter:drop-shadow(0 24px 22px rgba(0,0,0,.33))}
+  .sombra-prod{position:absolute;left:24%;right:24%;bottom:4%;height:9%;z-index:1;background:radial-gradient(closest-side,rgba(0,0,0,.32),transparent);animation:sombra 4.5s ease-in-out infinite}
+  @keyframes flotar{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(1.5deg)}}
+  @keyframes sombra{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.85);opacity:.6}}
+  .ing{position:absolute;pointer-events:none;will-change:transform}
+  .ing.atras{z-index:1}.ing.adelante{z-index:3}
+  .ing .ex{will-change:transform,opacity}
+  .ing img{width:100%;height:auto;animation:flotaIng var(--dur,5s) ease-in-out var(--ret,0s) infinite;filter:drop-shadow(0 8px 8px rgba(0,0,0,.22))}
+  @keyframes flotaIng{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(7deg)}}
+  .prod-info{grid-area:info}
+  .prod-info p{font-size:1.02rem;max-width:38ch;opacity:.92;min-height:3em}
+  .fila{display:flex;align-items:center;gap:16px;margin-top:8px}
+  .precio-grande{font-family:var(--titulo);font-size:2.5rem;line-height:1}
+  .btn-agregar{background:var(--negro);color:#fff;border:0;border-radius:999px;padding:14px 26px;font-weight:800;font-size:1rem}
   .btn-agregar.ok{background:#fff;color:var(--negro)}
-
+  .selector{grid-area:selector;display:flex;gap:10px;margin-top:12px}
+  .mini{flex:0 0 auto;width:64px;border:0;background:none;color:inherit;display:grid;justify-items:center;gap:4px;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .mini .cuadro{width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,.2);border:2px solid transparent;display:grid;place-items:center;padding:6px;transition:background .25s,border-color .25s,transform .2s}
+  .mini img{width:100%;height:auto}
+  .mini[aria-pressed="true"] .cuadro{background:#fff;border-color:var(--ink);transform:translateY(-3px)}
+  .mini:active .cuadro{transform:scale(.94)}
   /* ---------- Menú ---------- */
   section.menu{padding:56px 0}
   h2.sec{font-size:clamp(2.2rem,10vw,3.4rem)}
@@ -168,6 +161,8 @@
   .error{color:#ff6b6b;font-size:.85rem;min-height:1em}
   .vacio-carrito{color:var(--gris);text-align:center;padding:24px 0}
   .btn-wa{background:#25d366;color:#fff;width:100%}
+  .pie-caja{text-align:center;overflow:hidden;margin-top:28px}
+  .pie-gigante{display:inline-block;font-family:var(--titulo);text-transform:uppercase;white-space:nowrap;line-height:.82;color:var(--rojo);font-size:20vw}
 
   :focus-visible{outline:3px solid var(--amarillo);outline-offset:2px}
   @media (prefers-reduced-motion: reduce){
@@ -179,27 +174,20 @@
 
 <div class="demo">Página de ejemplo — hecha por Joaco</div>
 
-<!-- ENCABEZADO -->
-<header class="hero" id="inicio">
-  <div class="barra">
-    <div class="marca">Burger <span>Fuego</span></div>
-    <a class="pedir" href="#burgers">Pedí ahora</a>
+<!-- INICIO -->
+<section class="intro" id="inicio">
+  <div class="intro-pin" id="introPin">
+    <div class="intro-color" aria-hidden="true"></div>
+    <div class="barra">
+      <div class="marca">Burger <span>Fuego</span></div>
+      <a class="pedir" href="#burgers">Pedí ahora</a>
+    </div>
+    <h1 class="lema" id="lema" aria-label="Smash. Fuego. Repetí."><span>Smash.</span><span class="rojo">Fuego.</span><span>Repetí.</span></h1>
+    <p class="intro-sub" id="introSub">Smash burgers en Catamarca · Pedí por WhatsApp</p>
+    <div class="intro-burger" id="introBurger"><img src="img/clasica.webp" alt="Hamburguesa Clásica Fuego" width="800" height="514" fetchpriority="high"></div>
+    <div class="deslizar" aria-hidden="true">Deslizá</div>
   </div>
-  <div class="gigante" id="gigante" aria-hidden="true">Fuego</div>
-  <div class="hero-burger">
-    <div class="flota" id="heroBurger"></div>
-    <div class="sombra" aria-hidden="true"></div>
-  </div>
-  <!-- ingredientes del encabezado -->
-  <div class="ing" data-ing="tomate"  data-vel="1.4" data-rot="40"  style="width:15vw;max-width:90px;left:6%;top:22%"></div>
-  <div class="ing" data-ing="lechuga" data-vel="0.9" data-rot="-30" style="width:20vw;max-width:120px;right:4%;top:18%"></div>
-  <div class="ing" data-ing="queso"   data-vel="1.8" data-rot="60"  style="width:14vw;max-width:85px;right:10%;top:66%"></div>
-  <div class="ing" data-ing="tomate"  data-vel="0.7" data-rot="-50" style="width:11vw;max-width:70px;left:12%;top:68%"></div>
-  <div class="hero-pie">
-    <p>Smash burgers hechas al fuego en <strong>Catamarca</strong>.</p>
-    <a class="btn btn-rojo" href="#burgers">Elegí tu burger 👇</a>
-  </div>
-</header>
+</section>
 
 <div class="franja">
   <ul>
@@ -209,32 +197,25 @@
   </ul>
 </div>
 
-<!-- RUEDA DE HAMBURGUESAS -->
-<section class="carrusel" id="burgers" aria-roledescription="carrusel" aria-label="Nuestras hamburguesas">
-  <div class="ing" data-ing="lechuga" data-vel="1.2" data-rot="35"  style="width:16vw;max-width:100px;left:-3%;top:9%"></div>
-  <div class="ing" data-ing="queso"   data-vel="1.6" data-rot="-45" style="width:12vw;max-width:76px;right:2%;top:7%"></div>
-  <div class="ing" data-ing="tomate"  data-vel="0.8" data-rot="50"  style="width:12vw;max-width:76px;left:-3%;top:90%"></div>
-  <div class="cab wrap">
-    <small>Deslizá, girá o tocá una burger</small>
-    <h2 class="titulo">Nuestras burgers</h2>
-  </div>
-  <div class="escena" id="escena">
-    <svg class="arco" id="arco" aria-hidden="true"></svg>
-    <div class="piso" id="piso" aria-hidden="true"></div>
-    <div class="rueda" id="rueda"></div>
-  </div>
-  <div class="controles">
-    <button class="flecha" id="prev" type="button" aria-label="Hamburguesa anterior">←</button>
-    <div class="puntos" id="puntos"></div>
-    <button class="flecha" id="next" type="button" aria-label="Hamburguesa siguiente">→</button>
-  </div>
-  <div class="detalle" id="detalle" aria-live="polite">
-    <h3 class="titulo" id="sNombre"></h3>
-    <p id="sDesc"></p>
-    <div class="fila">
-      <span class="precio" id="sPrecio"></span>
-      <button class="btn-agregar" id="sAgregar" type="button">Agregar</button>
+<!-- BURGER PROTAGONISTA -->
+<section class="producto" id="burgers" aria-label="Nuestras hamburguesas">
+  <div class="wrap prod">
+    <div class="prod-eti">
+      <small>Nuestras burgers</small>
+      <h2 class="prod-nombre" id="pNombre"></h2>
     </div>
+    <div class="escena-prod" id="escenaProd">
+      <div class="burger-prod"><div class="cambio" id="pCambio"><div class="flota"><img id="pImg" src="img/clasica.webp" alt="" width="800" height="514" decoding="async"></div></div></div>
+      <div class="sombra-prod" aria-hidden="true"></div>
+    </div>
+    <div class="prod-info" id="pInfo" aria-live="polite">
+      <p id="pDesc"></p>
+      <div class="fila">
+        <span class="precio-grande" id="pPrecio"></span>
+        <button class="btn-agregar" id="pAgregar" type="button">Agregar</button>
+      </div>
+    </div>
+    <div class="selector" id="selector" role="group" aria-label="Elegí tu burger"></div>
   </div>
 </section>
 
@@ -270,6 +251,8 @@
     </ul>
     <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash (Amirali Mirhashemian, David Foodphototasty, Ghaly Wedinly, Stanley Kustamin).</p>
   </div>
+  <div class="pie-caja"><span class="pie-gigante" id="pieGigante" data-ajustar="0.96" aria-hidden="true">Burger Fuego</span></div>
+
 </footer>
 
 <button class="ver-carrito" id="verCarrito" type="button" aria-label="Ver pedido">
@@ -305,89 +288,123 @@
 
 <script>
 (function(){
-  /* =====================================================================
-     FOTOS RECORTADAS (WebP sin fondo, hechas con rembg) en /img:
-       img/clasica.webp  img/doble-cheddar.webp  img/criolla.webp  img/bacon.webp
-     FOTOS_ING = true cuando haya también fotos de ingredientes:
-       img/tomate.webp   img/lechuga.webp        img/queso.webp
-     Mientras tanto se usan ilustraciones SVG livianas.
-     ===================================================================== */
-  var FOTOS = true;
-  var FOTOS_ING = false;
-  var EXT = ".webp";
-
   var WA = "5493834024275";
   var reducir = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function $(id){ return document.getElementById(id); }
   function precio(n){ return "$" + n.toLocaleString("es-AR"); }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
 
-  /* ---------- Ilustraciones SVG (respaldo sin fotos) ---------- */
-  var capa = {
-    panArriba:function(y){
-      var s='<path d="M38 '+(y+112)+'Q38 '+y+' 200 '+y+'Q362 '+y+' 362 '+(y+112)+'Z" fill="#e39a35"/>'+
-        '<path d="M70 '+(y+60)+'Q110 '+(y+18)+' 190 '+(y+14)+'" stroke="#f6c46a" stroke-width="14" fill="none" stroke-linecap="round" opacity=".7"/>'+
-        '<path d="M38 '+(y+112)+'Q200 '+(y+124)+' 362 '+(y+112)+'Z" fill="#c4741f"/>';
-      [[120,40,-20],[170,28,10],[230,32,-10],[280,52,25],[150,70,30],[210,62,-30],[260,82,5],[100,82,-5],[320,84,15]].forEach(function(p){
-        s+='<ellipse cx="'+p[0]+'" cy="'+(y+p[1])+'" rx="7" ry="3.6" fill="#fff4d8" transform="rotate('+p[2]+' '+p[0]+' '+(y+p[1])+')"/>';
-      });
-      return [s,112];
-    },
-    lechuga:function(y){
-      var d='M24 '+(y+10);
-      for(var x=24;x<376;x+=22){ d+='Q'+(x+11)+' '+(y+(x%44?26:-4))+' '+(x+22)+' '+(y+10); }
-      d+='L370 '+(y+22)+'L30 '+(y+22)+'Z';
-      return ['<path d="'+d+'" fill="#58b333"/><path d="M40 '+(y+14)+'H360" stroke="#8fd65e" stroke-width="3" opacity=".7"/>',18];
-    },
-    tomate:function(y){
-      return ['<rect x="46" y="'+y+'" width="160" height="20" rx="10" fill="#d9302a"/><rect x="194" y="'+(y+2)+'" width="160" height="20" rx="10" fill="#e8402f"/>'+
-        '<rect x="60" y="'+(y+5)+'" width="132" height="6" rx="3" fill="#ff7a62" opacity=".7"/><rect x="208" y="'+(y+7)+'" width="132" height="6" rx="3" fill="#ff7a62" opacity=".7"/>',16];
-    },
-    queso:function(y){
-      var d='M40 '+y+'H360V'+(y+12)+'L346 '+(y+12)+'Q340 '+(y+40)+' 332 '+(y+12)+'H262Q254 '+(y+48)+' 246 '+(y+12)+'H160Q152 '+(y+36)+' 144 '+(y+12)+'H84Q76 '+(y+44)+' 68 '+(y+12)+'H40Z';
-      return ['<path d="'+d+'" fill="#ffc21a"/><path d="M48 '+(y+3)+'H352" stroke="#ffe17a" stroke-width="3"/>',10];
-    },
-    carne:function(y){
-      return ['<rect x="34" y="'+y+'" width="332" height="46" rx="23" fill="#5a2b16"/>'+
-        '<path d="M60 '+(y+14)+'h40M130 '+(y+28)+'h50M210 '+(y+12)+'h46M280 '+(y+30)+'h40M90 '+(y+34)+'h24M240 '+(y+36)+'h20" stroke="#3a1a0b" stroke-width="5" stroke-linecap="round"/>'+
-        '<path d="M56 '+(y+6)+'Q200 '+(y-2)+' 344 '+(y+6)+'" stroke="#7d4126" stroke-width="5" fill="none" stroke-linecap="round"/>',42];
-    },
-    veggie:function(y){
-      var s='<rect x="38" y="'+y+'" width="324" height="42" rx="21" fill="#c98a3a"/><path d="M58 '+(y+6)+'Q200 '+(y-2)+' 342 '+(y+6)+'" stroke="#e2ab5c" stroke-width="5" fill="none" stroke-linecap="round"/>';
-      [[80,18],[120,30],[170,16],[220,28],[270,18],[320,26],[150,34],[250,34]].forEach(function(p){ s+='<circle cx="'+p[0]+'" cy="'+(y+p[1])+'" r="4" fill="#8f5a1c"/>'; });
-      return [s,38];
-    },
-    panceta:function(y){
-      var d='M34 '+(y+8)+'Q90 '+(y-6)+' 140 '+(y+8)+'T246 '+(y+8)+'T366 '+(y+8)+'V'+(y+22)+'Q306 '+(y+8)+' 246 '+(y+22)+'T140 '+(y+22)+'T34 '+(y+22)+'Z';
-      return ['<path d="'+d+'" fill="#b8412b"/><path d="M40 '+(y+14)+'Q90 '+y+' 140 '+(y+14)+'T246 '+(y+14)+'T360 '+(y+14)+'" stroke="#f3b9a1" stroke-width="4" fill="none"/>',18];
-    },
-    panAbajo:function(y){
-      return ['<path d="M42 '+y+'H358V'+(y+24)+'Q358 '+(y+56)+' 322 '+(y+56)+'H78Q42 '+(y+56)+' 42 '+(y+24)+'Z" fill="#d98a2b"/><path d="M42 '+y+'H358V'+(y+8)+'H42Z" fill="#f0b25a"/>',56];
-    }
-  };
-  function burgerSVG(capas, titulo){
-    var y=10, partes=[];
-    capas.forEach(function(n){ var r=capa[n](y); partes.push(r[0]); y+=r[1]-4; });
-    var h=y+10;
-    return '<svg viewBox="0 0 400 '+h+'" role="img" aria-label="'+esc(titulo)+'">'+partes.reverse().join("")+'</svg>';
+  /* ---------- Hamburguesas (fotos recortadas con rembg) ----------
+     Ingredientes: [archivo, izquierda %, arriba %, ancho %, giro, adelante (1) o atrás (0)]
+     Los archivos están en img/ing-*.webp, recortados de las mismas fotos. */
+  var burgers = [
+    {id:1, slug:"clasica", nombre:"Clásica Fuego", lineas:["Clásica","Fuego"], desc:"Medallón smash, cheddar, lechuga, tomate y salsa de la casa.", precio:8500, bg:"#e3262b", ink:"#ffffff",
+      ing:[["lechuga",-6,0,38,-16,0],["queso",66,-2,36,12,0],["lechuga2",62,64,38,20,1],["sesamo1",24,-6,8,30,1],["sesamo2",52,-10,6,-35,0],["sesamo1",92,40,6,70,1],["sesamo2",2,58,7,-20,1]]},
+    {id:2, slug:"doble-cheddar", nombre:"Doble Cheddar", lineas:["Doble","Cheddar"], desc:"Doble carne, doble cheddar y cebolla caramelizada. La más pedida.", precio:11900, bg:"#ffc21a", ink:"#161210",
+      ing:[["queso",-8,2,40,-14,0],["queso",64,-4,38,18,0],["queso",64,66,34,-8,1],["lechuga2",-4,66,34,-24,1],["sesamo1",30,-8,7,20,1],["sesamo2",90,44,6,-50,1]]},
+    {id:3, slug:"criolla", nombre:"Criolla", lineas:["Criolla"], desc:"Carne smash, cheddar, cebolla, tomate, lechuga y salsa criolla.", precio:10500, bg:"#1f8a4c", ink:"#ffffff",
+      ing:[["lechuga",-8,-2,40,-20,0],["lechuga2",64,-6,40,16,0],["lechuga",62,62,40,24,1],["lechuga2",-6,64,36,-12,1],["queso",36,-12,26,8,0],["sesamo1",92,36,6,40,1],["sesamo2",4,40,6,-30,1]]},
+    {id:4, slug:"bacon", nombre:"Bacon Bomb", lineas:["Bacon","Bomb"], desc:"Doble panceta crocante, cheddar, carne smash y barbacoa.", precio:12500, bg:"#f47b20", ink:"#161210",
+      ing:[["panceta",-6,-6,26,-30,0],["panceta",74,-4,24,35,0],["panceta",72,60,24,-60,1],["queso",-8,62,34,-10,1],["lechuga2",34,-14,30,6,0],["sesamo1",22,80,6,20,1],["sesamo2",92,40,6,60,1]]}
+  ];
+  var MAX_ING = 8;
+  var PROF = [1.4, 1.9, 1.0, 2.3, 1.6, 2.6, 1.2, 2.0];   // profundidad de cada ingrediente para el parallax
+
+  /* ---------- Burger protagonista ---------- */
+  var escena = $("escenaProd"), slots = [], actual = -1;
+  for (var k = 0; k < MAX_ING; k++){
+    var sl = document.createElement("div");
+    sl.className = "ing"; sl.setAttribute("aria-hidden", "true"); sl.dataset.prof = PROF[k];
+    sl.innerHTML = '<div class="ex"><img alt="" decoding="async"></div>';
+    sl.querySelector("img").style.setProperty("--dur", (4 + (k % 3) * 0.9) + "s");
+    sl.querySelector("img").style.setProperty("--ret", (-k * 0.7) + "s");
+    escena.appendChild(sl); slots.push(sl);
   }
-  var ingSVG = {
-    tomate:'<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#d9302a"/><circle cx="50" cy="50" r="38" fill="#f0503a"/><g fill="#ffd0a8"><ellipse cx="50" cy="28" rx="5" ry="8"/><ellipse cx="72" cy="50" rx="8" ry="5"/><ellipse cx="50" cy="72" rx="5" ry="8"/><ellipse cx="28" cy="50" rx="8" ry="5"/></g><circle cx="50" cy="50" r="8" fill="#ff8a6a"/></svg>',
-    lechuga:'<svg viewBox="0 0 120 100" aria-hidden="true"><path d="M10 60Q4 30 30 18Q42 2 62 10Q86 2 98 22Q118 30 110 56Q116 80 92 86Q76 100 56 90Q30 98 20 82Q2 76 10 60Z" fill="#58b333"/><path d="M24 74Q60 50 98 24M50 58Q48 40 40 30M70 46Q80 56 92 58" stroke="#a6e07a" stroke-width="4" fill="none" stroke-linecap="round"/></svg>',
-    queso:'<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M8 14H92V86Q80 96 70 86H8Z" fill="#ffc21a"/><g fill="#e6a400"><circle cx="30" cy="34" r="7"/><circle cx="64" cy="28" r="5"/><circle cx="52" cy="60" r="9"/><circle cx="24" cy="70" r="4"/><circle cx="78" cy="64" r="5"/></g></svg>'
-  };
-  function imagen(slug, svg, alt, eager){
-    if (FOTOS) return '<img src="img/'+slug+EXT+'" alt="'+esc(alt)+'" width="800" height="660"'+(eager?' fetchpriority="high"':' loading="lazy"')+' decoding="async">';
-    return svg;
+  $("selector").innerHTML = burgers.map(function(b, i){
+    return '<button class="mini" type="button" data-i="'+i+'" aria-pressed="false" aria-label="Ver '+esc(b.nombre)+'">'+
+      '<span class="cuadro"><img src="img/'+b.slug+'.webp" alt="" width="62" height="40" loading="lazy" decoding="async"></span>'+esc(b.lineas[0])+'</button>';
+  }).join("");
+  var minis = $("selector").querySelectorAll(".mini");
+
+  function anim(el, frames, opts){ return (el.animate && !reducir) ? el.animate(frames, opts) : null; }
+  function cancelar(el){ if (el.getAnimations) el.getAnimations().forEach(function(a){ a.cancel(); }); }
+
+  function ponerIngredientes(b, animar){
+    var w = escena.clientWidth, h = escena.clientHeight;
+    slots.forEach(function(sl, i){
+      var ex = sl.firstChild, d = b.ing[i];
+      cancelar(ex);
+      if (!d){ sl.style.display = "none"; return; }
+      sl.style.display = "";
+      sl.style.left = d[1] + "%"; sl.style.top = d[2] + "%"; sl.style.width = d[3] + "%";
+      sl.className = "ing " + (d[5] ? "adelante" : "atras");
+      sl.querySelector("img").src = "img/ing-" + d[0] + ".webp";
+      ex.style.transform = "rotate(" + d[4] + "deg)";
+      if (!animar) return;
+      // "explotan" desde el centro de la burger hacia su lugar
+      var cx = (d[1] + d[3] / 2) / 100 * w, cy = (d[2] + d[3] * 0.25) / 100 * h;
+      var dx = w * 0.5 - cx, dy = h * 0.45 - cy;
+      anim(ex, [
+        {transform:"translate(" + dx + "px," + dy + "px) scale(.15) rotate(" + (d[4] - 140) + "deg)", opacity:0},
+        {opacity:1, offset:0.35},
+        {transform:"translate(0,0) scale(1) rotate(" + d[4] + "deg)", opacity:1}
+      ], {duration:820, delay:120 + i * 45, easing:"cubic-bezier(.18,.9,.3,1.25)", fill:"backwards"});
+    });
   }
 
-  /* ---------- Datos ---------- */
-  var burgers = [
-    {id:1, slug:"clasica", nombre:"Clásica Fuego", corto:"Clásica", desc:"Medallón smash, cheddar, lechuga, tomate y salsa de la casa.", precio:8500, bg:"#e3262b", ink:"#ffffff", capas:["panArriba","lechuga","tomate","queso","carne","panAbajo"]},
-    {id:2, slug:"doble-cheddar", nombre:"Doble Cheddar", corto:"Cheddar", desc:"Doble carne, doble cheddar y cebolla caramelizada. La más pedida.", precio:11900, bg:"#ffc21a", ink:"#141414", capas:["panArriba","queso","carne","queso","carne","panAbajo"]},
-    {id:3, slug:"criolla", nombre:"Criolla", corto:"Criolla", desc:"Carne smash, cheddar, cebolla, tomate, lechuga y salsa criolla.", precio:10500, bg:"#1f8a4c", ink:"#ffffff", capas:["panArriba","lechuga","tomate","queso","carne","lechuga","panAbajo"]},
-    {id:4, slug:"bacon", nombre:"Bacon Bomb", corto:"Bacon", desc:"Doble panceta crocante, cheddar, carne smash y barbacoa.", precio:12500, bg:"#f47b20", ink:"#141414", capas:["panArriba","panceta","queso","carne","lechuga","panAbajo"]}
-  ];
+  function elegir(i, animar){
+    if (i === actual) return;
+    var b = burgers[i], antes = actual;
+    actual = i;
+    document.documentElement.style.setProperty("--bg", b.bg);
+    document.documentElement.style.setProperty("--ink", b.ink);
+    minis.forEach(function(m, k){ m.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+    var nom = $("pNombre"), img = $("pImg"), cambio = $("pCambio"), info = $("pInfo");
+    function poner(){
+      nom.innerHTML = b.lineas.map(function(l){ return "<span>" + esc(l) + "</span>"; }).join("");
+      nom.setAttribute("aria-label", b.nombre);
+      img.src = "img/" + b.slug + ".webp"; img.alt = "Hamburguesa " + b.nombre;
+      $("pDesc").textContent = b.desc;
+      $("pPrecio").textContent = precio(b.precio);
+      $("pAgregar").setAttribute("aria-label", "Agregar " + b.nombre);
+    }
+    if (!animar || antes < 0 || reducir || !cambio.animate){ poner(); ponerIngredientes(b, false); return; }
+    [cambio, nom, info].forEach(cancelar);
+    var sale = cambio.animate([{transform:"none", opacity:1}, {transform:"translateY(8%) rotate(-24deg) scale(.55)", opacity:0}], {duration:260, easing:"ease-in", fill:"forwards"});
+    nom.animate([{transform:"none", opacity:1}, {transform:"translateY(-25%)", opacity:0}], {duration:200, easing:"ease-in", fill:"forwards"});
+    info.animate([{opacity:1}, {opacity:0}], {duration:180, fill:"forwards"});
+    slots.forEach(function(sl){ if (sl.style.display !== "none") sl.firstChild.animate([{opacity:1}, {opacity:0, transform:sl.firstChild.style.transform + " scale(.3)"}], {duration:220, easing:"ease-in", fill:"forwards"}); });
+    sale.onfinish = function(){
+      if (actual !== i) return;              // tocaron otra mientras tanto
+      poner(); [cambio, nom, info].forEach(cancelar);
+      cambio.animate([{transform:"translateY(-6%) rotate(26deg) scale(.6)", opacity:0}, {transform:"none", opacity:1}], {duration:600, easing:"cubic-bezier(.2,.9,.3,1.2)"});
+      nom.animate([{transform:"translateY(35%)", opacity:0}, {transform:"none", opacity:1}], {duration:420, easing:"cubic-bezier(.2,.8,.2,1)"});
+      info.animate([{transform:"translateY(10px)", opacity:0}, {transform:"none", opacity:1}], {duration:380, delay:120, easing:"ease-out", fill:"backwards"});
+      ponerIngredientes(b, true);
+    };
+  }
+  $("selector").addEventListener("click", function(e){ var m = e.target.closest(".mini"); if (m) elegir(+m.dataset.i, true); });
+  $("pAgregar").addEventListener("click", function(){ sumar(burgers[actual].id, 1); listo(this, "Agregar"); });
+  elegir(0, false);
+  window.addEventListener("load", function(){ ponerIngredientes(burgers[actual], false); });
+
+  // Textos gigantes que ocupan todo el ancho (con tope de alto)
+  function ajustar(){
+    document.querySelectorAll("[data-ajustar]").forEach(function(el){
+      el.style.fontSize = "100px";
+      var w = el.scrollWidth, h = el.scrollHeight;
+      var porAncho = 100 * el.parentNode.clientWidth * parseFloat(el.dataset.ajustar) / w;
+      var porAlto = el.dataset.alto ? 100 * window.innerHeight * parseFloat(el.dataset.alto) / h : Infinity;
+      el.style.fontSize = Math.min(porAncho, porAlto) + "px";
+    });
+    var lema = $("lema"), sub = $("introSub");
+    sub.style.top = (lema.offsetTop + lema.offsetHeight + 10) + "px";
+  }
+  $("lema").setAttribute("data-ajustar", "0.92"); $("lema").setAttribute("data-alto", "0.5");
+  ajustar();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustar);
+  var rt; window.addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(ajustar, 150); });
+
   var IMG="https://images.unsplash.com/photo-", Q="?w=300&q=55&auto=format&fit=crop";
   var categorias = [
     {id:"papas", nombre:"Papas", emoji:"🍟"},
@@ -416,245 +433,6 @@
       '<rect x="36" y="48" width="13" height="13" rx="2.5" fill="#fff" opacity=".55" transform="rotate(-12 42 54)"/><rect x="52" y="56" width="12" height="12" rx="2.5" fill="#fff" opacity=".5" transform="rotate(16 58 62)"/>'+
       '<g fill="#fff" opacity=".7"><circle cx="44" cy="80" r="2"/><circle cx="56" cy="88" r="1.6"/><circle cx="60" cy="76" r="1.2"/></g></svg>'
   };
-
-  /* ---------- Encabezado ---------- */
-  $("heroBurger").innerHTML = imagen("clasica", burgerSVG(burgers[0].capas, "Hamburguesa Clásica Fuego"), "Hamburguesa Clásica Fuego", true);
-  document.querySelectorAll(".ing").forEach(function(el){
-    var n = el.dataset.ing;
-    el.innerHTML = FOTOS_ING ? '<img src="img/'+n+EXT+'" alt="" loading="lazy" decoding="async">' : ingSVG[n];
-    el.style.transform = "rotate(" + (parseFloat(el.dataset.rot)/3) + "deg)";
-  });
-  // "FUEGO" ocupando todo el ancho
-  function ajustarGigante(){
-    var el = $("gigante"); el.style.fontSize = "100px";
-    var w = el.scrollWidth; if (w) el.style.fontSize = (100 * window.innerWidth * 0.96 / w) + "px";
-  }
-  ajustarGigante();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustarGigante);
-  var rt; window.addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(ajustarGigante, 150); });
-
-  /* ---------- Rueda de hamburguesas ("producto en órbita") ---------- */
-  var N = burgers.length;
-  var REP = Math.max(1, Math.ceil(8 / N));    // si son pocas, se repiten hasta completar la rueda
-  var M = N * REP, PASO = 360 / M;
-  var escena = $("escena"), estado = {r:0};
-  var items, tags, htmlR = "";
-  for (var k = 0; k < M; k++){
-    var bk = burgers[k % N];
-    htmlR += '<div class="r-item" data-i="'+k+'"'+(k >= N ? ' aria-hidden="true"' : '')+'>'+
-      imagen(bk.slug, burgerSVG(bk.capas, bk.nombre), k < N ? bk.nombre : "", false)+'</div>'+
-      '<span class="r-tag" aria-hidden="true">'+esc(bk.corto)+'</span>';
-  }
-  $("rueda").innerHTML = htmlR;
-  items = $("rueda").querySelectorAll(".r-item");
-  tags = $("rueda").querySelectorAll(".r-tag");
-  for (k = 0; k < items.length; k++) items[k].querySelectorAll("img").forEach(function(im){ im.draggable = false; });
-  $("puntos").innerHTML = burgers.map(function(b, i){ return '<button type="button" data-i="'+i+'" aria-label="Ver '+esc(b.nombre)+'"></button>'; }).join("");
-  var puntos = $("puntos").querySelectorAll("button");
-
-  var G = {};   // geometría: arco elíptico con el centro abajo de la pantalla
-  function geom(){
-    var vw = escena.clientWidth, vh = escena.clientHeight, chico = vw < 700;
-    G.vh = vh;
-    G.B = chico ? vw * 0.44 : Math.min(vw * 0.3, 320);   // tamaño de la del centro
-    G.H = G.B * 0.82;
-    G.Rx = chico ? vw * 0.33 / Math.sin(PASO * Math.PI / 180) : Math.max(420, vw * 0.36);
-    G.Ry = G.Rx * (chico ? 1.35 : 0.85);                  // más alto que ancho = más curvo
-    G.cx = vw / 2;
-    G.top = vh * 0.36;                                    // altura de la del centro
-    for (var i = 0; i < M; i++){ items[i].style.width = G.B + "px"; items[i].style.height = G.H + "px"; }
-    $("piso").style.top = (G.top + G.H * 0.36) + "px";
-    // Texto gigante siguiendo la curva (círculo con la misma curvatura que el arco en el centro)
-    var fs = G.B * 0.4, Rt = G.Rx * G.Rx / G.Ry, pad = fs * 1.2, c = Rt + pad, lado = 2 * c;
-    var cyT = G.top + G.B * 0.1 + Rt;
-    var circ = 2 * Math.PI * Rt, frase = "Smash burgers • Fuego • ";
-    var reps = Math.max(1, Math.round(circ / (frase.length * fs * 0.42)));
-    var arco = $("arco");
-    arco.setAttribute("width", lado); arco.setAttribute("height", lado);
-    arco.setAttribute("viewBox", "0 0 " + lado + " " + lado);
-    arco.style.left = (G.cx - c) + "px"; arco.style.top = (cyT - c) + "px";
-    arco.innerHTML = '<path id="arcoPath" fill="none" d="M'+c+' '+(c-Rt)+'a'+Rt+' '+Rt+' 0 1 1 0 '+(2*Rt)+'a'+Rt+' '+Rt+' 0 1 1 0 '+(-2*Rt)+'"/>'+
-      '<text font-size="'+fs+'" textLength="'+(circ - 2).toFixed(1)+'" lengthAdjust="spacing"><textPath href="#arcoPath">'+
-      new Array(reps + 1).join(frase)+'</textPath></text>';
-  }
-
-  function norm(a){ return ((a % 360) + 540) % 360 - 180; }
-  function mod(n, m){ return ((n % m) + m) % m; }
-  function enCentro(){ return mod(Math.round(-estado.r / PASO), M) % N; }   // hamburguesa más cercana al centro
-  var ultimo = 0, giro = 0, centroActual = -1, mostrado = -1;
-  var arrastrando = false, tweenActivo = false, scrollActivo = false, corriendo = false;
-
-  function pintar(){
-    var r = estado.r, d = r - ultimo; ultimo = r;
-    // giro propio de cada hamburguesa según la velocidad
-    giro += (Math.max(-22, Math.min(22, d * 3)) - giro) * 0.2;
-    if (Math.abs(giro) < 0.02) giro = 0;
-    for (var i = 0; i < M; i++){
-      var a = norm(i * PASO + r), u = Math.abs(a) / PASO, it = items[i], tg = tags[i];
-      if (u > 2.4){
-        if (!it._oculto){ it.style.visibility = tg.style.visibility = "hidden"; it._oculto = true; }
-        continue;
-      }
-      if (it._oculto){ it.style.visibility = tg.style.visibility = ""; it._oculto = false; }
-      var rad = a * Math.PI / 180;
-      var x = G.cx + G.Rx * Math.sin(rad), y = G.top + G.Ry * (1 - Math.cos(rad));
-      var s = u <= 1 ? 1 - 0.48 * u : Math.max(0.3, 0.52 - 0.16 * (u - 1));
-      var o = u <= 1 ? 1 - 0.18 * u : Math.max(0, 0.82 - 0.5 * (u - 1));
-      // se desvanecen al acercarse al borde de abajo (sin cortes bruscos)
-      o *= Math.max(0, Math.min(1, (G.vh - (y + G.H * s * 0.5) + 30) / 90));
-      var t = a + giro;   // inclinadas siguiendo la curva
-      it.style.transform = "translate3d(" + (x - G.B / 2).toFixed(1) + "px," + (y - G.H / 2).toFixed(1) + "px,0) rotate(" + t.toFixed(2) + "deg) scale(" + s.toFixed(3) + ")";
-      it.style.opacity = o.toFixed(3);
-      it.style.zIndex = 100 - Math.round(u * 10);
-      // etiqueta al costado (no se achica tanto para que se pueda leer)
-      var tr = t * Math.PI / 180, ox = G.B * s * 0.4, oy = -G.H * s * 0.44;
-      var lx = x + ox * Math.cos(tr) - oy * Math.sin(tr), ly = y + ox * Math.sin(tr) + oy * Math.cos(tr);
-      tg.style.transform = "translate3d(" + lx.toFixed(1) + "px," + ly.toFixed(1) + "px,0) translate(-50%,-50%) rotate(" + t.toFixed(2) + "deg) scale(" + (0.78 + 0.22 * s).toFixed(3) + ")";
-      tg.style.opacity = o.toFixed(3);
-      tg.style.zIndex = 101 - Math.round(u * 10);
-    }
-    $("arco").style.transform = "rotate(" + (r * 0.5).toFixed(2) + "deg)";
-    var c = enCentro();
-    if (c !== centroActual){ centroActual = c; ponerColor(c); mostrarDetalle(c, true); }
-  }
-  function quieto(){ return !arrastrando && !tweenActivo && !scrollActivo; }
-  function bucle(){
-    pintar();
-    if (!quieto() || giro !== 0){ requestAnimationFrame(bucle); return; }
-    corriendo = false;
-    // control final: siempre termina encajada y con los datos de la del centro
-    if (Math.abs(estado.r - encajar(estado.r)) > 0.05) irA(encajar(estado.r), 0.35);
-    else mostrarDetalle(enCentro(), true);
-  }
-  function mover(){ if (!corriendo){ corriendo = true; requestAnimationFrame(bucle); } }
-
-  function ponerColor(i){
-    var sec = $("burgers");
-    sec.style.setProperty("--slide-bg", burgers[i].bg);
-    sec.style.setProperty("--slide-ink", burgers[i].ink);
-    puntos.forEach(function(p, k){ p.setAttribute("aria-current", k === i ? "true" : "false"); });
-  }
-  function mostrarDetalle(i, animar){
-    if (i === mostrado) return;
-    mostrado = i;
-    var b = burgers[i];
-    $("sNombre").textContent = b.nombre;
-    $("sDesc").textContent = b.desc;
-    $("sPrecio").textContent = precio(b.precio);
-    $("sAgregar").setAttribute("aria-label", "Agregar " + b.nombre);
-    $("detalle").setAttribute("data-burger", b.slug);
-    if (!animar || reducir) return;
-    var partes = document.querySelectorAll("#detalle > *");
-    if (window.gsap) gsap.fromTo(partes, {y:14, opacity:0}, {y:0, opacity:1, duration:.45, stagger:.06, ease:"power2.out", overwrite:true});
-    else if (partes[0].animate) partes.forEach(function(p, n){ p.animate([{opacity:0, transform:"translateY(14px)"},{opacity:1, transform:"none"}], {duration:400, delay:n * 60, easing:"ease-out", fill:"backwards"}); });
-  }
-
-  var tweenPropio = null;
-  function frenar(){
-    if (window.gsap) gsap.killTweensOf(estado);
-    if (tweenPropio){ cancelAnimationFrame(tweenPropio); tweenPropio = null; }
-    tweenActivo = false;
-  }
-  function irA(destino, dur){
-    frenar();
-    if (reducir || !dur){ estado.r = destino; giro = 0; pintar(); giro = 0; pintar(); mostrarDetalle(enCentro(), false); return; }
-    tweenActivo = true; mover();
-    var fin = function(){ estado.r = destino; tweenActivo = false; mover(); };
-    if (window.gsap){ gsap.to(estado, {r:destino, duration:dur, ease:"power3.out", onComplete:fin}); return; }
-    var r0 = estado.r, t0 = performance.now();
-    (function paso(ahora){
-      var p = Math.min(1, (ahora - t0) / (dur * 1000)), e = 1 - Math.pow(1 - p, 3);
-      estado.r = r0 + (destino - r0) * e;
-      if (p < 1) tweenPropio = requestAnimationFrame(paso); else { tweenPropio = null; fin(); }
-    })(t0);
-  }
-  function encajar(r){ return Math.round(r / PASO) * PASO; }
-  function irPasos(n){ irA(encajar(estado.r) - n * PASO, 0.7); }
-  function irABurger(b){
-    // lleva al centro la copia más cercana de esa hamburguesa
-    var mejor = null;
-    for (var i = b; i < M; i += N){ var a = norm(i * PASO + estado.r); if (mejor === null || Math.abs(a) < Math.abs(mejor)) mejor = a; }
-    if (Math.abs(mejor) > 0.05) irA(estado.r - mejor, 0.8);
-  }
-
-  // Arrastrar con el dedo / mouse, con inercia
-  var p0 = null;
-  escena.addEventListener("pointerdown", function(e){
-    if (e.button > 0) return;
-    p0 = {x:e.clientX, y:e.clientY, r:estado.r, id:e.pointerId, muestras:[{t:e.timeStamp, x:e.clientX}], item:e.target.closest(".r-item")};
-  });
-  escena.addEventListener("pointermove", function(e){
-    if (!p0 || e.pointerId !== p0.id) return;
-    var dx = e.clientX - p0.x, dy = e.clientY - p0.y;
-    if (!arrastrando){
-      if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy)) return;
-      arrastrando = true; frenar(); p0.r = estado.r; p0.x = e.clientX;
-      escena.classList.add("arrastrando");
-      try { escena.setPointerCapture(e.pointerId); } catch(err){}
-      dx = 0;
-    }
-    estado.r = p0.r + dx / G.Rx * 57.2958;
-    p0.muestras.push({t:e.timeStamp, x:e.clientX});
-    if (p0.muestras.length > 6) p0.muestras.shift();
-    mover();
-  });
-  function soltar(e){
-    if (!p0) return;
-    var datos = p0; p0 = null;
-    if (!arrastrando){
-      // toque: si tocó una hamburguesa de costado, la trae al centro
-      if (e.type === "pointerup" && datos.item){
-        var a = norm(+datos.item.dataset.i * PASO + estado.r);
-        if (Math.abs(a) > PASO / 2) irA(estado.r - a, 0.8);
-      }
-      return;
-    }
-    arrastrando = false; escena.classList.remove("arrastrando");
-    var m = datos.muestras, v = 0;
-    if (m.length > 1){
-      var ult = m[m.length - 1], pri = m[0];
-      if (e.timeStamp - ult.t < 90 && ult.t > pri.t) v = (ult.x - pri.x) / (ult.t - pri.t);   // px por ms
-      if (Math.abs(v) < 0.35) v = 0;                       // arrastre lento: sin inercia
-    }
-    var vGrados = v / G.Rx * 57.2958;                     // grados por ms
-    var destino = encajar(estado.r + vGrados * 380);      // inercia: si va rápido, gira más
-    var dur = Math.min(2.2, Math.max(0.6, 0.45 + Math.abs(destino - estado.r) / PASO * 0.25));
-    irA(destino, dur);
-  }
-  escena.addEventListener("pointerup", soltar);
-  escena.addEventListener("pointercancel", soltar);
-  escena.addEventListener("dragstart", function(e){ e.preventDefault(); });
-
-  $("prev").addEventListener("click", function(){ irPasos(-1); });
-  $("next").addEventListener("click", function(){ irPasos(1); });
-  $("puntos").addEventListener("click", function(e){ var b = e.target.closest("button"); if (b) irABurger(+b.dataset.i); });
-  $("burgers").addEventListener("keydown", function(e){
-    if (e.key === "ArrowLeft") irPasos(-1);
-    if (e.key === "ArrowRight") irPasos(1);
-  });
-  $("sAgregar").addEventListener("click", function(){ sumar(burgers[enCentro()].id, 1); listo(this, "Agregar"); });
-
-  // Girar con el scroll (se activa cuando carga GSAP + ScrollTrigger)
-  function ruedaConScroll(){
-    var antes = null, espera, dir = 0;
-    ScrollTrigger.create({trigger:"#burgers", start:"top bottom", end:"bottom top", onUpdate:function(self){
-      if (antes === null){ antes = self.progress; return; }
-      var dp = self.progress - antes; antes = self.progress;
-      if (arrastrando || !dp) return;
-      frenar();
-      estado.r -= dp * PASO * 6;
-      dir = dp > 0 ? -1 : 1;
-      scrollActivo = true; mover();
-      clearTimeout(espera);
-      espera = setTimeout(function(){ scrollActivo = false; irA(encajar(estado.r + dir * PASO * 0.3), 0.6); }, 140);
-    }});
-  }
-
-  mostrarDetalle(0, false); geom(); pintar(); giro = 0; pintar();
-  // las 4 fotos de la rueda se bajan apenas termina de cargar la página, así no aparecen huecos al girar
-  window.addEventListener("load", function(){ $("rueda").querySelectorAll("img").forEach(function(im){ im.loading = "eager"; }); });
-  var rr; window.addEventListener("resize", function(){ clearTimeout(rr); rr = setTimeout(function(){ geom(); pintar(); }, 120); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ pintar(); });
 
   /* ---------- Menú ---------- */
   var htmlTabs = "", htmlCat = "";
@@ -729,36 +507,48 @@
       cargar("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js", function(){
         if (!window.gsap || !window.ScrollTrigger) return;
         gsap.registerPlugin(ScrollTrigger);
-        ruedaConScroll();
-        gsap.from(".hero-burger", {y:40, scale:.85, opacity:0, duration:1, ease:"power3.out"});
-        gsap.from("#gigante", {opacity:0, scale:1.08, duration:1.2, ease:"power2.out"});
-        gsap.from(".hero-pie > *", {y:20, opacity:0, duration:.8, stagger:.12, delay:.3, ease:"power2.out"});
-        // "FUEGO" y la hamburguesa se separan un poco al bajar
-        gsap.to("#gigante", {yPercent:30, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:true}});
-        gsap.to(".hero-burger", {yPercent:-12, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:true}});
-        // Ingredientes con parallax
-        gsap.utils.toArray(".ing").forEach(function(el){
-          var vel = parseFloat(el.dataset.vel) || 1, rot = parseFloat(el.dataset.rot) || 0;
-          gsap.fromTo(el, {y:60*vel}, {y:-140*vel, rotation:rot, ease:"none",
-            scrollTrigger:{trigger:el.parentElement, start:"top bottom", end:"bottom top", scrub:true}});
+        ScrollTrigger.config({ignoreMobileResize:true});
+
+        // Entrada
+        gsap.from("#lema span", {yPercent:40, opacity:0, duration:.9, stagger:.1, ease:"power3.out"});
+        gsap.from("#introBurger img", {yPercent:35, opacity:0, duration:1.1, delay:.2, ease:"power3.out"});
+
+        // Inicio fijo: la burger sube al centro, gira un poco y el fondo pasa de crema al color de la burger
+        var ib = $("introBurger"), pin = $("introPin");
+        gsap.set(ib, {yPercent:-52, y:0});
+        var tl = gsap.timeline({scrollTrigger:{trigger:"#inicio", start:"top top", end:"+=110%", pin:pin, scrub:.6, invalidateOnRefresh:true}});
+        tl.to(ib, {y:function(){ return -pin.clientHeight / 2 + ib.offsetHeight * 0.02; }, rotation:-14, scale:1.06, ease:"power1.inOut", duration:1}, 0)
+          .to(ib, {rotation:0, scale:1, ease:"power1.out", duration:.45}, 1)
+          .to("#lema", {yPercent:-18, opacity:0, ease:"none", duration:.75}, 0.05)
+          .to("#introSub, .deslizar", {opacity:0, ease:"none", duration:.3}, 0)
+          .to(".intro-color", {opacity:1, ease:"none", duration:.8}, 0.2)
+          .to(".barra", {color:function(){ return getComputedStyle(document.documentElement).getPropertyValue("--ink"); }, ease:"none", duration:.4}, 0.5);
+
+        // Ingredientes con parallax (cada uno a su velocidad)
+        slots.forEach(function(sl){
+          var p = parseFloat(sl.dataset.prof) || 1;
+          gsap.fromTo(sl, {y:46 * p}, {y:-46 * p, ease:"none", scrollTrigger:{trigger:"#burgers", start:"top bottom", end:"bottom top", scrub:true}});
         });
+
         gsap.utils.toArray(".anim").forEach(function(el){
           gsap.from(el, {y:20, opacity:0, duration:.7, ease:"power2.out", scrollTrigger:{trigger:el, start:"top 90%", once:true}});
         });
         ScrollTrigger.batch(".anim-card", {start:"top 92%", once:true,
           onEnter:function(b){ gsap.from(b, {y:24, opacity:0, duration:.6, stagger:.08, ease:"power2.out"}); }});
+        gsap.from("#pieGigante", {yPercent:40, opacity:0, duration:1, ease:"power3.out", scrollTrigger:{trigger:"#pieGigante", start:"top 95%", once:true}});
+
         cargar("https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js", function(){
           if (!window.Lenis) return;
           var lenis = new Lenis({duration:1.1, smoothWheel:true});
           window.__lenis = lenis;
           lenis.on("scroll", ScrollTrigger.update);
-          gsap.ticker.add(function(t){ lenis.raf(t*1000); });
+          gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
           gsap.ticker.lagSmoothing(0);
           document.querySelectorAll('a[href^="#"]').forEach(function(a){
             a.addEventListener("click", function(e){
               var h = a.getAttribute("href"); if (h.length < 2) return;
               var dest = document.querySelector(h);
-              if (dest){ e.preventDefault(); lenis.scrollTo(dest, {offset:-56}); }
+              if (dest){ e.preventDefault(); lenis.scrollTo(dest, {offset:-8}); }
             });
           });
         });
