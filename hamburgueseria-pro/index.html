@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burger Fuego — Hamburguesas premium en Catamarca</title>
+<meta name="description" content="Burger Fuego: hamburguesas smash en San Fernando del Valle de Catamarca. Elegí la tuya y pedí por WhatsApp.">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --negro:#0d0d0d; --negro2:#161616; --negro3:#232323;
+    --rojo:#e3262b; --rojo2:#b81c20; --amarillo:#ffc21a; --verde:#1f8a4c; --naranja:#f47b20;
+    --texto:#f5f5f5; --gris:#a3a3a3; --radio:16px;
+    --slide-bg:var(--rojo); --slide-ink:#fff;
+    --titulo:"Anton",Impact,"Arial Narrow Bold",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--negro);color:var(--texto);line-height:1.5;overflow-x:hidden}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+  .titulo{font-family:var(--titulo);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.95}
+
+  .demo{position:relative;z-index:5;background:var(--amarillo);color:var(--negro);text-align:center;font-size:.8rem;font-weight:700;padding:6px 12px}
+
+  /* ---------- Encabezado ---------- */
+  .hero{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;
+    background:radial-gradient(60% 45% at 50% 52%,#3a0d0e 0%,var(--negro) 70%)}
+  .barra{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:14px 16px}
+  .marca{font-family:var(--titulo);font-size:1.3rem;text-transform:uppercase;letter-spacing:.03em}
+  .marca span{color:var(--rojo)}
+  .barra a.pedir{background:var(--texto);color:var(--negro);text-decoration:none;font-weight:800;font-size:.85rem;padding:8px 14px;border-radius:999px}
+  .gigante{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);white-space:nowrap;font-family:var(--titulo);
+    font-size:38vw;line-height:.8;color:var(--rojo);text-transform:uppercase;user-select:none;pointer-events:none;z-index:1}
+  .hero-burger{position:absolute;left:50%;top:54%;width:min(70vw,460px);transform:translate(-50%,-50%);z-index:2}
+  .flota{animation:flotar 4.5s ease-in-out infinite}
+  .flota img,.flota svg{width:100%;height:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
+  .sombra{position:absolute;left:50%;bottom:-14%;width:70%;height:14%;transform:translateX(-50%);
+    background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);animation:sombra 4.5s ease-in-out infinite;z-index:-1}
+  @keyframes flotar{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(1deg)}}
+  @keyframes sombra{0%,100%{transform:translateX(-50%) scale(1);opacity:.9}50%{transform:translateX(-50%) scale(.82);opacity:.6}}
+  .hero-pie{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 16px 28px;text-align:center}
+  .hero-pie p{font-size:1.05rem;color:#e5e5e5;margin-bottom:14px}
+  .hero-pie p strong{color:var(--amarillo)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 26px;font-weight:800;text-decoration:none;font-size:1rem}
+  .btn-rojo{background:var(--rojo);color:#fff}
+  .btn-rojo:active{background:var(--rojo2)}
+
+  /* Ingredientes flotantes */
+  .ing{position:absolute;z-index:2;pointer-events:none;will-change:transform}
+  .ing svg,.ing img{width:100%;height:auto;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+
+  /* ---------- Franja ---------- */
+  .franja{background:var(--amarillo);color:var(--negro)}
+  .franja ul{list-style:none;display:grid;gap:6px;padding:14px 16px;max-width:1100px;margin:0 auto;font-weight:800;font-size:.95rem}
+  .franja li{display:flex;gap:8px;align-items:center}
+  @media(min-width:700px){.franja ul{grid-template-columns:repeat(3,1fr)}.franja li{justify-content:center}}
+
+  /* ---------- Carrusel ---------- */
+  .carrusel{position:relative;overflow:hidden;background:var(--slide-bg);color:var(--slide-ink);
+    transition:background-color .7s ease,color .7s ease;padding:44px 0 40px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+  .carrusel .cab{position:relative;z-index:3;text-align:center}
+  .carrusel .cab small{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;opacity:.8}
+  .carrusel h2{font-size:clamp(2.2rem,10vw,3.6rem)}
+  .escena{position:relative;flex:1;min-height:300px;display:flex;align-items:center;justify-content:center;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+  .fondo-nombre{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--titulo);text-transform:uppercase;
+    font-size:30vw;line-height:.8;white-space:nowrap;opacity:.14;pointer-events:none;z-index:0}
+  @media(min-width:900px){.fondo-nombre{font-size:20vw}}
+  .slot{position:relative;width:min(76vw,440px);aspect-ratio:400/330;z-index:2}
+  .slide{position:absolute;inset:0;display:none}
+  .slide.activa{display:block}
+  .slide .flota{position:absolute;inset:0}
+  .flecha{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:48px;height:48px;border-radius:50%;border:2px solid currentColor;
+    background:rgba(255,255,255,.12);color:inherit;font-size:1.3rem;display:grid;place-items:center}
+  .flecha:active{transform:translateY(-50%) scale(.92)}
+  .flecha.izq{left:12px}.flecha.der{right:12px}
+  @media(min-width:900px){.flecha.izq{left:8%}.flecha.der{right:8%}}
+  .detalle{position:relative;z-index:3;text-align:center;padding:0 16px;max-width:520px;margin:0 auto}
+  .detalle h3{font-size:clamp(2rem,9vw,3rem)}
+  .detalle p{opacity:.9;margin:6px 0 14px;min-height:3em}
+  .detalle .fila{display:flex;align-items:center;justify-content:center;gap:16px}
+  .detalle .precio{font-family:var(--titulo);font-size:2.2rem;line-height:1}
+  .btn-agregar{background:var(--negro);color:#fff;border:0;border-radius:999px;padding:14px 24px;font-weight:800}
+  .btn-agregar.ok{background:#fff;color:var(--negro)}
+  .puntos{display:flex;justify-content:center;gap:4px;margin-top:18px}
+  .puntos button{width:32px;height:32px;border:0;background:none;display:grid;place-items:center}
+  .puntos button::after{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--slide-ink);transition:background .3s,transform .3s}
+  .puntos button[aria-current="true"]::after{background:var(--slide-ink);transform:scale(1.2)}
+  .ayuda{text-align:center;font-size:.8rem;opacity:.75;margin-top:4px}
+
+  /* ---------- Menú ---------- */
+  section.menu{padding:56px 0}
+  h2.sec{font-size:clamp(2.2rem,10vw,3.4rem)}
+  h2.sec span{color:var(--amarillo)}
+  .sub{color:var(--gris);margin-top:6px}
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(13,13,13,.95);margin:20px -16px 0;padding:10px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs a{flex:0 0 auto;padding:8px 16px;border-radius:999px;background:var(--negro3);text-decoration:none;font-weight:700;font-size:.9rem}
+  .tabs a.activa{background:var(--amarillo);color:var(--negro)}
+  .cat{padding-top:28px;scroll-margin-top:60px}
+  .cat h3{font-family:var(--titulo);font-weight:400;font-size:1.6rem;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .cat h3::after{content:"";flex:1;height:2px;background:var(--rojo)}
+  .grid{display:grid;gap:14px}
+  @media(min-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--negro2);border-radius:var(--radio);overflow:hidden;display:flex;border:1px solid #222}
+  .card .foto{flex:0 0 112px;background:linear-gradient(135deg,var(--rojo2),var(--negro3));position:relative}
+  .card .foto::before{content:attr(data-emoji);position:absolute;inset:0;display:grid;place-items:center;font-size:2.4rem}
+  .card .foto img{position:relative;width:100%;height:100%;object-fit:cover}
+  .card .info{padding:12px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .card h4{font-size:1.05rem;font-weight:800}
+  .card .desc{color:var(--gris);font-size:.88rem;flex:1}
+  .card .pie{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}
+  .card .precio{font-size:1.2rem;font-weight:900;color:var(--amarillo)}
+  .agregar{background:var(--rojo);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-weight:800;font-size:.9rem}
+  .agregar.ok{background:#1f9d55}
+  .tag{display:inline-block;background:var(--amarillo);color:var(--negro);font-size:.7rem;font-weight:900;text-transform:uppercase;padding:2px 8px;border-radius:999px;align-self:flex-start}
+
+  /* ---------- Opiniones y pie ---------- */
+  .opiniones{background:var(--negro2);text-align:center;padding:56px 0}
+  .vacio{margin-top:20px;border:2px dashed #333;border-radius:var(--radio);padding:32px 16px;color:var(--gris)}
+  .vacio strong{display:block;color:var(--texto);font-size:1.1rem;margin-bottom:4px}
+  footer{padding:40px 0 120px;color:var(--gris)}
+  footer .marca{font-size:2rem;color:var(--texto)}
+  footer ul{list-style:none;margin:14px 0;display:grid;gap:8px}
+  footer a{color:var(--amarillo)}
+  .legal{font-size:.8rem;border-top:1px solid #222;padding-top:14px;margin-top:20px}
+
+  /* ---------- WhatsApp y carrito ---------- */
+  .wa{position:fixed;right:16px;bottom:16px;z-index:50;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  .wa svg{width:32px;height:32px;fill:#fff}
+  .ver-carrito{position:fixed;left:16px;right:90px;bottom:16px;z-index:50;background:var(--texto);color:var(--negro);border:0;border-radius:999px;padding:14px 18px;font-weight:900;display:none;justify-content:space-between;align-items:center;box-shadow:0 6px 20px rgba(0,0,0,.4);max-width:420px}
+  .ver-carrito.visible{display:flex}
+  .ver-carrito .n{background:var(--rojo);color:#fff;border-radius:999px;padding:0 9px;margin-right:6px;font-size:.85rem}
+  .fondo{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}
+  .panel{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--negro2);border-radius:20px 20px 0 0;max-height:92vh;max-height:92svh;overflow-y:auto;overscroll-behavior:contain;transform:translateY(105%);transition:transform .25s ease;padding:18px 16px 24px}
+  @media(min-width:700px){.panel{left:auto;right:16px;bottom:16px;width:420px;border-radius:20px}}
+  body.abierto .fondo{opacity:1;pointer-events:auto}
+  body.abierto .panel{transform:none}
+  body.abierto{overflow:hidden}
+  .panel-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .panel-top h2{font-size:2rem}
+  .cerrar{background:var(--negro3);color:var(--texto);border:0;width:40px;height:40px;border-radius:50%;font-size:1.2rem}
+  .items{list-style:none;display:grid;gap:10px}
+  .item{display:flex;align-items:center;gap:10px;background:var(--negro3);border-radius:12px;padding:10px}
+  .item .nom{flex:1;font-weight:700;font-size:.95rem}
+  .item .nom small{display:block;color:var(--gris);font-weight:400}
+  .cant{display:flex;align-items:center;gap:6px}
+  .cant button{width:34px;height:34px;border-radius:50%;border:0;background:var(--negro);color:var(--texto);font-weight:900;font-size:1.1rem}
+  .cant span{min-width:20px;text-align:center;font-weight:800}
+  .total{display:flex;justify-content:space-between;font-size:1.3rem;font-weight:900;margin:16px 0;padding-top:12px;border-top:1px solid #333}
+  .total span:last-child{color:var(--amarillo)}
+  form{display:grid;gap:12px}
+  label{font-weight:700;font-size:.9rem;display:grid;gap:4px}
+  input,select{font:inherit;font-size:16px;padding:12px;border-radius:10px;border:1px solid #333;background:var(--negro);color:var(--texto);width:100%}
+  input:focus,select:focus{outline:2px solid var(--amarillo);border-color:transparent}
+  .error{color:#ff6b6b;font-size:.85rem;min-height:1em}
+  .vacio-carrito{color:var(--gris);text-align:center;padding:24px 0}
+  .btn-wa{background:#25d366;color:#fff;width:100%}
+
+  :focus-visible{outline:3px solid var(--amarillo);outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo">Página de ejemplo — hecha por Joaco</div>
+
+<!-- ENCABEZADO -->
+<header class="hero" id="inicio">
+  <div class="barra">
+    <div class="marca">Burger <span>Fuego</span></div>
+    <a class="pedir" href="#burgers">Pedí ahora</a>
+  </div>
+  <div class="gigante" id="gigante" aria-hidden="true">Fuego</div>
+  <div class="hero-burger">
+    <div class="flota" id="heroBurger"></div>
+    <div class="sombra" aria-hidden="true"></div>
+  </div>
+  <!-- ingredientes del encabezado -->
+  <div class="ing" data-ing="tomate"  data-vel="1.4" data-rot="40"  style="width:15vw;max-width:90px;left:6%;top:22%"></div>
+  <div class="ing" data-ing="lechuga" data-vel="0.9" data-rot="-30" style="width:20vw;max-width:120px;right:4%;top:18%"></div>
+  <div class="ing" data-ing="queso"   data-vel="1.8" data-rot="60"  style="width:14vw;max-width:85px;right:10%;top:66%"></div>
+  <div class="ing" data-ing="tomate"  data-vel="0.7" data-rot="-50" style="width:11vw;max-width:70px;left:12%;top:68%"></div>
+  <div class="hero-pie">
+    <p>Smash burgers hechas al fuego en <strong>Catamarca</strong>.</p>
+    <a class="btn btn-rojo" href="#burgers">Elegí tu burger 👇</a>
+  </div>
+</header>
+
+<div class="franja">
+  <ul>
+    <li>💳 Efectivo · Transferencia · Mercado Pago</li>
+    <li>🛵 Delivery en el centro y alrededores</li>
+    <li>🕗 Martes a domingo · 20 a 00 h</li>
+  </ul>
+</div>
+
+<!-- CARRUSEL DE HAMBURGUESAS -->
+<section class="carrusel" id="burgers" aria-roledescription="carrusel" aria-label="Nuestras hamburguesas">
+  <div class="ing" data-ing="lechuga" data-vel="1.2" data-rot="35"  style="width:18vw;max-width:110px;left:-2%;top:14%"></div>
+  <div class="ing" data-ing="queso"   data-vel="1.6" data-rot="-45" style="width:13vw;max-width:80px;right:4%;top:12%"></div>
+  <div class="ing" data-ing="tomate"  data-vel="0.8" data-rot="50"  style="width:14vw;max-width:85px;right:-2%;top:70%"></div>
+  <div class="cab wrap">
+    <small>Deslizá o tocá las flechas</small>
+    <h2 class="titulo">Nuestras burgers</h2>
+  </div>
+  <div class="escena" id="escena">
+    <div class="fondo-nombre" id="fondoNombre" aria-hidden="true"></div>
+    <button class="flecha izq" id="prev" type="button" aria-label="Hamburguesa anterior">←</button>
+    <div class="slot" id="slot"></div>
+    <button class="flecha der" id="next" type="button" aria-label="Hamburguesa siguiente">→</button>
+  </div>
+  <div class="detalle" aria-live="polite">
+    <h3 class="titulo" id="sNombre"></h3>
+    <p id="sDesc"></p>
+    <div class="fila">
+      <span class="precio" id="sPrecio"></span>
+      <button class="btn-agregar" id="sAgregar" type="button">Agregar</button>
+    </div>
+  </div>
+  <div class="puntos" id="puntos"></div>
+</section>
+
+<main>
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <h2 class="sec titulo anim">Completá <span>tu pedido</span></h2>
+      <p class="sub anim">Papas, bebidas y combos para acompañar.</p>
+      <nav class="tabs" id="tabs" aria-label="Categorías del menú"></nav>
+      <div id="catalogo"></div>
+    </div>
+  </section>
+
+  <section class="opiniones" id="opiniones">
+    <div class="wrap">
+      <h2 class="sec titulo anim">Lo que dicen <span>nuestros clientes</span></h2>
+      <div class="vacio anim">
+        <strong>Próximamente opiniones de clientes</strong>
+        ¿Ya probaste Burger Fuego? Contanos qué te pareció por WhatsApp.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="marca">Burger <span>Fuego</span></div>
+    <ul>
+      <li>📍 Delivery en San Fernando del Valle de Catamarca</li>
+      <li>📱 WhatsApp: <a href="https://wa.me/5493834024275" target="_blank" rel="noopener">383 402-4275</a></li>
+      <li>📸 Instagram: <a href="#" onclick="return false">@burgerfuego</a> <small>(de ejemplo)</small></li>
+      <li>🕗 Martes a domingo de 20 a 00 h</li>
+    </ul>
+    <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash.</p>
+  </div>
+</footer>
+
+<button class="ver-carrito" id="verCarrito" type="button" aria-label="Ver pedido">
+  <span><span class="n" id="cuentaItems">0</span>Ver mi pedido</span>
+  <span id="totalBoton">$0</span>
+</button>
+
+<a class="wa" href="https://wa.me/5493834024275?text=Hola%20Burger%20Fuego!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2a13 13 0 0 0 6.6 1.8c7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.2-3.8 1.2 1.2-3.7-.3-.4a10.5 10.5 0 0 1-1.7-5.7C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.9c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9 2.8 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+</a>
+
+<div class="fondo" id="fondo"></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="tituloPedido" aria-hidden="true">
+  <div class="panel-top">
+    <h2 class="titulo" id="tituloPedido">Tu pedido</h2>
+    <button class="cerrar" id="cerrar" type="button" aria-label="Cerrar">✕</button>
+  </div>
+  <ul class="items" id="items"></ul>
+  <div class="total"><span>Total</span><span id="total">$0</span></div>
+  <form id="form" novalidate>
+    <label>Tu nombre <input id="nombre" autocomplete="name" required placeholder="Ej: Martina"></label>
+    <label>Dirección de entrega <input id="direccion" autocomplete="street-address" required placeholder="Calle, número y barrio"></label>
+    <label>Forma de pago
+      <select id="pago" required>
+        <option value="">Elegí una opción</option>
+        <option>Efectivo</option><option>Transferencia</option><option>Mercado Pago</option>
+      </select>
+    </label>
+    <p class="error" id="error" role="alert"></p>
+    <button class="btn btn-wa" type="submit">Enviar pedido por WhatsApp</button>
+  </form>
+</aside>
+
+<script>
+(function(){
+  /* =====================================================================
+     FOTOS RECORTADAS: cuando estén en /img (PNG o WebP sin fondo), poner
+     FOTOS = true. Nombres esperados:
+       img/clasica.webp  img/doble-cheddar.webp  img/veggie.webp  img/bacon.webp
+       img/tomate.webp   img/lechuga.webp        img/queso.webp
+     Mientras tanto se usan ilustraciones SVG livianas.
+     ===================================================================== */
+  var FOTOS = false;
+  var EXT = ".webp";
+
+  var WA = "5493834024275";
+  var reducir = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function $(id){ return document.getElementById(id); }
+  function precio(n){ return "$" + n.toLocaleString("es-AR"); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  /* ---------- Ilustraciones SVG (respaldo sin fotos) ---------- */
+  var capa = {
+    panArriba:function(y){
+      var s='<path d="M38 '+(y+112)+'Q38 '+y+' 200 '+y+'Q362 '+y+' 362 '+(y+112)+'Z" fill="#e39a35"/>'+
+        '<path d="M70 '+(y+60)+'Q110 '+(y+18)+' 190 '+(y+14)+'" stroke="#f6c46a" stroke-width="14" fill="none" stroke-linecap="round" opacity=".7"/>'+
+        '<path d="M38 '+(y+112)+'Q200 '+(y+124)+' 362 '+(y+112)+'Z" fill="#c4741f"/>';
+      [[120,40,-20],[170,28,10],[230,32,-10],[280,52,25],[150,70,30],[210,62,-30],[260,82,5],[100,82,-5],[320,84,15]].forEach(function(p){
+        s+='<ellipse cx="'+p[0]+'" cy="'+(y+p[1])+'" rx="7" ry="3.6" fill="#fff4d8" transform="rotate('+p[2]+' '+p[0]+' '+(y+p[1])+')"/>';
+      });
+      return [s,112];
+    },
+    lechuga:function(y){
+      var d='M24 '+(y+10);
+      for(var x=24;x<376;x+=22){ d+='Q'+(x+11)+' '+(y+(x%44?26:-4))+' '+(x+22)+' '+(y+10); }
+      d+='L370 '+(y+22)+'L30 '+(y+22)+'Z';
+      return ['<path d="'+d+'" fill="#58b333"/><path d="M40 '+(y+14)+'H360" stroke="#8fd65e" stroke-width="3" opacity=".7"/>',18];
+    },
+    tomate:function(y){
+      return ['<rect x="46" y="'+y+'" width="160" height="20" rx="10" fill="#d9302a"/><rect x="194" y="'+(y+2)+'" width="160" height="20" rx="10" fill="#e8402f"/>'+
+        '<rect x="60" y="'+(y+5)+'" width="132" height="6" rx="3" fill="#ff7a62" opacity=".7"/><rect x="208" y="'+(y+7)+'" width="132" height="6" rx="3" fill="#ff7a62" opacity=".7"/>',16];
+    },
+    queso:function(y){
+      var d='M40 '+y+'H360V'+(y+12)+'L346 '+(y+12)+'Q340 '+(y+40)+' 332 '+(y+12)+'H262Q254 '+(y+48)+' 246 '+(y+12)+'H160Q152 '+(y+36)+' 144 '+(y+12)+'H84Q76 '+(y+44)+' 68 '+(y+12)+'H40Z';
+      return ['<path d="'+d+'" fill="#ffc21a"/><path d="M48 '+(y+3)+'H352" stroke="#ffe17a" stroke-width="3"/>',10];
+    },
+    carne:function(y){
+      return ['<rect x="34" y="'+y+'" width="332" height="46" rx="23" fill="#5a2b16"/>'+
+        '<path d="M60 '+(y+14)+'h40M130 '+(y+28)+'h50M210 '+(y+12)+'h46M280 '+(y+30)+'h40M90 '+(y+34)+'h24M240 '+(y+36)+'h20" stroke="#3a1a0b" stroke-width="5" stroke-linecap="round"/>'+
+        '<path d="M56 '+(y+6)+'Q200 '+(y-2)+' 344 '+(y+6)+'" stroke="#7d4126" stroke-width="5" fill="none" stroke-linecap="round"/>',42];
+    },
+    veggie:function(y){
+      var s='<rect x="38" y="'+y+'" width="324" height="42" rx="21" fill="#c98a3a"/><path d="M58 '+(y+6)+'Q200 '+(y-2)+' 342 '+(y+6)+'" stroke="#e2ab5c" stroke-width="5" fill="none" stroke-linecap="round"/>';
+      [[80,18],[120,30],[170,16],[220,28],[270,18],[320,26],[150,34],[250,34]].forEach(function(p){ s+='<circle cx="'+p[0]+'" cy="'+(y+p[1])+'" r="4" fill="#8f5a1c"/>'; });
+      return [s,38];
+    },
+    panceta:function(y){
+      var d='M34 '+(y+8)+'Q90 '+(y-6)+' 140 '+(y+8)+'T246 '+(y+8)+'T366 '+(y+8)+'V'+(y+22)+'Q306 '+(y+8)+' 246 '+(y+22)+'T140 '+(y+22)+'T34 '+(y+22)+'Z';
+      return ['<path d="'+d+'" fill="#b8412b"/><path d="M40 '+(y+14)+'Q90 '+y+' 140 '+(y+14)+'T246 '+(y+14)+'T360 '+(y+14)+'" stroke="#f3b9a1" stroke-width="4" fill="none"/>',18];
+    },
+    panAbajo:function(y){
+      return ['<path d="M42 '+y+'H358V'+(y+24)+'Q358 '+(y+56)+' 322 '+(y+56)+'H78Q42 '+(y+56)+' 42 '+(y+24)+'Z" fill="#d98a2b"/><path d="M42 '+y+'H358V'+(y+8)+'H42Z" fill="#f0b25a"/>',56];
+    }
+  };
+  function burgerSVG(capas, titulo){
+    var y=10, partes=[];
+    capas.forEach(function(n){ var r=capa[n](y); partes.push(r[0]); y+=r[1]-4; });
+    var h=y+10;
+    return '<svg viewBox="0 0 400 '+h+'" role="img" aria-label="'+esc(titulo)+'">'+partes.reverse().join("")+'</svg>';
+  }
+  var ingSVG = {
+    tomate:'<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#d9302a"/><circle cx="50" cy="50" r="38" fill="#f0503a"/><g fill="#ffd0a8"><ellipse cx="50" cy="28" rx="5" ry="8"/><ellipse cx="72" cy="50" rx="8" ry="5"/><ellipse cx="50" cy="72" rx="5" ry="8"/><ellipse cx="28" cy="50" rx="8" ry="5"/></g><circle cx="50" cy="50" r="8" fill="#ff8a6a"/></svg>',
+    lechuga:'<svg viewBox="0 0 120 100" aria-hidden="true"><path d="M10 60Q4 30 30 18Q42 2 62 10Q86 2 98 22Q118 30 110 56Q116 80 92 86Q76 100 56 90Q30 98 20 82Q2 76 10 60Z" fill="#58b333"/><path d="M24 74Q60 50 98 24M50 58Q48 40 40 30M70 46Q80 56 92 58" stroke="#a6e07a" stroke-width="4" fill="none" stroke-linecap="round"/></svg>',
+    queso:'<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M8 14H92V86Q80 96 70 86H8Z" fill="#ffc21a"/><g fill="#e6a400"><circle cx="30" cy="34" r="7"/><circle cx="64" cy="28" r="5"/><circle cx="52" cy="60" r="9"/><circle cx="24" cy="70" r="4"/><circle cx="78" cy="64" r="5"/></g></svg>'
+  };
+  function imagen(slug, svg, alt, eager){
+    if (FOTOS) return '<img src="img/'+slug+EXT+'" alt="'+esc(alt)+'" width="800" height="660"'+(eager?' fetchpriority="high"':' loading="lazy"')+' decoding="async">';
+    return svg;
+  }
+
+  /* ---------- Datos ---------- */
+  var burgers = [
+    {id:1, slug:"clasica", nombre:"Clásica Fuego", corto:"Clásica", desc:"Medallón smash, cheddar, lechuga, tomate y salsa de la casa.", precio:8500, bg:"#e3262b", ink:"#ffffff", capas:["panArriba","lechuga","tomate","queso","carne","panAbajo"]},
+    {id:2, slug:"doble-cheddar", nombre:"Doble Cheddar", corto:"Cheddar", desc:"Doble carne, doble cheddar y cebolla caramelizada. La más pedida.", precio:11900, bg:"#ffc21a", ink:"#141414", capas:["panArriba","queso","carne","queso","carne","panAbajo"]},
+    {id:3, slug:"veggie", nombre:"Veggie Verde", corto:"Veggie", desc:"Medallón de garbanzos, lechuga, tomate y mayo de albahaca.", precio:9800, bg:"#1f8a4c", ink:"#ffffff", capas:["panArriba","lechuga","tomate","veggie","lechuga","panAbajo"]},
+    {id:4, slug:"bacon", nombre:"Bacon Bomb", corto:"Bacon", desc:"Doble panceta crocante, cheddar, carne smash y barbacoa.", precio:12500, bg:"#f47b20", ink:"#141414", capas:["panArriba","panceta","queso","carne","lechuga","panAbajo"]}
+  ];
+  var IMG="https://images.unsplash.com/photo-", Q="?w=300&q=55&auto=format&fit=crop";
+  var categorias = [
+    {id:"papas", nombre:"Papas", emoji:"🍟"},
+    {id:"bebidas", nombre:"Bebidas", emoji:"🥤"},
+    {id:"combos", nombre:"Combos", emoji:"🔥"}
+  ];
+  var menu = [
+    {id:6, cat:"papas", nombre:"Papas clásicas", desc:"Porción grande, crocantes y con sal.", precio:4500, foto:"1573080496219-bb080dd4f877"},
+    {id:7, cat:"papas", nombre:"Papas cheddar y panceta", desc:"Bañadas en cheddar con panceta y verdeo.", precio:6900, foto:"1630384060421-cb20d0e0649d"},
+    {id:8, cat:"bebidas", nombre:"Gaseosa 500 ml", desc:"Coca-Cola, Sprite o Fanta. Avisanos cuál querés.", precio:2500, foto:"1554866585-cd94860890b7"},
+    {id:9, cat:"bebidas", nombre:"Agua saborizada 500 ml", desc:"Pomelo, manzana o naranja.", precio:2200, foto:"1625772299848-391b6a87d7b3"},
+    {id:10, cat:"combos", nombre:"Combo Fuego", desc:"Clásica Fuego + papas clásicas + gaseosa.", precio:13900, foto:"1561758033-d89a9ad46330", tag:"Ahorrás $1.600"},
+    {id:11, cat:"combos", nombre:"Combo para dos", desc:"2 Doble Cheddar + 2 papas clásicas + 2 gaseosas.", precio:34500, foto:"1586190848861-99aa4a171e90"}
+  ];
+  var productos = burgers.concat(menu);
+
+  /* ---------- Encabezado ---------- */
+  $("heroBurger").innerHTML = imagen("clasica", burgerSVG(burgers[0].capas, "Hamburguesa Clásica Fuego"), "Hamburguesa Clásica Fuego", true);
+  document.querySelectorAll(".ing").forEach(function(el){
+    var n = el.dataset.ing;
+    el.innerHTML = FOTOS ? '<img src="img/'+n+EXT+'" alt="" loading="lazy" decoding="async">' : ingSVG[n];
+    el.style.transform = "rotate(" + (parseFloat(el.dataset.rot)/3) + "deg)";
+  });
+  // "FUEGO" ocupando todo el ancho
+  function ajustarGigante(){
+    var el = $("gigante"); el.style.fontSize = "100px";
+    var w = el.scrollWidth; if (w) el.style.fontSize = (100 * window.innerWidth * 0.96 / w) + "px";
+  }
+  ajustarGigante();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustarGigante);
+  var rt; window.addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(ajustarGigante, 150); });
+
+  /* ---------- Carrusel ---------- */
+  var slot = $("slot"), actual = 0, ocupado = false;
+  slot.innerHTML = burgers.map(function(b, i){
+    return '<div class="slide'+(i===0?' activa':'')+'" aria-roledescription="diapositiva" aria-label="'+(i+1)+' de '+burgers.length+'"><div class="flota">'+
+      imagen(b.slug, burgerSVG(b.capas, b.nombre), b.nombre, false)+'</div></div>';
+  }).join("");
+  var slides = slot.querySelectorAll(".slide");
+  $("puntos").innerHTML = burgers.map(function(b, i){ return '<button type="button" aria-label="Ver '+esc(b.nombre)+'" data-i="'+i+'"></button>'; }).join("");
+  var puntos = $("puntos").querySelectorAll("button");
+
+  function pintarDetalle(i){
+    var b = burgers[i], sec = $("burgers");
+    sec.style.setProperty("--slide-bg", b.bg);
+    sec.style.setProperty("--slide-ink", b.ink);
+    $("sNombre").textContent = b.nombre;
+    $("sDesc").textContent = b.desc;
+    $("sPrecio").textContent = precio(b.precio);
+    $("fondoNombre").textContent = b.corto;
+    puntos.forEach(function(p, k){ p.setAttribute("aria-current", k===i ? "true" : "false"); });
+  }
+
+  function ir(nuevo, dir){
+    nuevo = (nuevo + burgers.length) % burgers.length;
+    if (nuevo === actual || ocupado) return;
+    if (dir === undefined) dir = nuevo > actual ? 1 : -1;
+    var viejo = slides[actual], entra = slides[nuevo];
+    actual = nuevo;
+    pintarDetalle(nuevo);
+    if (reducir || !viejo.animate){
+      viejo.classList.remove("activa"); entra.classList.add("activa"); return;
+    }
+    ocupado = true;
+    entra.classList.add("activa");
+    viejo.animate([
+      {transform:"translateX(0) rotate(0) scale(1)", opacity:1},
+      {transform:"translateX("+(-dir*80)+"vw) rotate("+(-dir*110)+"deg) scale(.6)", opacity:0}
+    ], {duration:480, easing:"cubic-bezier(.55,0,.75,.3)", fill:"forwards"}).onfinish = function(){
+      viejo.classList.remove("activa"); viejo.getAnimations().forEach(function(a){ a.cancel(); });
+    };
+    var a = entra.animate([
+      {transform:"translateX("+(dir*80)+"vw) rotate("+(dir*110)+"deg) scale(.6)", opacity:0},
+      {transform:"translateX(0) rotate(0) scale(1)", opacity:1}
+    ], {duration:620, delay:120, easing:"cubic-bezier(.2,.9,.25,1)", fill:"backwards"});
+    a.onfinish = function(){ ocupado = false; };
+    var d = document.querySelector(".detalle");
+    d.animate([{opacity:0, transform:"translateY(12px)"},{opacity:1, transform:"none"}], {duration:400, delay:200, easing:"ease-out", fill:"backwards"});
+  }
+  $("prev").addEventListener("click", function(){ ir(actual - 1, -1); });
+  $("next").addEventListener("click", function(){ ir(actual + 1, 1); });
+  $("puntos").addEventListener("click", function(e){ var b = e.target.closest("button"); if (b) ir(+b.dataset.i); });
+  $("burgers").addEventListener("keydown", function(e){
+    if (e.key === "ArrowLeft") ir(actual - 1, -1);
+    if (e.key === "ArrowRight") ir(actual + 1, 1);
+  });
+  // Deslizar con el dedo
+  var x0 = null, y0 = 0;
+  $("escena").addEventListener("pointerdown", function(e){ x0 = e.clientX; y0 = e.clientY; });
+  $("escena").addEventListener("pointerup", function(e){
+    if (x0 === null) return;
+    var dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) ir(actual + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+  });
+  $("escena").addEventListener("pointercancel", function(){ x0 = null; });
+  $("sAgregar").addEventListener("click", function(){ sumar(burgers[actual].id, 1); listo(this, "Agregar"); });
+  pintarDetalle(0);
+
+  /* ---------- Menú ---------- */
+  var htmlTabs = "", htmlCat = "";
+  categorias.forEach(function(c, i){
+    htmlTabs += '<a href="#'+c.id+'"'+(i===0?' class="activa"':'')+'>'+c.emoji+' '+c.nombre+'</a>';
+    htmlCat += '<div class="cat" id="'+c.id+'"><h3>'+c.nombre+'</h3><div class="grid">';
+    menu.filter(function(p){ return p.cat===c.id; }).forEach(function(p){
+      htmlCat += '<article class="card anim-card"><div class="foto" data-emoji="'+c.emoji+'"><img src="'+IMG+p.foto+Q+'" alt="'+esc(p.nombre)+'" loading="lazy" decoding="async" width="300" height="300" onerror="this.remove()"></div>'+
+        '<div class="info">'+(p.tag?'<span class="tag">'+esc(p.tag)+'</span>':'')+'<h4>'+esc(p.nombre)+'</h4><p class="desc">'+esc(p.desc)+'</p>'+
+        '<div class="pie"><span class="precio">'+precio(p.precio)+'</span><button class="agregar" type="button" data-id="'+p.id+'">Agregar</button></div></div></article>';
+    });
+    htmlCat += '</div></div>';
+  });
+  $("tabs").innerHTML = htmlTabs;
+  $("catalogo").innerHTML = htmlCat;
+  if ("IntersectionObserver" in window){
+    var links = $("tabs").querySelectorAll("a");
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) links.forEach(function(a){ a.classList.toggle("activa", a.getAttribute("href")==="#"+e.target.id); }); });
+    }, {rootMargin:"-40% 0px -55% 0px"});
+    categorias.forEach(function(c){ io.observe($(c.id)); });
+  }
+
+  /* ---------- Carrito ---------- */
+  var carrito = {};
+  try { carrito = JSON.parse(localStorage.getItem("bfpro-carrito")) || {}; } catch(e){ carrito = {}; }
+  function guardar(){ try { localStorage.setItem("bfpro-carrito", JSON.stringify(carrito)); } catch(e){} }
+  function buscar(id){ for (var i=0;i<productos.length;i++) if (productos[i].id == id) return productos[i]; }
+  function lineas(){ return Object.keys(carrito).map(function(id){ var p = buscar(id); return p && carrito[id] > 0 ? {p:p, c:carrito[id]} : null; }).filter(Boolean); }
+  function total(){ return lineas().reduce(function(s,l){ return s + l.p.precio*l.c; }, 0); }
+  function render(){
+    var ls = lineas(), cant = ls.reduce(function(s,l){ return s + l.c; }, 0);
+    $("cuentaItems").textContent = cant;
+    $("totalBoton").textContent = $("total").textContent = precio(total());
+    $("verCarrito").classList.toggle("visible", cant > 0);
+    $("items").innerHTML = ls.length ? ls.map(function(l){
+      return '<li class="item"><div class="nom">'+esc(l.p.nombre)+'<small>'+precio(l.p.precio*l.c)+'</small></div><div class="cant">'+
+        '<button type="button" data-menos="'+l.p.id+'" aria-label="Quitar uno">−</button><span>'+l.c+'</span>'+
+        '<button type="button" data-mas="'+l.p.id+'" aria-label="Agregar uno">+</button></div></li>';
+    }).join("") : '<li class="vacio-carrito">Todavía no agregaste nada 🍔</li>';
+  }
+  function sumar(id, n){ carrito[id] = (carrito[id]||0) + n; if (carrito[id] <= 0) delete carrito[id]; guardar(); render(); }
+  function listo(b, txt){ b.textContent = "¡Listo! ✓"; b.classList.add("ok"); setTimeout(function(){ b.textContent = txt; b.classList.remove("ok"); }, 900); }
+  $("catalogo").addEventListener("click", function(e){ var b = e.target.closest(".agregar"); if (b){ sumar(b.dataset.id, 1); listo(b, "Agregar"); } });
+  $("items").addEventListener("click", function(e){ var t = e.target; if (t.dataset.mas) sumar(t.dataset.mas, 1); if (t.dataset.menos) sumar(t.dataset.menos, -1); });
+  function abrir(){ document.body.classList.add("abierto"); $("panel").setAttribute("aria-hidden","false"); $("cerrar").focus(); if (window.__lenis) window.__lenis.stop(); }
+  function cerrar(){ document.body.classList.remove("abierto"); $("panel").setAttribute("aria-hidden","true"); $("verCarrito").focus(); if (window.__lenis) window.__lenis.start(); }
+  $("verCarrito").addEventListener("click", abrir);
+  $("cerrar").addEventListener("click", cerrar);
+  $("fondo").addEventListener("click", cerrar);
+  document.addEventListener("keydown", function(e){ if (e.key==="Escape" && document.body.classList.contains("abierto")) cerrar(); });
+  $("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var nombre = $("nombre").value.trim(), dir = $("direccion").value.trim(), pago = $("pago").value, ls = lineas();
+    if (!ls.length){ $("error").textContent = "Agregá al menos un producto."; return; }
+    if (!nombre || !dir || !pago){ $("error").textContent = "Completá tu nombre, dirección y forma de pago."; return; }
+    $("error").textContent = "";
+    var msg = "¡Hola Burger Fuego! 🔥 Quiero hacer este pedido:\n\n" +
+      ls.map(function(l){ return "• " + l.c + " x " + l.p.nombre + " — " + precio(l.p.precio*l.c); }).join("\n") +
+      "\n\n*Total: " + precio(total()) + "*\n\nNombre: " + nombre + "\nDirección: " + dir + "\nForma de pago: " + pago;
+    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(msg), "_blank");
+  });
+  render();
+
+  /* ---------- Animaciones con GSAP + Lenis (no se cargan si piden reducir movimiento) ---------- */
+  if (reducir) return;
+  function cargar(src, cb){ var s = document.createElement("script"); s.src = src; s.async = true; s.onload = cb; document.head.appendChild(s); }
+  window.addEventListener("load", function(){
+    cargar("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js", function(){
+      cargar("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js", function(){
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from(".hero-burger", {y:40, scale:.85, opacity:0, duration:1, ease:"power3.out"});
+        gsap.from("#gigante", {opacity:0, scale:1.08, duration:1.2, ease:"power2.out"});
+        gsap.from(".hero-pie > *", {y:20, opacity:0, duration:.8, stagger:.12, delay:.3, ease:"power2.out"});
+        // "FUEGO" y la hamburguesa se separan un poco al bajar
+        gsap.to("#gigante", {yPercent:30, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:true}});
+        gsap.to(".hero-burger", {yPercent:-12, ease:"none", scrollTrigger:{trigger:".hero", start:"top top", end:"bottom top", scrub:true}});
+        // Ingredientes con parallax
+        gsap.utils.toArray(".ing").forEach(function(el){
+          var vel = parseFloat(el.dataset.vel) || 1, rot = parseFloat(el.dataset.rot) || 0;
+          gsap.fromTo(el, {y:60*vel}, {y:-140*vel, rotation:rot, ease:"none",
+            scrollTrigger:{trigger:el.parentElement, start:"top bottom", end:"bottom top", scrub:true}});
+        });
+        gsap.utils.toArray(".anim").forEach(function(el){
+          gsap.from(el, {y:20, opacity:0, duration:.7, ease:"power2.out", scrollTrigger:{trigger:el, start:"top 90%", once:true}});
+        });
+        ScrollTrigger.batch(".anim-card", {start:"top 92%", once:true,
+          onEnter:function(b){ gsap.from(b, {y:24, opacity:0, duration:.6, stagger:.08, ease:"power2.out"}); }});
+        cargar("https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js", function(){
+          if (!window.Lenis) return;
+          var lenis = new Lenis({duration:1.1, smoothWheel:true});
+          window.__lenis = lenis;
+          lenis.on("scroll", ScrollTrigger.update);
+          gsap.ticker.add(function(t){ lenis.raf(t*1000); });
+          gsap.ticker.lagSmoothing(0);
+          document.querySelectorAll('a[href^="#"]').forEach(function(a){
+            a.addEventListener("click", function(e){
+              var h = a.getAttribute("href"); if (h.length < 2) return;
+              var dest = document.querySelector(h);
+              if (dest){ e.preventDefault(); lenis.scrollTo(dest, {offset:-56}); }
+            });
+          });
+        });
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
