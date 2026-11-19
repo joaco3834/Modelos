@@ -15,3 +15,14 @@ Cosas que elegí por mi cuenta mientras armaba los modelos. Si algo no te gusta,
 - 14 gustos en 4 grupos (cremas, chocolates, dulce de leche, frutales) y 4 postres (torta helada, bombones x6, Copa Nube, paletas x3).
 - Los gustos y postres van con ilustraciones/emojis en tarjetas de "plastilina" en lugar de fotos: encaja con el estilo y evita fotos con marcas.
 - Horario: todos los días de 14 a 24 h. Tipografía: Fredoka (Google Fonts).
+
+## Cabañas El Rodeo (/cabanas)
+- 3 cabañas: **Arroyo** (hasta 2, $65.000/noche), **Cerro** (hasta 4, $85.000/noche), **Familiar** (hasta 6, $110.000/noche).
+- Check-in 14 h, check-out 10 h. Reserva con **seña del 30%** por transferencia (solo se informa, no se cobra en la página).
+- La consulta valida fechas (llegada desde hoy, salida después de la llegada) y que las personas no superen la capacidad de la cabaña elegida. Calcula noches y un precio estimado.
+- Ubicación genérica ("a unos 40 minutos de la Capital", "cerca del río y de la plaza"): no puse una dirección ni un mapa para no apuntar a un lugar real.
+- Comodidades: Wi-Fi, parrilla, pileta en verano, cochera, aire y calefacción, ropa de cama, cocina equipada y TV.
+- Tipografía: Fraunces (Google Fonts). No lleva barra de "Ver mi pedido" porque es una consulta, no un carrito.
+
+## Índice
+- Le agregué la etiqueta "Estilo: Clásico" a la primera hamburguesería para que las 5 tarjetas tengan su estilo. Saqué la tarjeta de "Más modelos próximamente".
