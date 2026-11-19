@@ -64,11 +64,11 @@
 
   /* ---------- Rueda de hamburguesas ---------- */
   .carrusel{position:relative;overflow:hidden;background:var(--slide-bg);color:var(--slide-ink);
-    transition:background-color .7s ease,color .7s ease;padding:40px 0 36px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+    transition:background-color .7s ease,color .7s ease;padding:26px 0 104px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
   .carrusel .cab{position:relative;z-index:3;text-align:center}
   .carrusel .cab small{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;opacity:.8}
   .carrusel h2{font-size:clamp(2.2rem,10vw,3.6rem)}
-  .escena{position:relative;height:clamp(320px,56vh,600px);height:clamp(320px,56svh,600px);margin-top:8px;overflow:hidden;
+  .escena{position:relative;height:clamp(280px,43vh,540px);height:clamp(280px,43svh,540px);margin-top:4px;overflow:hidden;
     touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;z-index:2}
   .escena.arrastrando{cursor:grabbing}
   .rueda{position:absolute;inset:0}
@@ -80,14 +80,17 @@
   .r-item img,.r-item svg{width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
   .r-tag{position:absolute;left:0;top:0;white-space:nowrap;pointer-events:none;will-change:transform,opacity;
     background:var(--negro);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
-  .flecha{position:absolute;top:50%;transform:translateY(-50%);z-index:200;width:46px;height:46px;border-radius:50%;border:2px solid currentColor;
-    background:rgba(255,255,255,.14);color:inherit;font-size:1.2rem;display:grid;place-items:center}
-  .flecha:active{transform:translateY(-50%) scale(.92)}
-  .flecha.izq{left:10px}.flecha.der{right:10px}
-  @media(min-width:900px){.flecha.izq{left:5%}.flecha.der{right:5%}}
+  .controles{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px}
+  .flecha{width:44px;height:44px;border-radius:50%;border:2px solid currentColor;flex:0 0 auto;
+    background:rgba(255,255,255,.14);color:inherit;font-size:1.15rem;display:grid;place-items:center}
+  .flecha:active{transform:scale(.92)}
+  .puntos{display:flex;gap:2px}
+  .puntos button{width:30px;height:44px;border:0;background:none;display:grid;place-items:center}
+  .puntos button::after{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--slide-ink);transition:background .3s,transform .3s}
+  .puntos button[aria-current="true"]::after{background:var(--slide-ink);transform:scale(1.2)}
   .detalle{position:relative;z-index:3;text-align:center;padding:0 16px;max-width:520px;margin:6px auto 0}
   .detalle h3{font-size:clamp(2rem,9vw,3rem)}
-  .detalle p{opacity:.9;margin:6px 0 14px;min-height:3em}
+  .detalle p{opacity:.9;margin:4px 0 12px;min-height:3em}
   .detalle .fila{display:flex;align-items:center;justify-content:center;gap:16px}
   .detalle .precio{font-family:var(--titulo);font-size:2.2rem;line-height:1}
   .btn-agregar{background:var(--negro);color:#fff;border:0;border-radius:999px;padding:14px 24px;font-weight:800}
@@ -112,6 +115,9 @@
   .card .foto{flex:0 0 112px;background:linear-gradient(135deg,var(--rojo2),var(--negro3));position:relative}
   .card .foto::before{content:attr(data-emoji);position:absolute;inset:0;display:grid;place-items:center;font-size:2.4rem}
   .card .foto img{position:relative;width:100%;height:100%;object-fit:cover}
+  .card .foto-svg{display:grid;place-items:center;padding:10px}
+  .card .foto-svg::before{content:none}
+  .card .foto-svg svg{width:100%;height:auto;max-height:110px}
   .card .info{padding:12px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
   .card h4{font-size:1.05rem;font-weight:800}
   .card .desc{color:var(--gris);font-size:.88rem;flex:1}
@@ -199,7 +205,7 @@
   <ul>
     <li>💳 Efectivo · Transferencia · Mercado Pago</li>
     <li>🛵 Delivery en el centro y alrededores</li>
-    <li>🕗 Martes a domingo · 20 a 00 h</li>
+    <li>🕗 Martes a domingo · 20 a 24 h</li>
   </ul>
 </div>
 
@@ -216,10 +222,13 @@
     <svg class="arco" id="arco" aria-hidden="true"></svg>
     <div class="piso" id="piso" aria-hidden="true"></div>
     <div class="rueda" id="rueda"></div>
-    <button class="flecha izq" id="prev" type="button" aria-label="Hamburguesa anterior">←</button>
-    <button class="flecha der" id="next" type="button" aria-label="Hamburguesa siguiente">→</button>
   </div>
-  <div class="detalle" aria-live="polite">
+  <div class="controles">
+    <button class="flecha" id="prev" type="button" aria-label="Hamburguesa anterior">←</button>
+    <div class="puntos" id="puntos"></div>
+    <button class="flecha" id="next" type="button" aria-label="Hamburguesa siguiente">→</button>
+  </div>
+  <div class="detalle" id="detalle" aria-live="polite">
     <h3 class="titulo" id="sNombre"></h3>
     <p id="sDesc"></p>
     <div class="fila">
@@ -257,7 +266,7 @@
       <li>📍 Delivery en San Fernando del Valle de Catamarca</li>
       <li>📱 WhatsApp: <a href="https://wa.me/5493834024275" target="_blank" rel="noopener">383 402-4275</a></li>
       <li>📸 Instagram: <a href="#" onclick="return false">@burgerfuego</a> <small>(de ejemplo)</small></li>
-      <li>🕗 Martes a domingo de 20 a 00 h</li>
+      <li>🕗 Martes a domingo de 20 a 24 h</li>
     </ul>
     <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash (Amirali Mirhashemian, David Foodphototasty, Ghaly Wedinly, Stanley Kustamin).</p>
   </div>
@@ -388,12 +397,25 @@
   var menu = [
     {id:6, cat:"papas", nombre:"Papas clásicas", desc:"Porción grande, crocantes y con sal.", precio:4500, foto:"1573080496219-bb080dd4f877"},
     {id:7, cat:"papas", nombre:"Papas cheddar y panceta", desc:"Bañadas en cheddar con panceta y verdeo.", precio:6900, foto:"1630384060421-cb20d0e0649d"},
-    {id:8, cat:"bebidas", nombre:"Gaseosa 500 ml", desc:"Coca-Cola, Sprite o Fanta. Avisanos cuál querés.", precio:2500, foto:"1554866585-cd94860890b7"},
-    {id:9, cat:"bebidas", nombre:"Agua saborizada 500 ml", desc:"Pomelo, manzana o naranja.", precio:2200, foto:"1625772299848-391b6a87d7b3"},
+    {id:8, cat:"bebidas", nombre:"Gaseosa 500 ml", desc:"Cola, lima-limón o naranja. Avisanos cuál querés.", precio:2500, svg:"gaseosa"},
+    {id:9, cat:"bebidas", nombre:"Agua saborizada 500 ml", desc:"Pomelo, manzana o naranja.", precio:2200, svg:"agua"},
     {id:10, cat:"combos", nombre:"Combo Fuego", desc:"Clásica Fuego + papas clásicas + gaseosa.", precio:13900, foto:"1561758033-d89a9ad46330", tag:"Ahorrás $1.600"},
     {id:11, cat:"combos", nombre:"Combo para dos", desc:"2 Doble Cheddar + 2 papas clásicas + 2 gaseosas.", precio:34500, foto:"1586190848861-99aa4a171e90"}
   ];
   var productos = burgers.concat(menu);
+  var bebidaSVG = {
+    gaseosa:'<svg viewBox="0 0 100 110" aria-hidden="true"><path d="M60 30 70 4h8" stroke="#e3262b" stroke-width="5" fill="none" stroke-linecap="round"/>'+
+      '<path d="M24 24h52l-7 74a7 7 0 0 1-7 6H38a7 7 0 0 1-7-6z" fill="rgba(255,255,255,.18)" stroke="#fff" stroke-width="2.5"/>'+
+      '<path d="M28 40h44l-5.6 57a5 5 0 0 1-5 4.5H38.6a5 5 0 0 1-5-4.5z" fill="#5b2a12"/><path d="M28 40h44l-.5 5H28.5z" fill="#c98a5a"/>'+
+      '<rect x="36" y="48" width="13" height="13" rx="2.5" fill="#fff" opacity=".5" transform="rotate(-12 42 54)"/><rect x="52" y="54" width="12" height="12" rx="2.5" fill="#fff" opacity=".45" transform="rotate(16 58 60)"/>'+
+      '<g fill="#fff" opacity=".6"><circle cx="44" cy="78" r="2"/><circle cx="56" cy="86" r="1.6"/><circle cx="50" cy="70" r="1.4"/><circle cx="60" cy="74" r="1.2"/></g></svg>',
+    agua:'<svg viewBox="0 0 100 110" aria-hidden="true"><circle cx="70" cy="26" r="15" fill="#ffc21a"/><circle cx="70" cy="26" r="11" fill="#ffe17a"/>'+
+      '<path d="M70 15v22M59 26h22M62 18l16 16M78 18 62 34" stroke="#ffc21a" stroke-width="1.6"/>'+
+      '<path d="M24 24h52l-7 74a7 7 0 0 1-7 6H38a7 7 0 0 1-7-6z" fill="rgba(255,255,255,.18)" stroke="#fff" stroke-width="2.5"/>'+
+      '<path d="M28 40h44l-5.6 57a5 5 0 0 1-5 4.5H38.6a5 5 0 0 1-5-4.5z" fill="#ff9f43" opacity=".85"/>'+
+      '<rect x="36" y="48" width="13" height="13" rx="2.5" fill="#fff" opacity=".55" transform="rotate(-12 42 54)"/><rect x="52" y="56" width="12" height="12" rx="2.5" fill="#fff" opacity=".5" transform="rotate(16 58 62)"/>'+
+      '<g fill="#fff" opacity=".7"><circle cx="44" cy="80" r="2"/><circle cx="56" cy="88" r="1.6"/><circle cx="60" cy="76" r="1.2"/></g></svg>'
+  };
 
   /* ---------- Encabezado ---------- */
   $("heroBurger").innerHTML = imagen("clasica", burgerSVG(burgers[0].capas, "Hamburguesa Clásica Fuego"), "Hamburguesa Clásica Fuego", true);
@@ -413,10 +435,10 @@
 
   /* ---------- Rueda de hamburguesas ("producto en órbita") ---------- */
   var N = burgers.length;
-  var REP = Math.max(1, Math.ceil(12 / N));   // si son pocas, se repiten hasta completar la rueda
+  var REP = Math.max(1, Math.ceil(8 / N));    // si son pocas, se repiten hasta completar la rueda
   var M = N * REP, PASO = 360 / M;
   var escena = $("escena"), estado = {r:0};
-  var items = [], tags = [], htmlR = "";
+  var items, tags, htmlR = "";
   for (var k = 0; k < M; k++){
     var bk = burgers[k % N];
     htmlR += '<div class="r-item" data-i="'+k+'"'+(k >= N ? ' aria-hidden="true"' : '')+'>'+
@@ -427,26 +449,30 @@
   items = $("rueda").querySelectorAll(".r-item");
   tags = $("rueda").querySelectorAll(".r-tag");
   for (k = 0; k < items.length; k++) items[k].querySelectorAll("img").forEach(function(im){ im.draggable = false; });
+  $("puntos").innerHTML = burgers.map(function(b, i){ return '<button type="button" data-i="'+i+'" aria-label="Ver '+esc(b.nombre)+'"></button>'; }).join("");
+  var puntos = $("puntos").querySelectorAll("button");
 
-  var G = {};   // geometría
+  var G = {};   // geometría: arco elíptico con el centro abajo de la pantalla
   function geom(){
-    var vw = escena.clientWidth, vh = escena.clientHeight;
+    var vw = escena.clientWidth, vh = escena.clientHeight, chico = vw < 700;
     G.vh = vh;
-    G.B = Math.min(vw * 0.5, 320);           // tamaño de la del centro
+    G.B = chico ? vw * 0.44 : Math.min(vw * 0.3, 320);   // tamaño de la del centro
     G.H = G.B * 0.82;
-    G.R = vw < 700 ? Math.max(230, vw * 0.7) : Math.max(480, vw * 0.42);           // radio del círculo (centro abajo de la pantalla)
+    G.Rx = chico ? vw * 0.33 / Math.sin(PASO * Math.PI / 180) : Math.max(420, vw * 0.36);
+    G.Ry = G.Rx * (chico ? 1.35 : 0.85);                  // más alto que ancho = más curvo
     G.cx = vw / 2;
-    G.cy = vh * 0.46 + G.R;
+    G.top = vh * 0.36;                                    // altura de la del centro
     for (var i = 0; i < M; i++){ items[i].style.width = G.B + "px"; items[i].style.height = G.H + "px"; }
-    var piso = $("piso"); piso.style.top = (vh * 0.46 + G.H * 0.36) + "px";
-    // Texto gigante siguiendo la curva
-    var fs = G.B * 0.42, Rt = G.R - G.B * 0.06, pad = fs * 1.2, lado = 2 * (Rt + pad), c = Rt + pad;
+    $("piso").style.top = (G.top + G.H * 0.36) + "px";
+    // Texto gigante siguiendo la curva (círculo con la misma curvatura que el arco en el centro)
+    var fs = G.B * 0.4, Rt = G.Rx * G.Rx / G.Ry, pad = fs * 1.2, c = Rt + pad, lado = 2 * c;
+    var cyT = G.top + G.B * 0.1 + Rt;
     var circ = 2 * Math.PI * Rt, frase = "Smash burgers • Fuego • ";
     var reps = Math.max(1, Math.round(circ / (frase.length * fs * 0.42)));
     var arco = $("arco");
     arco.setAttribute("width", lado); arco.setAttribute("height", lado);
     arco.setAttribute("viewBox", "0 0 " + lado + " " + lado);
-    arco.style.left = (G.cx - c) + "px"; arco.style.top = (G.cy - c) + "px";
+    arco.style.left = (G.cx - c) + "px"; arco.style.top = (cyT - c) + "px";
     arco.innerHTML = '<path id="arcoPath" fill="none" d="M'+c+' '+(c-Rt)+'a'+Rt+' '+Rt+' 0 1 1 0 '+(2*Rt)+'a'+Rt+' '+Rt+' 0 1 1 0 '+(-2*Rt)+'"/>'+
       '<text font-size="'+fs+'" textLength="'+(circ - 2).toFixed(1)+'" lengthAdjust="spacing"><textPath href="#arcoPath">'+
       new Array(reps + 1).join(frase)+'</textPath></text>';
@@ -454,46 +480,51 @@
 
   function norm(a){ return ((a % 360) + 540) % 360 - 180; }
   function mod(n, m){ return ((n % m) + m) % m; }
-  var ultimo = 0, giro = 0, colorActual = -1, mostrado = -1;
+  function enCentro(){ return mod(Math.round(-estado.r / PASO), M) % N; }   // hamburguesa más cercana al centro
+  var ultimo = 0, giro = 0, centroActual = -1, mostrado = -1;
   var arrastrando = false, tweenActivo = false, scrollActivo = false, corriendo = false;
 
   function pintar(){
     var r = estado.r, d = r - ultimo; ultimo = r;
     // giro propio de cada hamburguesa según la velocidad
-    giro += (Math.max(-22, Math.min(22, d * 5)) - giro) * 0.2;
+    giro += (Math.max(-22, Math.min(22, d * 3)) - giro) * 0.2;
     if (Math.abs(giro) < 0.02) giro = 0;
     for (var i = 0; i < M; i++){
       var a = norm(i * PASO + r), u = Math.abs(a) / PASO, it = items[i], tg = tags[i];
-      if (u > 2.6){
+      if (u > 2.4){
         if (!it._oculto){ it.style.visibility = tg.style.visibility = "hidden"; it._oculto = true; }
         continue;
       }
       if (it._oculto){ it.style.visibility = tg.style.visibility = ""; it._oculto = false; }
       var rad = a * Math.PI / 180;
-      var x = G.cx + G.R * Math.sin(rad), y = G.cy - G.R * Math.cos(rad);
-      var s = u <= 1 ? 1 - 0.45 * u : Math.max(0.3, 0.55 - 0.15 * (u - 1));
-      var o = u <= 1 ? 1 - 0.2 * u : Math.max(0, 0.8 - 0.4 * (u - 1));
+      var x = G.cx + G.Rx * Math.sin(rad), y = G.top + G.Ry * (1 - Math.cos(rad));
+      var s = u <= 1 ? 1 - 0.48 * u : Math.max(0.3, 0.52 - 0.16 * (u - 1));
+      var o = u <= 1 ? 1 - 0.18 * u : Math.max(0, 0.82 - 0.5 * (u - 1));
       // se desvanecen al acercarse al borde de abajo (sin cortes bruscos)
       o *= Math.max(0, Math.min(1, (G.vh - (y + G.H * s * 0.5) + 30) / 90));
-      var t = a * 0.9 + giro;
+      var t = a + giro;   // inclinadas siguiendo la curva
       it.style.transform = "translate3d(" + (x - G.B / 2).toFixed(1) + "px," + (y - G.H / 2).toFixed(1) + "px,0) rotate(" + t.toFixed(2) + "deg) scale(" + s.toFixed(3) + ")";
       it.style.opacity = o.toFixed(3);
       it.style.zIndex = 100 - Math.round(u * 10);
       // etiqueta al costado (no se achica tanto para que se pueda leer)
-      var tr = t * Math.PI / 180, ox = G.B * s * 0.4, oy = -G.H * s * 0.42;
+      var tr = t * Math.PI / 180, ox = G.B * s * 0.4, oy = -G.H * s * 0.44;
       var lx = x + ox * Math.cos(tr) - oy * Math.sin(tr), ly = y + ox * Math.sin(tr) + oy * Math.cos(tr);
-      tg.style.transform = "translate3d(" + lx.toFixed(1) + "px," + ly.toFixed(1) + "px,0) translate(-50%,-50%) rotate(" + t.toFixed(2) + "deg) scale(" + (0.75 + 0.25 * s).toFixed(3) + ")";
-      tg.style.opacity = (o * (u < 0.5 ? 1 : 0.9)).toFixed(3);
+      tg.style.transform = "translate3d(" + lx.toFixed(1) + "px," + ly.toFixed(1) + "px,0) translate(-50%,-50%) rotate(" + t.toFixed(2) + "deg) scale(" + (0.78 + 0.22 * s).toFixed(3) + ")";
+      tg.style.opacity = o.toFixed(3);
       tg.style.zIndex = 101 - Math.round(u * 10);
     }
-    $("arco").style.transform = "rotate(" + (r * 0.6).toFixed(2) + "deg)";
-    var c = mod(Math.round(-r / PASO), M) % N;
-    if (c !== colorActual){ colorActual = c; ponerColor(c); }
+    $("arco").style.transform = "rotate(" + (r * 0.5).toFixed(2) + "deg)";
+    var c = enCentro();
+    if (c !== centroActual){ centroActual = c; ponerColor(c); mostrarDetalle(c, true); }
   }
+  function quieto(){ return !arrastrando && !tweenActivo && !scrollActivo; }
   function bucle(){
     pintar();
-    if (arrastrando || tweenActivo || scrollActivo || giro !== 0) requestAnimationFrame(bucle);
-    else corriendo = false;
+    if (!quieto() || giro !== 0){ requestAnimationFrame(bucle); return; }
+    corriendo = false;
+    // control final: siempre termina encajada y con los datos de la del centro
+    if (Math.abs(estado.r - encajar(estado.r)) > 0.05) irA(encajar(estado.r), 0.35);
+    else mostrarDetalle(enCentro(), true);
   }
   function mover(){ if (!corriendo){ corriendo = true; requestAnimationFrame(bucle); } }
 
@@ -501,6 +532,7 @@
     var sec = $("burgers");
     sec.style.setProperty("--slide-bg", burgers[i].bg);
     sec.style.setProperty("--slide-ink", burgers[i].ink);
+    puntos.forEach(function(p, k){ p.setAttribute("aria-current", k === i ? "true" : "false"); });
   }
   function mostrarDetalle(i, animar){
     if (i === mostrado) return;
@@ -510,12 +542,12 @@
     $("sDesc").textContent = b.desc;
     $("sPrecio").textContent = precio(b.precio);
     $("sAgregar").setAttribute("aria-label", "Agregar " + b.nombre);
+    $("detalle").setAttribute("data-burger", b.slug);
     if (!animar || reducir) return;
-    var partes = document.querySelectorAll(".detalle > *");
-    if (window.gsap) gsap.fromTo(partes, {y:16, opacity:0}, {y:0, opacity:1, duration:.5, stagger:.07, ease:"power2.out", overwrite:true});
-    else if (partes[0].animate) partes.forEach(function(p, n){ p.animate([{opacity:0, transform:"translateY(16px)"},{opacity:1, transform:"none"}], {duration:450, delay:n * 70, easing:"ease-out", fill:"backwards"}); });
+    var partes = document.querySelectorAll("#detalle > *");
+    if (window.gsap) gsap.fromTo(partes, {y:14, opacity:0}, {y:0, opacity:1, duration:.45, stagger:.06, ease:"power2.out", overwrite:true});
+    else if (partes[0].animate) partes.forEach(function(p, n){ p.animate([{opacity:0, transform:"translateY(14px)"},{opacity:1, transform:"none"}], {duration:400, delay:n * 60, easing:"ease-out", fill:"backwards"}); });
   }
-  function asentar(){ mostrarDetalle(mod(Math.round(-estado.r / PASO), M) % N, true); }
 
   var tweenPropio = null;
   function frenar(){
@@ -525,9 +557,9 @@
   }
   function irA(destino, dur){
     frenar();
-    if (reducir || !dur){ estado.r = destino; pintar(); giro = 0; pintar(); asentar(); return; }
+    if (reducir || !dur){ estado.r = destino; giro = 0; pintar(); giro = 0; pintar(); mostrarDetalle(enCentro(), false); return; }
     tweenActivo = true; mover();
-    var fin = function(){ tweenActivo = false; asentar(); };
+    var fin = function(){ estado.r = destino; tweenActivo = false; mover(); };
     if (window.gsap){ gsap.to(estado, {r:destino, duration:dur, ease:"power3.out", onComplete:fin}); return; }
     var r0 = estado.r, t0 = performance.now();
     (function paso(ahora){
@@ -538,11 +570,17 @@
   }
   function encajar(r){ return Math.round(r / PASO) * PASO; }
   function irPasos(n){ irA(encajar(estado.r) - n * PASO, 0.7); }
+  function irABurger(b){
+    // lleva al centro la copia más cercana de esa hamburguesa
+    var mejor = null;
+    for (var i = b; i < M; i += N){ var a = norm(i * PASO + estado.r); if (mejor === null || Math.abs(a) < Math.abs(mejor)) mejor = a; }
+    if (Math.abs(mejor) > 0.05) irA(estado.r - mejor, 0.8);
+  }
 
   // Arrastrar con el dedo / mouse, con inercia
   var p0 = null;
   escena.addEventListener("pointerdown", function(e){
-    if (e.button > 0 || e.target.closest(".flecha")) return;
+    if (e.button > 0) return;
     p0 = {x:e.clientX, y:e.clientY, r:estado.r, id:e.pointerId, muestras:[{t:e.timeStamp, x:e.clientX}], item:e.target.closest(".r-item")};
   });
   escena.addEventListener("pointermove", function(e){
@@ -555,7 +593,7 @@
       try { escena.setPointerCapture(e.pointerId); } catch(err){}
       dx = 0;
     }
-    estado.r = p0.r + dx / G.R * 57.2958;
+    estado.r = p0.r + dx / G.Rx * 57.2958;
     p0.muestras.push({t:e.timeStamp, x:e.clientX});
     if (p0.muestras.length > 6) p0.muestras.shift();
     mover();
@@ -578,9 +616,9 @@
       if (e.timeStamp - ult.t < 90 && ult.t > pri.t) v = (ult.x - pri.x) / (ult.t - pri.t);   // px por ms
       if (Math.abs(v) < 0.35) v = 0;                       // arrastre lento: sin inercia
     }
-    var vGrados = v / G.R * 57.2958;                      // grados por ms
+    var vGrados = v / G.Rx * 57.2958;                     // grados por ms
     var destino = encajar(estado.r + vGrados * 380);      // inercia: si va rápido, gira más
-    var dur = Math.min(2.2, Math.max(0.6, 0.45 + Math.abs(destino - estado.r) / PASO * 0.22));
+    var dur = Math.min(2.2, Math.max(0.6, 0.45 + Math.abs(destino - estado.r) / PASO * 0.25));
     irA(destino, dur);
   }
   escena.addEventListener("pointerup", soltar);
@@ -589,29 +627,32 @@
 
   $("prev").addEventListener("click", function(){ irPasos(-1); });
   $("next").addEventListener("click", function(){ irPasos(1); });
+  $("puntos").addEventListener("click", function(e){ var b = e.target.closest("button"); if (b) irABurger(+b.dataset.i); });
   $("burgers").addEventListener("keydown", function(e){
     if (e.key === "ArrowLeft") irPasos(-1);
     if (e.key === "ArrowRight") irPasos(1);
   });
-  $("sAgregar").addEventListener("click", function(){ sumar(burgers[mostrado].id, 1); listo(this, "Agregar"); });
+  $("sAgregar").addEventListener("click", function(){ sumar(burgers[enCentro()].id, 1); listo(this, "Agregar"); });
 
   // Girar con el scroll (se activa cuando carga GSAP + ScrollTrigger)
   function ruedaConScroll(){
-    var antes = null, quieto, dirScroll = 0;
+    var antes = null, espera, dir = 0;
     ScrollTrigger.create({trigger:"#burgers", start:"top bottom", end:"bottom top", onUpdate:function(self){
       if (antes === null){ antes = self.progress; return; }
       var dp = self.progress - antes; antes = self.progress;
       if (arrastrando || !dp) return;
       frenar();
-      estado.r -= dp * PASO * 7;
-      dirScroll = dp > 0 ? -1 : 1;
+      estado.r -= dp * PASO * 6;
+      dir = dp > 0 ? -1 : 1;
       scrollActivo = true; mover();
-      clearTimeout(quieto);
-      quieto = setTimeout(function(){ scrollActivo = false; irA(encajar(estado.r + dirScroll * PASO * 0.3), 0.6); }, 140);
+      clearTimeout(espera);
+      espera = setTimeout(function(){ scrollActivo = false; irA(encajar(estado.r + dir * PASO * 0.3), 0.6); }, 140);
     }});
   }
 
-  geom(); pintar(); giro = 0; pintar(); mostrarDetalle(0, false);
+  mostrarDetalle(0, false); geom(); pintar(); giro = 0; pintar();
+  // las 4 fotos de la rueda se bajan apenas termina de cargar la página, así no aparecen huecos al girar
+  window.addEventListener("load", function(){ $("rueda").querySelectorAll("img").forEach(function(im){ im.loading = "eager"; }); });
   var rr; window.addEventListener("resize", function(){ clearTimeout(rr); rr = setTimeout(function(){ geom(); pintar(); }, 120); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ pintar(); });
 
@@ -621,7 +662,9 @@
     htmlTabs += '<a href="#'+c.id+'"'+(i===0?' class="activa"':'')+'>'+c.emoji+' '+c.nombre+'</a>';
     htmlCat += '<div class="cat" id="'+c.id+'"><h3>'+c.nombre+'</h3><div class="grid">';
     menu.filter(function(p){ return p.cat===c.id; }).forEach(function(p){
-      htmlCat += '<article class="card anim-card"><div class="foto" data-emoji="'+c.emoji+'"><img src="'+IMG+p.foto+Q+'" alt="'+esc(p.nombre)+'" loading="lazy" decoding="async" width="300" height="300" onerror="this.remove()"></div>'+
+      var foto = p.svg ? '<div class="foto foto-svg">'+bebidaSVG[p.svg]+'</div>' :
+        '<div class="foto" data-emoji="'+c.emoji+'"><img src="'+IMG+p.foto+Q+'" alt="'+esc(p.nombre)+'" loading="lazy" decoding="async" width="300" height="300" onerror="this.remove()"></div>';
+      htmlCat += '<article class="card anim-card">'+foto+
         '<div class="info">'+(p.tag?'<span class="tag">'+esc(p.tag)+'</span>':'')+'<h4>'+esc(p.nombre)+'</h4><p class="desc">'+esc(p.desc)+'</p>'+
         '<div class="pie"><span class="precio">'+precio(p.precio)+'</span><button class="agregar" type="button" data-id="'+p.id+'">Agregar</button></div></div></article>';
     });
