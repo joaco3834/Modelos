@@ -69,6 +69,9 @@
   .card .foto img{width:100%;height:100%;object-fit:cover}
   .card .foto::before{content:attr(data-emoji);position:absolute;inset:0;display:grid;place-items:center;font-size:3rem;z-index:0}
   .card .foto img{position:relative;z-index:1}
+  .card .foto-svg{display:grid;place-items:center;padding:12px}
+  .card .foto-svg::before{content:none}
+  .card .foto-svg svg{height:150px;max-height:100%;width:auto}
   .card .info{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
   .card h4{font-size:1.1rem;font-weight:800}
   .card .desc{color:var(--gris);font-size:.9rem;flex:1}
@@ -154,7 +157,7 @@
   <ul>
     <li>💳 Efectivo · Transferencia · Mercado Pago</li>
     <li>🛵 Delivery en todo el centro y alrededores</li>
-    <li>🕗 Martes a domingo · 20 a 00 h</li>
+    <li>🕗 Martes a domingo · 20 a 24 h</li>
   </ul>
 </div>
 
@@ -186,7 +189,7 @@
       <li>📍 Delivery en San Fernando del Valle de Catamarca</li>
       <li>📱 WhatsApp: <a href="https://wa.me/5493834024275" target="_blank" rel="noopener">383 402-4275</a></li>
       <li>📸 Instagram: <a href="#" onclick="return false">@burgerfuego</a> <small>(de ejemplo)</small></li>
-      <li>🕗 Martes a domingo de 20 a 00 h</li>
+      <li>🕗 Martes a domingo de 20 a 24 h</li>
     </ul>
     <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash.</p>
   </div>
@@ -253,11 +256,25 @@
     {id:5, cat:"hamburguesas", nombre:"Veggie", desc:"Medallón de garbanzos, queso, rúcula y tomate.", precio:9800, foto:"1520072959219-c595dc870360"},
     {id:6, cat:"papas", nombre:"Papas clásicas", desc:"Porción grande, crocantes y con sal.", precio:4500, foto:"1573080496219-bb080dd4f877"},
     {id:7, cat:"papas", nombre:"Papas cheddar y panceta", desc:"Bañadas en cheddar con panceta y verdeo.", precio:6900, foto:"1630384060421-cb20d0e0649d"},
-    {id:8, cat:"bebidas", nombre:"Gaseosa 500 ml", desc:"Coca-Cola, Sprite o Fanta. Avisanos cuál querés.", precio:2500, foto:"1554866585-cd94860890b7"},
-    {id:9, cat:"bebidas", nombre:"Agua saborizada 500 ml", desc:"Pomelo, manzana o naranja.", precio:2200, foto:"1625772299848-391b6a87d7b3"},
+    {id:8, cat:"bebidas", nombre:"Gaseosa 500 ml", desc:"Cola, lima-limón o naranja. Avisanos cuál querés.", precio:2500, svg:"gaseosa"},
+    {id:9, cat:"bebidas", nombre:"Agua saborizada 500 ml", desc:"Pomelo, manzana o naranja.", precio:2200, svg:"agua"},
     {id:10, cat:"combos", nombre:"Combo Fuego", desc:"Clásica Fuego + papas clásicas + gaseosa.", precio:13900, foto:"1561758033-d89a9ad46330", tag:"Ahorrás $1.600"},
     {id:11, cat:"combos", nombre:"Combo para dos", desc:"2 Doble Cheddar + 2 papas clásicas + 2 gaseosas.", precio:34500, foto:"1586190848861-99aa4a171e90"}
   ];
+
+  var bebidaSVG = {
+    gaseosa:'<svg viewBox="0 0 100 110" aria-hidden="true"><path d="M60 30 70 4h8" stroke="#e3262b" stroke-width="5" fill="none" stroke-linecap="round"/>'+
+      '<path d="M24 24h52l-7 74a7 7 0 0 1-7 6H38a7 7 0 0 1-7-6z" fill="rgba(255,255,255,.18)" stroke="#fff" stroke-width="2.5"/>'+
+      '<path d="M28 40h44l-5.6 57a5 5 0 0 1-5 4.5H38.6a5 5 0 0 1-5-4.5z" fill="#5b2a12"/><path d="M28 40h44l-.5 5H28.5z" fill="#c98a5a"/>'+
+      '<rect x="36" y="48" width="13" height="13" rx="2.5" fill="#fff" opacity=".5" transform="rotate(-12 42 54)"/><rect x="52" y="54" width="12" height="12" rx="2.5" fill="#fff" opacity=".45" transform="rotate(16 58 60)"/>'+
+      '<g fill="#fff" opacity=".6"><circle cx="44" cy="78" r="2"/><circle cx="56" cy="86" r="1.6"/><circle cx="50" cy="70" r="1.4"/><circle cx="60" cy="74" r="1.2"/></g></svg>',
+    agua:'<svg viewBox="0 0 100 110" aria-hidden="true"><circle cx="70" cy="26" r="15" fill="#ffc21a"/><circle cx="70" cy="26" r="11" fill="#ffe17a"/>'+
+      '<path d="M70 15v22M59 26h22M62 18l16 16M78 18 62 34" stroke="#ffc21a" stroke-width="1.6"/>'+
+      '<path d="M24 24h52l-7 74a7 7 0 0 1-7 6H38a7 7 0 0 1-7-6z" fill="rgba(255,255,255,.18)" stroke="#fff" stroke-width="2.5"/>'+
+      '<path d="M28 40h44l-5.6 57a5 5 0 0 1-5 4.5H38.6a5 5 0 0 1-5-4.5z" fill="#ff9f43" opacity=".85"/>'+
+      '<rect x="36" y="48" width="13" height="13" rx="2.5" fill="#fff" opacity=".55" transform="rotate(-12 42 54)"/><rect x="52" y="56" width="12" height="12" rx="2.5" fill="#fff" opacity=".5" transform="rotate(16 58 62)"/>'+
+      '<g fill="#fff" opacity=".7"><circle cx="44" cy="80" r="2"/><circle cx="56" cy="88" r="1.6"/><circle cx="60" cy="76" r="1.2"/></g></svg>'
+  };
 
   function precio(n){ return "$" + n.toLocaleString("es-AR"); }
   function $(id){ return document.getElementById(id); }
@@ -269,8 +286,9 @@
     htmlTabs += '<a href="#' + c.id + '"' + (i===0?' class="activa"':'') + '>' + c.emoji + ' ' + c.nombre + '</a>';
     htmlCat += '<div class="cat" id="' + c.id + '"><h3>' + c.nombre + '</h3><div class="grid">';
     productos.filter(function(p){return p.cat===c.id;}).forEach(function(p){
-      htmlCat += '<article class="card anim-card">' +
-        '<div class="foto" data-emoji="' + c.emoji + '"><img src="' + IMG + p.foto + Q + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" width="500" height="313" onerror="this.remove()"></div>' +
+      var foto = p.svg ? '<div class="foto foto-svg">' + bebidaSVG[p.svg] + '</div>' :
+        '<div class="foto" data-emoji="' + c.emoji + '"><img src="' + IMG + p.foto + Q + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" width="500" height="313" onerror="this.remove()"></div>';
+      htmlCat += '<article class="card anim-card">' + foto +
         '<div class="info">' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') +
         '<h4>' + esc(p.nombre) + '</h4><p class="desc">' + esc(p.desc) + '</p>' +
         '<div class="pie"><span class="precio">' + precio(p.precio) + '</span>' +

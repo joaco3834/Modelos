@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Burger Fuego — Smash burgers en Catamarca</title>
 <meta name="description" content="Burger Fuego: smash burgers en San Fernando del Valle de Catamarca. Elegí la tuya y pedí por WhatsApp.">
-<meta name="theme-color" content="#f3ead9">
+<meta name="theme-color" content="#f5efe6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
     --negro:#0d0d0d; --negro2:#161616; --negro3:#232323;
     --rojo:#e3262b; --rojo2:#b81c20; --amarillo:#ffc21a;
     --texto:#f5f5f5; --gris:#a3a3a3; --radio:16px;
-    --crema:#f3ead9; --tinta:#1b1612;
+    --crema:#f5efe6; --tinta:#1b1612;
     --bg:#e3262b; --ink:#ffffff;
     --titulo:"Anton",Impact,"Arial Narrow Bold",system-ui,sans-serif;
   }
@@ -32,7 +32,7 @@
   /* ---------- Inicio (crema, texto gigante y la burger asomando) ---------- */
   .intro{position:relative}
   .intro-pin{position:relative;height:100vh;height:100svh;min-height:540px;overflow:hidden;background:var(--crema);color:var(--tinta)}
-  .intro-color{position:absolute;inset:0;background:var(--bg);opacity:0;transition:background-color .6s ease}
+  .intro-color{position:absolute;inset:0;background:var(--bg);transform:scaleY(0);transform-origin:50% 100%;will-change:transform;transition:background-color .6s ease}
   .barra{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:14px 16px}
   .marca{font-family:var(--titulo);font-size:1.35rem;text-transform:uppercase;letter-spacing:.03em}
   .marca span{color:var(--rojo)}
@@ -189,14 +189,6 @@
   </div>
 </section>
 
-<div class="franja">
-  <ul>
-    <li>💳 Efectivo · Transferencia · Mercado Pago</li>
-    <li>🛵 Delivery en el centro y alrededores</li>
-    <li>🕗 Martes a domingo · 20 a 24 h</li>
-  </ul>
-</div>
-
 <!-- BURGER PROTAGONISTA -->
 <section class="producto" id="burgers" aria-label="Nuestras hamburguesas">
   <div class="wrap prod">
@@ -218,6 +210,14 @@
     <div class="selector" id="selector" role="group" aria-label="Elegí tu burger"></div>
   </div>
 </section>
+
+<div class="franja">
+  <ul>
+    <li>💳 Efectivo · Transferencia · Mercado Pago</li>
+    <li>🛵 Delivery en el centro y alrededores</li>
+    <li>🕗 Martes a domingo · 20 a 24 h</li>
+  </ul>
+</div>
 
 <main>
   <section class="menu" id="menu">
@@ -249,7 +249,7 @@
       <li>📸 Instagram: <a href="#" onclick="return false">@burgerfuego</a> <small>(de ejemplo)</small></li>
       <li>🕗 Martes a domingo de 20 a 24 h</li>
     </ul>
-    <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash (Amirali Mirhashemian, David Foodphototasty, Ghaly Wedinly, Stanley Kustamin).</p>
+    <p class="legal">Negocio ficticio. Página de ejemplo — hecha por Joaco. Fotos: Unsplash (Amirali Mirhashemian, David Foodphototasty, Ghaly Wedinly, Stanley Kustamin, Mockup Graphics).</p>
   </div>
   <div class="pie-caja"><span class="pie-gigante" id="pieGigante" data-ajustar="0.96" aria-hidden="true">Burger Fuego</span></div>
 
@@ -299,13 +299,13 @@
      Los archivos están en img/ing-*.webp, recortados de las mismas fotos. */
   var burgers = [
     {id:1, slug:"clasica", nombre:"Clásica Fuego", lineas:["Clásica","Fuego"], desc:"Medallón smash, cheddar, lechuga, tomate y salsa de la casa.", precio:8500, bg:"#e3262b", ink:"#ffffff",
-      ing:[["lechuga",-6,0,38,-16,0],["queso",66,-2,36,12,0],["lechuga2",62,64,38,20,1],["sesamo1",24,-6,8,30,1],["sesamo2",52,-10,6,-35,0],["sesamo1",92,40,6,70,1],["sesamo2",2,58,7,-20,1]]},
+      ing:[["lechuga",-6,0,38,-16,0],["queso",66,-2,36,12,0],["lechuga2",62,64,38,20,1],["sesamo1",24,-6,8,30,1],["sesamo2",52,-10,6,-35,0],["sesamo1",92,40,6,70,1],["sesamo2",34,88,6,-20,1],["tomate",-6,56,26,-18,1]]},
     {id:2, slug:"doble-cheddar", nombre:"Doble Cheddar", lineas:["Doble","Cheddar"], desc:"Doble carne, doble cheddar y cebolla caramelizada. La más pedida.", precio:11900, bg:"#ffc21a", ink:"#161210",
-      ing:[["queso",-8,2,40,-14,0],["queso",64,-4,38,18,0],["queso",64,66,34,-8,1],["lechuga2",-4,66,34,-24,1],["sesamo1",30,-8,7,20,1],["sesamo2",90,44,6,-50,1]]},
+      ing:[["queso",-8,2,40,-14,0],["queso",64,-4,38,18,0],["queso",64,66,34,-8,1],["lechuga2",-4,66,34,-24,1],["sesamo1",30,-8,7,20,1],["sesamo2",90,44,6,-50,1],["tomate",80,28,20,25,0]]},
     {id:3, slug:"criolla", nombre:"Criolla", lineas:["Criolla"], desc:"Carne smash, cheddar, cebolla, tomate, lechuga y salsa criolla.", precio:10500, bg:"#1f8a4c", ink:"#ffffff",
-      ing:[["lechuga",-8,-2,40,-20,0],["lechuga2",64,-6,40,16,0],["lechuga",62,62,40,24,1],["lechuga2",-6,64,36,-12,1],["queso",36,-12,26,8,0],["sesamo1",92,36,6,40,1],["sesamo2",4,40,6,-30,1]]},
+      ing:[["lechuga",-8,-2,40,-20,0],["lechuga2",64,-6,40,16,0],["lechuga",62,62,40,24,1],["lechuga2",-6,64,36,-12,1],["queso",36,-12,26,8,0],["sesamo1",92,36,6,40,1],["sesamo2",4,40,6,-30,1],["tomate",80,28,20,20,0]]},
     {id:4, slug:"bacon", nombre:"Bacon Bomb", lineas:["Bacon","Bomb"], desc:"Doble panceta crocante, cheddar, carne smash y barbacoa.", precio:12500, bg:"#f47b20", ink:"#161210",
-      ing:[["panceta",-6,-6,26,-30,0],["panceta",74,-4,24,35,0],["panceta",72,60,24,-60,1],["queso",-8,62,34,-10,1],["lechuga2",34,-14,30,6,0],["sesamo1",22,80,6,20,1],["sesamo2",92,40,6,60,1]]}
+      ing:[["panceta",-6,-6,26,-30,0],["panceta",74,-4,24,35,0],["panceta",72,60,24,-60,1],["queso",-8,62,34,-10,1],["lechuga2",34,-14,30,6,0],["sesamo1",22,80,6,20,1],["sesamo2",92,40,6,60,1],["tomate",-4,30,20,-20,0]]}
   ];
   var MAX_ING = 8;
   var PROF = [1.4, 1.9, 1.0, 2.3, 1.6, 2.6, 1.2, 2.0];   // profundidad de cada ingrediente para el parallax
@@ -521,7 +521,8 @@
           .to(ib, {rotation:0, scale:1, ease:"power1.out", duration:.45}, 1)
           .to("#lema", {yPercent:-18, opacity:0, ease:"none", duration:.75}, 0.05)
           .to("#introSub, .deslizar", {opacity:0, ease:"none", duration:.3}, 0)
-          .to(".intro-color", {opacity:1, ease:"none", duration:.8}, 0.2)
+          .to(".intro-color", {scaleY:1, ease:"power2.inOut", duration:.8}, 0.2)
+          .to(".marca span", {color:function(){ return getComputedStyle(document.documentElement).getPropertyValue("--ink"); }, ease:"none", duration:.4}, 0.5)
           .to(".barra", {color:function(){ return getComputedStyle(document.documentElement).getPropertyValue("--ink"); }, ease:"none", duration:.4}, 0.5);
 
         // Ingredientes con parallax (cada uno a su velocidad)

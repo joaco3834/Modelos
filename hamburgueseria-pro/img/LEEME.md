@@ -22,6 +22,4 @@ Recortados por color (verde, amarillo, rojo) de las mismas fotos:
 | `ing-panceta.webp`    | tira enrulada de la derecha, misma foto    |
 | `ing-queso.webp`      | feta que cae, foto de Stanley Kustamin     |
 | `ing-sesamo1/2.webp`  | semillas de la tapa del pan                |
-
-Falta una rodaja de tomate: en estas fotos el tomate solo se ve de costado. Si se agrega
-`ing-tomate.webp`, se suma en la lista `ing` de cada burger en `../index.html`.
+| `ing-tomate.webp`     | rodaja, foto de Mockup Graphics (rembg)    |
